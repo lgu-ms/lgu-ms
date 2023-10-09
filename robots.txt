@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /log/
+Disallow: /?
+Disallow: /#
+Disallow: /index.php?
+Allow: /?hl=
+Crawl-delay: 60
