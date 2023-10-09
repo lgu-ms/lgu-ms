@@ -18,15 +18,44 @@ include("include/header.php");
 
 <body class="d-flex flex-column min-vh-100">
     <?php include("include/nav.php"); ?>
-    
+
+    <header>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4" id="mobile">
+          <img class="rounded mx-auto d-block img-fluid"
+            src="images/cover.png">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 style="color: #4285f4;">Quezon City</h5>
+            <h1 class="card-title"><strong>Digital Barangay</strong></h1>
+            <p class="card-text sub-title">
+              A proposed Local Government Unit Management<br>System Project</p>
+              <br>
+              <button type="button" class="btn btn-primary" >Learn more</button>
+            <a class="accnt px-3"> Procurement
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4" id="desktop">
+          <img class="rounded mx-auto d-block img-fluid"
+            src="images/cover.png">
+        </div>
+      </div>
+
+    </div>
+  </header>
+
     <main class="text-center">
         This is a test
 
-        <h1 style="font-family: Poppins;">This is a poppins font</h1>
-        <h1 style="font-family: Montserrat;">This is a montserrat font</h1>
-    </main>
-</body>
+        <h1 style="font-family: Maven Pro;">This is a maven pro font</h1>
+        <h1 style="font-family: Source Code Pro;">This is a source code pro font</h1>
+        <p>A paragraph</p>
 
-<?php
-include("include/footer.php");
-?>
+    </main>
+
+    <?php include("include/footer.php");?>
+</body>
+</html>

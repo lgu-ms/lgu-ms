@@ -18,6 +18,9 @@
 
   <link rel="preload" href="<?php echo $directory; ?>images/hamburger-light.svg" as="image" type="image/svg+xml" crossorigin>
   <link rel="preload" href="<?php echo $directory; ?>images/hamburger-dark.svg" as="image" type="image/svg+xml" crossorigin>
+
+  <link rel="preload" href="<?php echo $directory; ?>images/nav-light.png" as="image" type="image/png" crossorigin>
+  <link rel="preload" href="<?php echo $directory; ?>images/nav-dark.png" as="image" type="image/png" crossorigin>
   <style>
     @font-face {
       font-family: 'Source Code Pro';
@@ -37,10 +40,12 @@
 
     body.light-mode {
       --menu: url("<?php echo $directory; ?>../images/hamburger-light.svg");
+      --topicon: url("<?php echo $directory; ?>../images/nav-dark.png");
     }
 
     body {
       --menu: url("<?php echo $directory; ?>../images/hamburger-dark.svg");
+      --topicon: url("<?php echo $directory; ?>../images/nav-light.png");
     }
   </style>
   <link href="<?php echo $directory; ?>assets/fontawesome-6.4.2/css/fontawesome.min.css" rel="stylesheet">

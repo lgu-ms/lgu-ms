@@ -65,16 +65,16 @@
     </div>
     <br>
     <a href="#" class="px-1" target="_blank">
-    <i class="fa-brands fa-facebook"></i>
+      <i class="fa-brands fa-facebook"></i>
     </a>
-    <a href="#" class="px-1"  target="_blank">
-    <i class="fa-brands fa-instagram"></i>
+    <a href="#" class="px-1" target="_blank">
+      <i class="fa-brands fa-instagram"></i>
     </a>
-    <a href="#" class="px-1"  target="_blank">
-    <i class="fa-brands fa-twitter"></i>
+    <a href="#" class="px-1" target="_blank">
+      <i class="fa-brands fa-twitter"></i>
     </a>
-    <a href="#" class="px-1"  target="_blank">
-    <i class="fa-brands fa-youtube"></i>
+    <a href="#" class="px-1" target="_blank">
+      <i class="fa-brands fa-youtube"></i>
     </a>
     <br>
     <?php
@@ -89,18 +89,18 @@
 <script>
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-        .register("<?php echo $directory; ?>sw.js")
-        .then((reg) => {
-            if (reg.installing) {
-                console.log("Service worker installing");
-            } else if (reg.waiting) {
-                console.log("Service worker installed");
-            } else if (reg.active) {
-                console.log("Service worker active");
-            }
-        })
-        .catch((err) => {
-            console.error("Service worker failed: ", err);
-        });
-}
+      .register("<?php echo $directory; ?>sw.js")
+      .then((reg) => {
+        if (reg.installing) {
+          console.log("Service worker installing");
+        } else if (reg.waiting) {
+          console.log("Service worker installed");
+        } else if (reg.active) {
+          console.log("Service worker active");
+        }
+      })
+      .catch((err) => {
+        console.error("Service worker failed: ", err);
+      });
+  }
 </script>
