@@ -1,7 +1,7 @@
-<footer class="mt-auto">
+<footer class="mt-5">
   <div class="container">
     <div class="row footer-row">
-      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <h5>Digital Barangay</h5>
         <p>Republic of the Philippines</p>
         <ul class="nav flex-column">
@@ -16,7 +16,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <!-- HEADS UP 
       
         Most of the government sites are hosted in .gov.ph domain including local government units.
@@ -36,7 +36,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
         <h5>Government Link</h5>
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -61,6 +61,10 @@
             <a class="nav-link" href="//sb.judiciary.gov.ph">Sandiganbayan</a>
           </li>
         </ul>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-check form-switch" id="themeswitch">
+        </div>
       </div>
     </div>
     <br>

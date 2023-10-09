@@ -213,8 +213,8 @@ nav {
 footer {
     box-shadow: 0 0 5em rgba(0, 0, 0, .10);
     background: var(--background-color);
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 7%;
+    padding-right: 7%;
     padding-top: 5%;
     padding-bottom: 2%;
 }
@@ -494,31 +494,46 @@ input[type=date]:focus::-webkit-datetime-edit {
     transform: scaleY(0);
     transform-origin: top;
     transition: all 0.3s ease-in-out;
-  }
+}
 
-  .dropdown>.btn.show+.dropdown-menu {
+.dropdown>.btn.show+.dropdown-menu {
     display: inherit;
-    transform: scaleY(1);        
-  }
+    transform: scaleY(1);
+}
 
-  @media only screen and (max-device-width: 480px) {
-    
+@media only screen and (max-device-width: 480px) {
+
     .navbar-brand {
-        float:none !important;
+        float: none !important;
     }
+
     .img-responsive {
-        margin:0 auto !important;
-        display:block !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 }
 
 @media (min-width:535px) {
 
-div.dropdown-multicol2{
-    width: 30em;
-  }
-  div.dropdown-multicol2>div.dropdown-col{
-    display:inline-block;
-    width: 32%;
-  }
+    div.dropdown-multicol2 {
+        width: 30em;
+    }
+
+    div.dropdown-multicol2>div.dropdown-col {
+        display: inline-block;
+        width: 32%;
+    }
+}
+
+.form-check-input {
+    margin-top: 0px;
+}
+
+.form-switch .form-check-input {
+    width: 2.5em;
+}
+
+div label {
+    margin-top: 0px;
+    margin-left: 10px;
 }

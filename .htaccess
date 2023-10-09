@@ -1,1 +1,2 @@
-ErrorDocument 404 /lgu/404.php
+ErrorDocument 404 http://localhost/lgu
+ErrorDocument 403 http://localhost/lgu
