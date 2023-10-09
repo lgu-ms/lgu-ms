@@ -39,13 +39,13 @@
     }
 
     body.light-mode {
-      --menu: url("<?php echo $directory; ?>../images/hamburger-light.svg");
-      --topicon: url("<?php echo $directory; ?>../images/nav-dark.png");
+      --menu: url("<?php echo $directory_img; ?>images/hamburger-light.svg");
+      --topicon: url("<?php echo $directory_img; ?>images/nav-dark.png");
     }
 
     body {
-      --menu: url("<?php echo $directory; ?>../images/hamburger-dark.svg");
-      --topicon: url("<?php echo $directory; ?>../images/nav-light.png");
+      --menu: url("<?php echo $directory_img; ?>images/hamburger-dark.svg");
+      --topicon: url("<?php echo $directory_img; ?>images/nav-light.png");
     }
   </style>
   <link href="<?php echo $directory; ?>assets/fontawesome-6.4.2/css/fontawesome.min.css" rel="stylesheet">

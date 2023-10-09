@@ -324,7 +324,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: #000 !important;
+    -webkit-text-fill-color: val(--text-color) !important;
 }
 
 #mobile {
@@ -453,7 +453,7 @@ label {
 
 .form-group>label {
     background-color: var(--background-color);
-    bottom: 43px;
+    bottom: 35px;
     left: 15px;
     position: relative;
     padding: 0px 5px 0px 5px;
@@ -464,12 +464,12 @@ label {
 
 input:focus~label,
 select:focus~label {
-    bottom: 65px;
+    bottom: 56px;
 }
 
 input:valid~label,
 select:valid~label {
-    bottom: 65px;
+    bottom: 56px;
 }
 
 input[type=date]:required:invalid::-webkit-datetime-edit {
@@ -482,7 +482,7 @@ input[type=date]:focus::-webkit-datetime-edit {
 }
 
 .form-group {
-    margin-bottom: -4% !important;
+    
 }
 
 #toplink {

@@ -4,7 +4,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" id="qwe111">
             <span class="navbar-toggler-icon" id="qwe"></span>
         </button>
-        <a class="navbar-brand " href="#">
+        <a class="navbar-brand " href="<?php echo $directory; ?>">
             <img class="img-responsive" id="toplink" width="60">
         </a>
         <div class="collapse navbar-collapse" id="navbarText">
@@ -60,12 +60,22 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="text sec px-2">Sign in</span>
+                <?php
+
+                if (!$isForm) {
+                    $ff = '
+                    <li class="nav-item">
+                    <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
+                        <span class="text sec px-2">Log in</span>
                         <i class="fa-solid fa-user"></i>
                     </a>
                 </li>
+                    ';
+                    echo $ff;
+                }
+
+                ?>
+
             </ul>
         </div>
     </div>

@@ -11,6 +11,8 @@ $page_author = "Melvin Jones Repol";
 $page_canonical = "http://localhost/lgu/";
 $page_url = $page_canonical;
 $directory = "";
+$directory_img = "../";
+$isForm = false;
 
 include("include/header.php");
 
