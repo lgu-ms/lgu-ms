@@ -101,16 +101,14 @@ label.setAttribute("id", "themelabel");
 themeswitch.append(label);
 
 const currentTheme = localStorage.getItem("theme");
-if (currentTheme == "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
+if (currentTheme == "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
   document.body.classList.toggle("dark-mode");
   label.innerHTML = "Dark Theme";
   input.setAttribute("checked", null);
 } else if (currentTheme == "light") {
   document.body.classList.toggle("light-mode");
   label.innerHTML = "Light Theme";
-} else {
-    alert(currentTheme)
-}
+} 
 
 input.addEventListener("click", function() {
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -127,4 +125,3 @@ input.addEventListener("click", function() {
   }
   localStorage.setItem("theme", theme);
 });
-

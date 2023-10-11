@@ -48,11 +48,18 @@ include("include/header.php");
     </div>
   </header>
 
-    <main class="text-center">
-
-
-    </main>
-
+  <main class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-xl-6  mx-auto">
+          <h3 class="fw-bold">Here some info</h3>
+        </div>
+      </div>
+      <div class="py-5 p-lg-5">
+        and more info here...
+      </div>
+    </div>
+  </main>
     <?php include("include/footer.php");?>
 </body>
 </html>

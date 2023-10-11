@@ -494,6 +494,8 @@ input[type=date]:focus::-webkit-datetime-edit {
     transform: scaleY(0);
     transform-origin: top;
     transition: all 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
 }
 
 .dropdown>.btn.show+.dropdown-menu {
@@ -536,4 +538,17 @@ input[type=date]:focus::-webkit-datetime-edit {
 div label {
     margin-top: 0px;
     margin-left: 10px;
+}
+
+div .dropdown-item {
+    text-align: center;
+    padding: 5%;
+    margin: 0px;
+}
+
+.nav-item .btn {
+    border: none;
+    text-align: left;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
 }

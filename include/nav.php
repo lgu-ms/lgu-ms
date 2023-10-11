@@ -10,42 +10,42 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="<?php echo $directory; ?>about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link btn dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Module
+                        Modules
                     </a>
                     <div class="dropdown-menu dropdown-multicol2" aria-labelledby="dropdownMenuButton">
                         <div class="dropdown-col">
-                            <a class="dropdown-item" href="#">Module 1</a>
-                            <a class="dropdown-item" href="#">Module 2</a>
-                            <a class="dropdown-item" href="#">Module 3</a>
-                            <a class="dropdown-item" href="#">Module 4</a>
-                            <a class="dropdown-item" href="#">Module 5</a>
-                            <a class="dropdown-item" href="#">Module 6</a>
+                            <a class="dropdown-item" href="#"> <i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 1</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 2</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 3</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 4</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 5</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 6</a>
                         </div>
                         <div class="dropdown-col">
-                            <a class="dropdown-item" href="#">Module 7</a>
-                            <a class="dropdown-item" href="#">Module 8</a>
-                            <a class="dropdown-item" href="#">Module 9</a>
-                            <a class="dropdown-item" href="#">Module 10</a>
-                            <a class="dropdown-item" href="#">Module 11</a>
-                            <a class="dropdown-item" href="#">Module 12</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 7</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 8</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 9</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 10</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 11</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 12</a>
                         </div>
                         <div class="dropdown-col">
-                            <a class="dropdown-item" href="#">Module 13</a>
-                            <a class="dropdown-item" href="#">Module 14</a>
-                            <a class="dropdown-item" href="#">Module 15</a>
-                            <a class="dropdown-item" href="#">Module 16</a>
-                            <a class="dropdown-item" href="#">Module 17</a>
-                            <a class="dropdown-item" href="#">Module 18</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 13</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 14</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 15</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 16</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 17</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 18</a>
                         </div>
                         <div class="dropdown-col">
-                            <a class="dropdown-item" href="#">Module 19</a>
+                            <a class="dropdown-item" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 19</a>
                         </div>
                     </div>
                 </li>
