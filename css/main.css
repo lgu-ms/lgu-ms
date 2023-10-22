@@ -65,6 +65,7 @@ a {
     position: relative;
 }
 
+
 a:after {
     content: '';
     position: absolute;
@@ -280,8 +281,8 @@ footer {
 }
 
 .scrolled-up {
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     transform: translateY(0);
     box-shadow: 0 0 5em rgba(0, 0, 0, .2);
     transition: all 0.3s ease-in-out;
@@ -487,21 +488,7 @@ input[type=date]:focus::-webkit-datetime-edit {
 
 #toplink {
     content: var(--topicon);
-}
-
-.dropdown>.dropdown-menu {
-    display: inherit;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: all 0.3s ease-in-out;
-    border: none;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
-}
-
-.dropdown>.btn.show+.dropdown-menu {
-    display: inherit;
-    transform: scaleY(1);
-}
+} 
 
 @media only screen and (max-device-width: 480px) {
 
@@ -512,18 +499,6 @@ input[type=date]:focus::-webkit-datetime-edit {
     .img-responsive {
         margin: 0 auto !important;
         display: block !important;
-    }
-}
-
-@media (min-width:535px) {
-
-    div.dropdown-multicol2 {
-        width: 30em;
-    }
-
-    div.dropdown-multicol2>div.dropdown-col {
-        display: inline-block;
-        width: 32%;
     }
 }
 
@@ -540,15 +515,22 @@ div label {
     margin-left: 10px;
 }
 
-div .dropdown-item {
-    text-align: center;
-    padding: 5%;
-    margin: 0px;
-}
-
 .nav-item .btn {
     border: none;
     text-align: left;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
     font-size: var(--bs-nav-link-font-size);
+}
+
+#modulesModal .modal-content {
+    border-radius: 5px;
+    border: none;
+}
+
+.modal-content {
+    box-shadow: 0 0 5em rgba(0, 0, 0, .10);
+}
+
+.modal-backdrop.fade.show {
+    display:none;
 }

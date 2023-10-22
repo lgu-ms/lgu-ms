@@ -125,3 +125,9 @@ input.addEventListener("click", function() {
   }
   localStorage.setItem("theme", theme);
 });
+
+function modulesModal(){
+    const modules = document.getElementById('modulesModal');
+    const modal = new bootstrap.Modal(modules);
+    modal.toggle();
+}
