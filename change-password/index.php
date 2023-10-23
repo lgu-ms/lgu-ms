@@ -31,16 +31,16 @@ include("../include/header.php");
               <div class="col-md-6">
                 <h1>Change Password</h1>
                 <br>
-                <div class="form-group">
-                  <input type="password" class="" id="password" required>
-                  <label for="password">New Password</label>
+                <div class="input-group2">
+                  <input type="password" placeholder="New Password" name="password" required>
+                  <i class="fa fa-key fa-lg"></i>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="" id="repassword" required>
-                  <label for="password">Re-type Password</label>
+                <div class="input-group2">
+                  <input type="password" placeholder="Confirm New Password" name="cpassword" required>
+                  <i class="fa fa-arrows-rotate fa-lg"></i>
                 </div>
                 <div class="form-group mt-2">
-                  <button id="changep" class="btn btn-primary px-5">Change</button>
+                  <button id="changep" class="btn btn-primary px-5 shadow">Change</button>
                 </div>
               </div>
             </div>

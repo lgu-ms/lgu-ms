@@ -6,12 +6,14 @@ body.light-mode {
     --background-color: #fff;
     --text-color: #2e475d;
     --hover: rgba(0, 0, 0, 0.9);
+    --box-shdow: rgba(36, 35, 35, 0.1);
 }
 
 body {
     --background-color: #1b1818;
     --text-color: #90b8dd;
     --hover: #2e475de6;
+    --box-shdow: #2e475d1e;
 }
 
 h1,
@@ -325,7 +327,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: val(--text-color) !important;
+    -webkit-text-fill-color: var(--text-color) !important;
 }
 
 #mobile {
@@ -482,13 +484,11 @@ input[type=date]:focus::-webkit-datetime-edit {
     color: var(--text-color) !important;
 }
 
-.form-group {
-    
-}
+.form-group {}
 
 #toplink {
     content: var(--topicon);
-} 
+}
 
 @media only screen and (max-device-width: 480px) {
 
@@ -528,9 +528,31 @@ div label {
 }
 
 .modal-content {
-    box-shadow: 0 0 5em rgba(0, 0, 0, .10);
+    box-shadow: 0 0 5em var(--box-shdow);
+    background-color: var(--background-color);
+    letter-spacing: -0.7px;
+    font-family: 'Source Code Pro', sans-serif;
+    text-transform: uppercase;
 }
 
 .modal-backdrop.fade.show {
-    display:none;
+    display: none;
+}
+
+.input-group2 {
+    position: relative;
+}
+
+.input-group2 i {
+    position: absolute;
+    left: 15px;
+    top: 33px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    padding: 12px 40px;
+    margin: 8px 0;
+    display: inline-block;
 }

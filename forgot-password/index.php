@@ -31,12 +31,12 @@ include("../include/header.php");
               <div class="col-md-6">
                 <h1>Forgot Password</h1>
                 <br>
-                <div class="form-group">
-                  <input type="text" class="" id="email" required> 
-                  <label for="email">Email</label>
+                <div class="input-group2">
+                  <input type="email" placeholder="Email" name="email" required>
+                  <i class="fa fa-user fa-lg"></i>
                 </div>
                 <div class="form-group mt-2">
-                  <button id="forgot" class="btn btn-primary px-4">Forgot</button>
+                  <button id="forgot" class="btn btn-primary shadow px-5">Forgot</button>
                   <a class="accnt px-3" href="../login?utm_source=forgot-password">Login</a>
                   <br><br>
                   <a class="fpass" href="../signup?utm_source=forgot-password">No account yet?</a>

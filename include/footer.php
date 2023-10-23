@@ -6,10 +6,10 @@
         <p>Republic of the Philippines</p>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="<?php echo $directory; ?>">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="<?php echo $directory; ?>about">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>
@@ -85,7 +85,7 @@
     $currentDate = new DateTime();
     $year = $currentDate->format("Y");
     ?>
-    <span>© <?php echo $year; ?> LGU Management System</span>
+    <span>© <?php echo $year; ?> Quezon City LGU</span>
 </footer>
 <script src="<?php echo $directory; ?>assets/jquery-3.7.1.min.js"></script>
 <script src="<?php echo $directory; ?>assets/bootstrap-5.3.0-alpha1.min.js"></script>

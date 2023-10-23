@@ -19,31 +19,29 @@ include("include/header.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php include("include/nav.php"); ?>
+  <?php include("include/nav.php"); ?>
 
-    <header>
+  <header>
     <div class="card mb-3">
-    <div class="card-body">
-      <div class="row g-0">
-        <div class="col-md-4" id="mobile">
-        <img class="rounded mx-auto d-block img-fluid"
-            src="images/cover.png" width="270">
-        </div>
-        <div class="col-md-8">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4" id="mobile">
+            <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
+          </div>
+          <div class="col-md-8">
             <h5 style="color: #4285f4;">Welcome to</h5>
             <h1 class="card-title"><strong>Digital Barangay</strong></h1>
             <p class="card-text sub-title">
               A proposed Local Government Unit Management<br>System Project</p>
-              <br>
-              <button type="button" class="btn btn-primary shadow">Learn more</button>
+            <br>
+            <button type="button" class="btn btn-primary shadow px-4">Learn more</button>
             <a class="accnt px-3">Procurement</a>
-        </div>
-        <div class="col-md-4" id="desktop">
-          <img class="rounded mx-auto d-block img-fluid"
-            src="images/cover.png" width="270">
+          </div>
+          <div class="col-md-4" id="desktop">
+            <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </header>
 
@@ -59,6 +57,7 @@ include("include/header.php");
       </div>
     </div>
   </main>
-    <?php include("include/footer.php");?>
+  <?php include("include/footer.php"); ?>
 </body>
+
 </html>

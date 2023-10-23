@@ -31,26 +31,26 @@ include("../include/header.php");
               <div class="col-md-6">
                 <h1>Signup for free</h1>
                 <br>
-                <div class="form-group">
-                  <input type="text" class="" id="email" required> 
-                  <label for="email">Email</label>
+                <div class="input-group2">
+                  <input type="email" placeholder="Email" name="email" required>
+                  <i class="fa fa-user fa-lg"></i>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="" id="fullname" required>
-                  <label for="email">Full Name</label>
+                <div class="input-group2">
+                  <input type="text" placeholder="Full Name" name="fullname" required>
+                  <i class="fa fa-circle-info fa-lg"></i>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="" id="password" required>
-                  <label for="email">Password</label>
+                <div class="input-group2">
+                  <input type="password" placeholder="Password" name="password" required>
+                  <i class="fa fa-key fa-lg"></i>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="" id="cpassword" required>
-                  <label for="email">Confirm Password</label>
+                <div class="input-group2">
+                  <input type="password" placeholder="Confirm Password" name="cpassword" required>
+                  <i class="fa fa-arrows-rotate fa-lg"></i>
                 </div>
                 <small>By clicking Signup, you agree to our <u><a href="/terms">Terms</a></u>, <u><a
                       href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie Policy</a></u>.</small>
                 <div class="mt-2">
-                  <button id="create" class="btn btn-primary px-4">Signup</button>
+                  <button id="create" class="btn btn-primary px-5 shadow">Signup</button>
                   <a class="accnt px-3" href="../login?utm_source=signup">Login</a>
                   <br><br>
                   <a class="fpass" href="../forgot-password?utm_source=signup">Forgot password?</a>

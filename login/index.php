@@ -31,16 +31,18 @@ include("../include/header.php");
               <div class="col-md-6">
                 <h1>Login to continue</h1>
                 <br>
-                <div class="form-group">
-                  <input type="text" class="" id="email" required> 
-                  <label for="email">Email</label>
+                <div class="input-group2">
+                  <input type="email" placeholder="Email" name="email" required>
+                  <i class="fa fa-user fa-lg"></i>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="" id="password" required>
-                  <label for="email">Password</label>
+
+                <div class="input-group2">
+                  <input type="password" placeholder="Password" name="password" required>
+                  <i class="fa fa-key fa-lg"></i>
                 </div>
+
                 <div class="mt-2">
-                  <button id="login" class="btn btn-primary px-4">Login</button>
+                  <button id="login" class="btn btn-primary px-5 shadow">Login</button>
                   <a class="accnt px-3" href="../signup?utm_source=login">Signup</a>
                   <br><br>
                   <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
