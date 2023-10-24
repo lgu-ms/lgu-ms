@@ -2,13 +2,13 @@
 include("../include/session.php");
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
-$page_modified_time = "2023-10-12T13:37:36+00:00";
+$page_modified_time = "2023-10-25T23:37:36+00:00";
 $page_title = "About Digital Barangay - A LGU Management System";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu/images/cover.png";
+$page_image = "http://localhost/lgu-ms/images/cover.png";
 $page_author = "Melvin Jones Repol";
-$page_canonical = "http://localhost/lgu/about";
+$page_canonical = "http://localhost/lgu-ms/about";
 $page_url = $page_canonical;
 $directory = "../";
 $directory_img = "../";

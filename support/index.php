@@ -9,14 +9,14 @@
     <link rel="preload" href="../assets/MavenPro.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/SourceCodePro-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <meta property="article:publisher" content="https://www.facebook.com/melvinjonesrepol">
-    <meta property="article:modified_time" content="2023-10-12T13:37:36+00:00">
+    <meta property="article:modified_time" content="2023-10-25T23:37:36+00:00">
 
     <meta property="og:title" content="Chat Support - Digital Barangay">
-    <meta property="og:url" content="http://localhost/lgu/support">
+    <meta property="og:url" content="http://localhost/lgu-ms/support">
     <meta property="og:site_name" content="Chat Support - Digital Barangay">
-    <link rel="canonical" href="http://localhost/lgu/support">
+    <link rel="canonical" href="http://localhost/lgu-ms/support">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost/lgu/images/cover.png">
+    <meta property="og:image" content="http://localhost/lgu-ms/images/cover.png">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">

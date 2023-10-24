@@ -1,2 +1,2 @@
-ErrorDocument 404 http://localhost/lgu
-ErrorDocument 403 http://localhost/lgu
+ErrorDocument 404 http://localhost/lgu-ms
+ErrorDocument 403 http://localhost/lgu-ms

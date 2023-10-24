@@ -1,5 +1,5 @@
 const cacheName = 'lgu';
-const domain = "http://localhost/lgu";
+const domain = "http://localhost/lgu-ms";
 
 self.addEventListener('activate', event => {
   event.waitUntil(

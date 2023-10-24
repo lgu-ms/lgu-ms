@@ -1,25 +1,23 @@
-# lgu
+# lgu-ms
 
 A proposed Local Government Unit Management System Project
 
-<img src="demo1.png" width="350">
-<img src="demo1.1.png" width="350">
-
-<img src="demo2.png" width="350">
-<img src="demo2.2.png" width="350">
+<img src="animated-roped-off-construction-barracades.gif">
 
 ## Required Software
 - XAMPP
 
 ## Install
+- Forked this repository to your own Github Account
 - Clone this repository to xampp/htdocs
 ```bash
-git clone git@github.com:mrepol742/lgu.git
+git clone git@github.com:{username}/lgu-ms.git
 ```
 
 ## Run
+- Open XAMPP
 - Start Apache and MySQL server.
-- Open this link http://localhost/lgu
+- Open this link http://localhost/lgu-ms
 
-## Update
-**Instructions here will be updated once the module get added**
+## Live Demo
+https://lgu.mrepol742.repl.co
