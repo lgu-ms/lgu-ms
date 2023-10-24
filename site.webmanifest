@@ -6,12 +6,12 @@
   "lang": "en-US",
   "icons": [
     {
-      "src": "/lgu/favicon_192.png",
+      "src": "/lgu-ms/favicon_192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/lgu/favicon_512.png",
+      "src": "/lgu-ms/favicon_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
