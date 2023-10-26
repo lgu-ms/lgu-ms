@@ -91,32 +91,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if (!empty($sessions)) {
             $sessions = json_decode($row["session_ids"]);
           } else {
-            $sessions = [];
+            $sessions = json_decode("[]");
           }
-          echo '<script>alert("' . json_encode($sessions) . '")</script>';
 
           if ($db_password == hash("sha512", $password)) {
 
             $sql = "INSERT INTO account_session (user_agent, session_started) VALUES ";
-            $device_id = md5($_SERVER['HTTP_USER_AGENT']);
+            $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
             $today = date("Y-m-d H:i:s");
             $sql .= "('$device_id', '$today')";
             if ($conn->query($sql) === TRUE) {
-              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session where user_agent = '$device_id'");
+              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session where session_started = '$today'");
 
               if (mysqli_num_rows($getSessionID) > 0) {
-                while ($row = mysqli_fetch_assoc($getSessionID)) {
+                while ($row1 = mysqli_fetch_assoc($getSessionID)) {
                   $_SESSION['user_login'] = true;
-                  $_SESSION["session_id"] = $row["_id"];
+                  $_SESSION["session_id"] = $row1["_id"];
                   $_SESSION["user_id"] = $user_id;
-                  array_push($sessions, $row["_id"]);
+                  array_push($sessions, $row1["_id"]);
                   $sessions = json_encode($sessions);
                   // updating ids in progress
-                  $saveSessionID = mysqli_query($conn, "UPDATE account SET session_ids = $sessions where _id = '$user_id'");
-                  if ($conn->query($saveSessionID) === TRUE) {
+                  $updateQuery = "UPDATE account SET session_ids = '$sessions' where _id = $user_id";
+                 if ($conn->query($updateQuery) === TRUE) {
                     echo '<script>window.location.href = "../"</script>';
                     die();
-                  }
+                 }
                 }
               }
             }
