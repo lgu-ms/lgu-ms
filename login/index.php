@@ -1,12 +1,17 @@
 <?php
 include("../include/session.php");
 
+if (isLogin()) {
+  header('Location: ../');
+  die();
+}
+
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Login or signup - Digital Barangay";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu-ms/images/cover.png";
+$page_image = "http://localhost/lgu-ms/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
 $page_canonical = "http://localhost/lgu-ms/login/";
 $page_url = $page_canonical;
@@ -27,28 +32,30 @@ include("../include/header.php");
       <div class="row g-0">
         <div class="col-md-7">
           <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <h1>Login to continue</h1>
-                <br>
-                <div class="input-group2">
-                  <input type="email" placeholder="Email" name="email" required>
-                  <i class="fa fa-user fa-lg"></i>
-                </div>
+            <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Login to continue</h1>
+                  <br>
+                  <div class="input-group2">
+                    <input id="email" type="email" placeholder="Email" name="email" required>
+                    <i class="fa fa-user"></i>
+                  </div>
 
-                <div class="input-group2">
-                  <input type="password" placeholder="Password" name="password" required>
-                  <i class="fa fa-key fa-lg"></i>
-                </div>
+                  <div class="input-group2">
+                    <input type="password" placeholder="Password" name="password" required>
+                    <i class="fa fa-key"></i>
+                  </div>
 
-                <div class="mt-2">
-                  <button id="login" class="btn btn-primary px-5 shadow">Login</button>
-                  <a class="accnt px-3" href="../signup?utm_source=login">Signup</a>
-                  <br><br>
-                  <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
+                  <div class="mt-2">
+                    <button id="login" class="btn btn-primary px-5 shadow">Login</button>
+                    <a class="accnt px-3" href="../signup?utm_source=login">Signup</a>
+                    <br><br>
+                    <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -60,3 +67,66 @@ include("../include/header.php");
 </body>
 
 </html>
+<?php
+include("../include/dbcon.php");
+
+$email = $password = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (empty($_POST["email"])) {
+    echo '<script>showErr("Email is required!")</script>';
+  } else {
+    $email = $_POST["email"];
+    if (empty($_POST["password"])) {
+      echo '<script>showErr("Password is required!")</script>';
+    } else {
+      $password = $_POST["password"];
+      $check_email = mysqli_query($conn, "SELECT * FROM account where user_email = '$email'");
+      if (mysqli_num_rows($check_email) > 0) {
+        while ($row = mysqli_fetch_assoc($check_email)) {
+
+          $db_password = $row["user_password"];
+          $user_id = $row["_id"];
+          $sessions = $row["session_ids"];
+          if (!empty($sessions)) {
+            $sessions = json_decode($row["session_ids"]);
+          } else {
+            $sessions = json_decode("[]");
+          }
+
+          if ($db_password == hash("sha512", $password)) {
+
+            $sql = "INSERT INTO account_session (user_agent, session_started) VALUES ";
+            $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+            $today = date("Y-m-d H:i:s");
+            $sql .= "('$device_id', '$today')";
+            if ($conn->query($sql) === TRUE) {
+              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session where session_started = '$today'");
+
+              if (mysqli_num_rows($getSessionID) > 0) {
+                while ($row1 = mysqli_fetch_assoc($getSessionID)) {
+                  $_SESSION['user_login'] = true;
+                  $_SESSION["session_id"] = $row1["_id"];
+                  $_SESSION["user_id"] = $user_id;
+                  array_push($sessions, $row1["_id"]);
+                  $sessions = json_encode($sessions);
+                  // updating ids in progress
+                  $updateQuery = "UPDATE account SET session_ids = '$sessions' where _id = $user_id";
+                 if ($conn->query($updateQuery) === TRUE) {
+                    echo '<script>window.location.href = "../"</script>';
+                    die();
+                 }
+                }
+              }
+            }
+          } else {
+            echo '<script>showErr("Email or Password incorrect!")</script>';
+          }
+        }
+      } else {
+        echo '<script>showErr("Email is not registered! Please create an account first.")</script>';
+      }
+    }
+  }
+}
+?>
