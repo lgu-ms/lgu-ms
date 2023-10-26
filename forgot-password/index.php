@@ -6,7 +6,7 @@ $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Forgot Password - Digital Barangay";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu-ms/images/cover.png";
+$page_image = "http://localhost/lgu-ms/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
 $page_canonical = "http://localhost/lgu-ms/forgot-password/";
 $page_url = $page_canonical;
@@ -33,7 +33,7 @@ include("../include/header.php");
                 <br>
                 <div class="input-group2">
                   <input type="email" placeholder="Email" name="email" required>
-                  <i class="fa fa-user fa-lg"></i>
+                  <i class="fa fa-user"></i>
                 </div>
                 <div class="form-group mt-2">
                   <button id="forgot" class="btn btn-primary shadow px-5">Forgot</button>

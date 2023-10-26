@@ -30,9 +30,19 @@
                     </a>
                 </li>
                 <?php
-
-                if (!$isForm) {
+                $ff = null;
+                if (isLogin()) {
                     $ff = '
+                    <li class="nav-item">
+                    <a class="nav-link" href="' . $directory . 'profile">
+                        <span class="text sec px-2">' . $_SESSION['session_id'] . '</span>
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                </li>
+                    ';
+                } else {
+                    if (!$isForm) {
+                        $ff = '
                     <li class="nav-item">
                     <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
                         <span class="text sec px-2">Log in</span>
@@ -40,8 +50,9 @@
                     </a>
                 </li>
                     ';
-                    echo $ff;
+                    }
                 }
+                echo $ff;
 
                 ?>
 
@@ -58,7 +69,7 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-body">
-            <div class="container-fluid">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 1</a>
@@ -66,29 +77,29 @@
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 3</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 4</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 5</a>
-                           
+
 
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 6</a>
+                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 6</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 7</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 8</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 9</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 10</a>
-                     
+
 
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 11</a>
+                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 11</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 12</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 13</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 14</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 15</a>
-                        
+
 
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 16</a>
+                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 16</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 17</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 18</a>
                             <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i> Module 19</a>
