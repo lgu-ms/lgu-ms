@@ -1,3 +1,6 @@
+<div class="progress-container fixed-top">
+  <span class="progress-bar"></span>
+</div>
 <nav class="autohide navbar navbar-expand-lg fixed-top scrolled-up scrolled-up-tr">
     <div class="container-fluid">
 
@@ -5,15 +8,13 @@
             <span class="navbar-toggler-icon" id="qwe"></span>
         </button>
         <a class="navbar-brand " href="<?php echo $directory; ?>">
-            <img class="img-responsive" id="toplink" width="60">
+            <img src="<?php echo $directory; ?>favicon.ico" alt="Icon" height="20" class="navbar-brand-icon">
+           <span class="navbar-brand-name"> Digital Barangay </span>
         </a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $directory; ?>about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="<?php echo $directory; ?>contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#modulesModal" data-bs-toggle="modal" data-bs-target="#modulesModal" onmouseover="modulesModal()">Modules</a>
@@ -32,6 +33,14 @@
                 <?php
                 $ff = null;
                 if (isLogin()) {
+                    $getUserName = mysqli_query($conn, "SELECT * FROM account_session where session_started = '$today'");
+
+                    if (mysqli_num_rows($getUserName) > 0) {
+                        while ($row = mysqli_fetch_assoc($getUserName)) {
+                            $_SESSION['user_login'] = true;
+                            $_SESSION["session_id"] = $row["_id"];
+                        }
+                    }
                     $ff = '
                     <li class="nav-item">
                     <a class="nav-link" href="' . $directory . 'profile">

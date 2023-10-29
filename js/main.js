@@ -49,6 +49,7 @@ window.onerror = function a(msm, url, num) {
  */
 
 window.addEventListener("DOMContentLoaded", () => {
+    scrollProgressBar();
     el_autohide = document.querySelector(".autohide");
     navbar_height = document.querySelector(".navbar").offsetHeight;
     document.body.style.paddingTop = navbar_height + "px";
@@ -134,3 +135,35 @@ function modulesModal() {
     const modal = new bootstrap.Modal(modules);
     modal.toggle();
 }
+
+function scrollProgressBar() {
+    var getMax = function () {
+      return $(document).height() - $(window).height();
+    };
+  
+    var getValue = function () {
+      return $(window).scrollTop();
+    };
+  
+    var progressBar = $(".progress-bar"),
+      max = getMax(),
+      value,
+      width;
+  
+    var getWidth = function () {
+      value = getValue();
+      width = (value / max) * 100;
+      width = width + "%";
+      return width;
+    };
+  
+    var setWidth = function () {
+      progressBar.css({ width: getWidth() });
+    };
+  
+    $(document).on("scroll", setWidth);
+    $(window).on("resize", function () {
+      max = getMax();
+      setWidth();
+    });
+  }
