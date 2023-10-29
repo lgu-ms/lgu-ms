@@ -44,7 +44,21 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    border: none;
+    background-color: var(--text-color);
+    border-radius: 0.2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-color);
 }
 
 svg {
@@ -146,12 +160,49 @@ nav {
     display: inline-block;
 }
 
-.sec {
+.sec,
+.navbar-brand-icon, .prim {
     display: none;
 }
 
+.seco {
+    display: inline-block;
+}
+
 @media (min-width:995px) {
-    .sec {
+
+    .sec, .prim {
+        display: inline-block;
+    }
+
+    .seco {
+        display: none;
+    }
+}
+
+@media (min-width:0px) {
+
+    .navbar-brand-icon,
+    .navbar-brand-name {
+        display: none;
+    }
+}
+
+@media (min-width:250px) {
+
+    .navbar-brand-name {
+        display: none;
+    }
+
+    .navbar-brand-icon {
+        display: inline-block;
+    }
+}
+
+@media (min-width:400px) {
+
+    .navbar-brand-icon,
+    .navbar-brand-name {
         display: inline-block;
     }
 }
@@ -211,6 +262,10 @@ nav {
 
 .card {
     background-color: var(--background-color);
+}
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml, <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\" viewBox=\"0 0 448 512\"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d=\"M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z\"/></svg>") !important;
 }
 
 footer {
@@ -360,16 +415,9 @@ input:-webkit-autofill:active {
     border-radius: 50% !important;
 }
 
-.form-control {
-    padding: 1%;
-    margin: 1%;
-    border: none !important;
-    border-bottom: 1px solid #212121 !important;
-    border-radius: 0px !important;
-}
-
 input,
-select {
+select,
+textarea {
     color: var(--text-color);
     padding: 10px;
     border-radius: 5px;
@@ -381,7 +429,8 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
     outline: 1px solid var(--text-color);
     border-color: var(--text-color);
 }
@@ -484,10 +533,19 @@ input[type=date]:focus::-webkit-datetime-edit {
     color: var(--text-color) !important;
 }
 
-.form-group {}
+.navbar-brand {
+    color: var(--text-color);
+    font-size: 1em;
+    text-transform: uppercase;
+}
 
-#toplink {
-    content: var(--topicon);
+.navbar-brand img {
+    padding: 0 5px;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: var(--text-color);
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -551,8 +609,54 @@ div label {
 
 input[type=text],
 input[type=email],
-input[type=password] {
+input[type=password],
+textarea {
     padding: 12px 40px;
     margin: 8px 0;
     display: inline-block;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: transparent;
+    height: 3.5px;
+    display: block;
+    z-index: 999999;
+}
+
+.progress-bar {
+    background-color: var(--text-color);
+    width: 0%;
+    display: block;
+    height: inherit;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: none;
+}
+
+video {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.video-wrapper {
+    border: 2px solid #000;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    position: relative;
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
