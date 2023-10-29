@@ -21,9 +21,9 @@
                 </li>
             </ul>
         </div>
+        
         <div>
             <ul class="nav navbar-nav" style="flex-direction: row;">
-
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <span class="text sec px-2">Search</span>

@@ -407,14 +407,6 @@ input:-webkit-autofill:active {
     border-radius: 50% !important;
 }
 
-.form-control {
-    padding: 1%;
-    margin: 1%;
-    border: none !important;
-    border-bottom: 1px solid #212121 !important;
-    border-radius: 0px !important;
-}
-
 input,
 select,
 textarea {
