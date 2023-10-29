@@ -1,5 +1,5 @@
 <div class="progress-container fixed-top">
-  <span class="progress-bar"></span>
+    <span class="progress-bar"></span>
 </div>
 <nav class="autohide navbar navbar-expand-lg fixed-top scrolled-up scrolled-up-tr">
     <div class="container-fluid">
@@ -7,29 +7,31 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" id="qwe111">
             <span class="navbar-toggler-icon" id="qwe"></span>
         </button>
+
         <a class="navbar-brand " href="<?php echo $directory; ?>">
             <img src="<?php echo $directory; ?>favicon.ico" alt="Icon" height="20" class="navbar-brand-icon">
-           <span class="navbar-brand-name"> Digital Barangay </span>
+            <span class="navbar-brand-name"> Digital Barangay </span>
         </a>
+
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $directory; ?>">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Search
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo $directory; ?>contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#modulesModal" data-bs-toggle="modal" data-bs-target="#modulesModal" onmouseover="modulesModal()">Modules</a>
                 </li>
-            </ul>
-        </div>
-        
-        <div>
-            <ul class="nav navbar-nav" style="flex-direction: row;">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="text sec px-2">Search</span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </a>
-                </li>
+
                 <?php
                 $ff = null;
                 if (isLogin()) {
@@ -42,20 +44,18 @@
                         }
                     }
                     $ff = '
-                    <li class="nav-item">
+                    <li class="nav-item prim">
                     <a class="nav-link" href="' . $directory . 'profile">
-                        <span class="text sec px-2">' . $_SESSION['session_id'] . '</span>
-                        <i class="fa-regular fa-user"></i>
+                       ' . $_SESSION['session_id'] . '
                     </a>
                 </li>
                     ';
                 } else {
                     if (!$isForm) {
                         $ff = '
-                    <li class="nav-item">
+                    <li class="nav-item prim">
                     <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
-                        <span class="text sec px-2">Log in</span>
-                        <i class="fa-solid fa-user"></i>
+                        Login
                     </a>
                 </li>
                     ';
@@ -65,6 +65,44 @@
 
                 ?>
 
+            </ul>
+        </div>
+        <div>
+            <ul class="nav navbar-nav" style="flex-direction: row;">
+            <?php
+                $ff = null;
+                if (isLogin()) {
+                    $getUserName = mysqli_query($conn, "SELECT * FROM account_session where session_started = '$today'");
+
+                    if (mysqli_num_rows($getUserName) > 0) {
+                        while ($row = mysqli_fetch_assoc($getUserName)) {
+                            $_SESSION['user_login'] = true;
+                            $_SESSION["session_id"] = $row["_id"];
+                        }
+                    }
+                    $ff = '
+                    <li class="nav-item seco">
+                    <a class="nav-link" href="' . $directory . 'profile">
+                    <span class="text sec px-2">' . $_SESSION['session_id'] . '</span>
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                    ';
+                } else {
+                    if (!$isForm) {
+                        $ff = '
+                    <li class="nav-item seco">
+                    <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
+                    <span class="text sec px-2">Log in</span>
+                    <i class="fa-solid fa-user"></i>
+                    </a>
+                </li>
+                    ';
+                    }
+                }
+                echo $ff;
+
+                ?>
             </ul>
         </div>
     </div>

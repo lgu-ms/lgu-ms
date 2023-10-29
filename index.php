@@ -15,38 +15,44 @@ $directory_img = "../";
 $isForm = false;
 
 include("include/header.php");
-
 ?>
 
 <body class="d-flex flex-column min-vh-100">
+  <div class="video-background">
+    <video autoplay muted loop playsinline class="video" class="lazy">
+      <source src="videos/intro.compressed.webm" type="video/webm">
+      <source src="videos/intro.compressed.mp4" type="video/mp4">
+    </video>
 
-  <?php include("include/nav.php"); ?>
-  <header>
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4" id="mobile">
-            <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
-          </div>
-          <div class="col-md-8">
-            <h5 style="color: #4285f4;">#quezoncity</h5>
-            <h1 class="card-title"><strong>Digital Barangay</strong></h1>
-            <p class="card-text sub-title">
-              A proposed Local Government Unit Management<br>System Project</p>
-            <br>
-            <button type="button" class="btn btn-primary shadow px-4">Learn more</button>
-            <a class="accnt px-3">Procurement</a>
-          </div>
-          <div class="col-md-4" id="desktop">
-            <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
+    <div class="header">
+      <?php include("include/nav.php"); ?>
+      <header>
+        <div class="card mb-3" style="background: transparent">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4" id="mobile">
+                <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
+              </div>
+              <div class="col-md-8">
+                <h5 style="color: #4285f4;">#quezoncity</h5>
+                <h1 class="card-title"><strong>Digital Barangay</strong></h1>
+                <p class="card-text sub-title">
+                  A proposed Local Government Unit Management<br>System Project</p>
+                <br>
+                <button type="button" class="btn btn-primary shadow px-4">Learn more</button>
+                <a class="accnt px-3">Procurement</a>
+              </div>
+              <div class="col-md-4" id="desktop">
+                <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </header>
     </div>
-  </header>
-
+  </div>
   <main>
-    <div class="container pt-4 pt-xl-5">
+    <div class="container pt-4 pt-xl-5 mt-5">
       <div class="row pt-5">
         <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
           <div class="text-center">
