@@ -9,6 +9,7 @@ function findHtmlCssFiles(location) {
     fs.readdir(location, function (err, files) {
         if (err) return console.error(err);
         for (let i = 0; i < files.length; i++) {
+            if (files[i] != "obfuscate") {
                 const file = location + "/" + files[i];
                 fs.stat(file, async (err, stats) => {
                     if (err) {
@@ -69,6 +70,7 @@ function findHtmlCssFiles(location) {
                         console.log("[Unknown] " + file);
                     }
                 });
+            }
         }
     });
 }
