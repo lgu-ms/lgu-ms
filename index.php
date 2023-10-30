@@ -30,7 +30,7 @@ include("include/header.php");
         <div class="card mb-3" style="background: transparent">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-4" id="mobile">
+              <div class="col-md-4 mb-5" id="mobile">
                 <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
               </div>
               <div class="col-md-8">
@@ -39,8 +39,8 @@ include("include/header.php");
                 <p class="card-text sub-title">
                   A proposed Local Government Unit Management<br>System Project</p>
                 <br>
-                <button type="button" class="btn btn-primary shadow px-4">Learn more</button>
-                <a class="accnt px-3">Procurement</a>
+                <a type="button" class="btn btn-primary shadow px-4" href="learnmore">Learn more</a>
+                <a type="button" class="btn btn-outline-primary px-4" href="milestone">Milestone</a>
               </div>
               <div class="col-md-4" id="desktop">
                 <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
@@ -110,10 +110,10 @@ include("include/header.php");
     <div class="container pt-4 pt-xl-5">
       <div class="card mb-3">
         <div class="row g-0">
-          <div class="col-md-6">
+          <div class="col-md-6 p-3">
             <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 p-1">
             <h2>Lorem Ipsum Dolor</h2>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
           </div>
@@ -121,21 +121,21 @@ include("include/header.php");
       </div>
       <div class="card mb-3">
         <div class="row g-0">
-          <div class="col-md-6">
+          <div class="col-md-6 p-1">
             <h2>Lorem Ipsum Dolor</h2>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 p-3">
             <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
           </div>
         </div>
       </div>
       <div class="card mb-3 ">
         <div class="row g-0">
-          <div class="col-md-6">
+          <div class="col-md-6 p-3">
             <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 p-1">
             <h2>Lorem Ipsum Dolor</h2>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
           </div>

@@ -56,7 +56,7 @@ include("../include/header.php");
                   <small>By clicking Signup, you agree to our <u><a href="/terms">Terms</a></u>, <u><a href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie Policy</a></u>.</small>
                   <div class="mt-2">
                     <button id="create" class="btn btn-primary px-5 shadow">Signup</button>
-                    <a class="accnt px-3" href="../login?utm_source=signup">Login</a>
+                    <a type="button" class="btn btn-outline-primary px-4" href="../login?utm_source=signup">Login</a>
                     <br><br>
                     <a class="fpass" href="../forgot-password?utm_source=signup">Forgot password?</a>
                   </div>

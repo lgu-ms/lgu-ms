@@ -37,7 +37,7 @@ include("../include/header.php");
                 </div>
                 <div class="form-group mt-2">
                   <button id="forgot" class="btn btn-primary shadow px-5">Forgot</button>
-                  <a class="accnt px-3" href="../login?utm_source=forgot-password">Login</a>
+                  <a type="button" class="btn btn-outline-primary px-4" href="../login?utm_source=forgot-password">Login</a>
                   <br><br>
                   <a class="fpass" href="../signup?utm_source=forgot-password">No account yet?</a>
                 </div>

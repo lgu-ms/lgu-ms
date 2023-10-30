@@ -1,0 +1,35 @@
+name: "Obfuscate"
+
+on:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start Obfuscating
+        run: |
+          rm -rf .github .gitignore .git .vscode lgu-ms.sql README.md
+          cd obfuscate
+          npm i
+          npm install minify
+          node obfuscate.js
+          cd ..
+          rm -rf obfuscate
+      - name: Push to deployment Repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: '.'
+          destination-github-username: 'lgu-ms'
+          destination-repository-name: 'lgu-ms'
+          user-email: mrepol742@gmail.com
+          commit-message: Initial Commit
+          target-branch: deployment

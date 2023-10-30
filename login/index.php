@@ -49,7 +49,7 @@ include("../include/header.php");
 
                   <div class="mt-2">
                     <button id="login" class="btn btn-primary px-5 shadow">Login</button>
-                    <a class="accnt px-3" href="../signup?utm_source=login">Signup</a>
+                    <a type="button" class="btn btn-outline-primary px-4" href="../signup?utm_source=login">Signup</a>
                     <br><br>
                     <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
                   </div>
