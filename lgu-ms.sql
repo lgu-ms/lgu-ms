@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2023 at 07:29 PM
+-- Generation Time: Oct 30, 2023 at 07:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,13 +38,8 @@ CREATE TABLE `account` (
   `dateofbirth` int(11) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `phonenumber` int(15) DEFAULT NULL,
-  `user_email` text NOT NULL,
-  `session_ids` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+  `user_email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `account`
---
 
 -- --------------------------------------------------------
 
@@ -53,9 +48,37 @@ CREATE TABLE `account` (
 --
 
 CREATE TABLE `account_session` (
-  `_id` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `_sid` int(10) UNSIGNED ZEROFILL NOT NULL,
   `user_agent` text DEFAULT NULL,
-  `session_started` text NOT NULL
+  `session_started` text NOT NULL,
+  `session_ended` int(11) DEFAULT NULL,
+  `status` varchar(10) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otp`
+--
+
+CREATE TABLE `otp` (
+  `_oid` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `session_id` int(10) UNSIGNED NOT NULL,
+  `account_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profilepic`
+--
+
+CREATE TABLE `profilepic` (
+  `_pid` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `profilepic` text NOT NULL,
+  `account_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -72,7 +95,23 @@ ALTER TABLE `account`
 -- Indexes for table `account_session`
 --
 ALTER TABLE `account_session`
-  ADD PRIMARY KEY (`_id`);
+  ADD PRIMARY KEY (`_sid`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `otp`
+--
+ALTER TABLE `otp`
+  ADD PRIMARY KEY (`_oid`),
+  ADD KEY `session_otp_id` (`session_id`),
+  ADD KEY `account_otp_id` (`account_id`);
+
+--
+-- Indexes for table `profilepic`
+--
+ALTER TABLE `profilepic`
+  ADD PRIMARY KEY (`_pid`),
+  ADD KEY `account_profile_id` (`account_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -82,13 +121,48 @@ ALTER TABLE `account_session`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `_id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2023000000;
+  MODIFY `_id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2023000016;
 
 --
 -- AUTO_INCREMENT for table `account_session`
 --
 ALTER TABLE `account_session`
-  MODIFY `_id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
+  MODIFY `_sid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000035;
+
+--
+-- AUTO_INCREMENT for table `otp`
+--
+ALTER TABLE `otp`
+  MODIFY `_oid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `profilepic`
+--
+ALTER TABLE `profilepic`
+  MODIFY `_pid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `account_session`
+--
+ALTER TABLE `account_session`
+  ADD CONSTRAINT `account_session_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
+
+--
+-- Constraints for table `otp`
+--
+ALTER TABLE `otp`
+  ADD CONSTRAINT `account_otp_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`_id`),
+  ADD CONSTRAINT `session_otp_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`);
+
+--
+-- Constraints for table `profilepic`
+--
+ALTER TABLE `profilepic`
+  ADD CONSTRAINT `account_profile_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

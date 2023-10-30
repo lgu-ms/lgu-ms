@@ -8,6 +8,12 @@ insertParam = (key, value) => {
     window.history.pushState({ path: url.href }, "", url.href);
 };
 
+showErr = (err) => {
+    let bsAlert = new bootstrap.Toast(document.getElementById("error-toast"));
+    bsAlert.show();
+    document.getElementById("error").innerText = err;
+};
+
 setSession = (key, value) => {
     sessionStorage.setItem(key, value);
 };
