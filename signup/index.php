@@ -100,9 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if ($password != $cpassword) {
             echo '<script>showErr("Password did not match!")</script>';
           } else {
-            $chemail = mysqli_query($conn, "SELECT * FROM account WHERE user_email= '" . $email . "'");
-            $check = mysqli_num_rows($chemail);
-            if ($check > 0) {
+            $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email= '$email'");
+            if (mysqli_num_rows($isRegister) > 0) {
               echo '<script>showErr("Email is already registered!")</script>';
             } else {
               $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";

@@ -1,5 +1,7 @@
 <?php
-include("dbcon.php");
+if (!$isForm) {
+    include("dbcon.php");
+}
 ?>
 
 <div class="progress-container fixed-top">
@@ -190,4 +192,19 @@ include("dbcon.php");
     <div class="toast-body">
         <p id="error"></p>
     </div>
+</div>
+<div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="popupModalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="popupModalContent">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

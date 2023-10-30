@@ -14,6 +14,16 @@ showErr = (err) => {
     document.getElementById("error").innerText = err;
 };
 
+showPopup = (title, content, action) => {
+    let bsModal = new bootstrap.Modal(document.getElementById("popupModal"));
+    bsModal.show();
+    document.getElementById("popupModalLabel").innerText = title;
+    document.getElementById("popupModalContent").innerText = content;
+    $("#popupModal").on("hidden.bs.modal", function () {
+        window.location.href = action;
+    });
+};
+
 setSession = (key, value) => {
     sessionStorage.setItem(key, value);
 };
