@@ -70,7 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo '<script>showErr("You need to type your previous password!")</script>';
   } else {
     $ppassword = hash("sha512", $_POST["ppassword"]);
-    $user_id = $_SESSION["session_id"];
+    $user_id = $_SESSION["user_id"];
+    $session_id = $_SESSION["session_id"];
 
     $checkID = mysqli_query($conn, "SELECT * FROM account where _id = $user_id");
     if (mysqli_num_rows($checkID) > 0) {
@@ -81,16 +82,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($_POST["password"])) {
           echo '<script>showErr("You need to enter your new password!")</script>';
         } else {
-          $password = $_POST["password"];
+          $password = hash("sha512", $_POST["password"]);
           if (empty($_POST["cpassword"])) {
             echo '<script>showErr("You need to retype your password again!")</script>';
           } else {
-            $cpassword = $_POST["cpassword"];
+            $cpassword = hash("sha512", $_POST["cpassword"]);
             if (strcasecmp($password, $cpassword) == 0) {
               if (strcasecmp($db_password, $ppassword) == 0) {
-                $setPassword = "UPDATE account SET user_password = '$ppassword' WHERE _id = $user_id";
+                $setPassword = "UPDATE account SET user_password = '$password' WHERE _id = $user_id";
                 if ($conn->query($setPassword)) {
-                  echo '<script>showPopup("Change Password", "Successfully changed your password", ' . $directory . ')</script>';
+                  $setChangePassword = "INSERT INTO passwordchanged (date_accessed, session_id, user_id, event_type) VALUES ";
+                  $today = date("Y-m-d H:i:s");
+                  $setChangePassword .= "('$today', $session_id, $user_id, 'change-password')";
+                  if ($conn->query($setChangePassword) === TRUE) {
+                    echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '")</script>';
+                  }
                 }
               } else {
                 echo '<script>showErr("Please type again your password!")</script>';
