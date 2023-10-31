@@ -11,6 +11,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $directory; ?>contact">Contact Us</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $directory; ?>modules">Modules</a>
+          </li>
         </ul>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -60,6 +63,7 @@
         </ul>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+      <h5>Toggle Theme</h5>
         <div class="form-check form-switch" id="themeswitch">
         </div>
       </div>

@@ -36,8 +36,7 @@ if (!$isForm) {
                     <a class="nav-link" href="<?php echo $directory; ?>contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#modulesModal" data-bs-toggle="modal" data-bs-target="#modulesModal"
-                        onmouseover="modulesModal()">Modules</a>
+                <a class="nav-link" href="<?php echo $directory; ?>modules">Modules</a>
                 </li>
 
                 <?php
@@ -119,70 +118,6 @@ if (!$isForm) {
         An error occurred. Try reloading this page, or enable JavaScript if it is disabled in your browser.
     </div>
 </noscript>
-<div class="modal fade" id="modulesModal" tabindex="-1" aria-labelledby="modulesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 1</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 2</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 3</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 4</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 5</a>
-
-
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 6</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 7</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 8</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 9</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 10</a>
-
-
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 11</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 12</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 13</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 14</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 15</a>
-
-
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 16</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 17</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 18</a>
-                            <a class="" href="#"><i class="fa-solid fa-book" style="color: #213454; padding: 10px;"></i>
-                                Module 19</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="toast" id="error-toast"
     style="position: fixed; bottom: 0; right: 0; z-index: 9999; float: right; margin: 3%;" data-bs-autohide="true">
     <div class="toast-header">
@@ -194,17 +129,17 @@ if (!$isForm) {
     </div>
 </div>
 <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="popupModalLabel"></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="popupModalContent">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="popupModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="popupModalContent">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

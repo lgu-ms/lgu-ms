@@ -6,9 +6,9 @@ $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Digital Barangay - A LGU Management System";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu-ms/images/ogimage.png";
+$page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
-$page_canonical = "http://localhost/lgu-ms/";
+$page_canonical = "https://digitalbarangay.com/";
 $page_url = $page_canonical;
 $directory = "";
 $directory_img = "../";
@@ -56,7 +56,7 @@ include("include/header.php");
       <div class="row pt-5">
         <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
           <div class="text-center">
-            <h4 style="color: #4285f4;">Lorem Ipsum Dolor</h4>
+            <h4 style="color: #4285f4 ;">Lorem Ipsum Dolor</h4>
             <p class="fw-bold">Nunc quis neque id libero bibendum posuere a ut nunc.</p>
           </div>
         </div>
