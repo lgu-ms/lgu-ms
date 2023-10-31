@@ -1,17 +1,17 @@
 {
-  "name": "LGU Management System",
-  "short_name": "LGU",
+  "name": "Digital Barangay - LGU Management System",
+  "short_name": "Digital Barangay",
   "description": "",
   "dir": "ltr",
   "lang": "en-US",
   "icons": [
     {
-      "src": "/lgu-ms/favicon_192.png",
+      "src": "https://digitalbarangay.com/favicon_192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/lgu-ms/favicon_512.png",
+      "src": "https://digitalbarangay.com/favicon_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
