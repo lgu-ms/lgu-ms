@@ -80,42 +80,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST["password"])) {
       echo '<script>showErr("Password is required!")</script>';
     } else {
-      $password = $_POST["password"];
-      $check_email = mysqli_query($conn, "SELECT * FROM account where user_email = '$email'");
-      if (mysqli_num_rows($check_email) > 0) {
-        while ($row = mysqli_fetch_assoc($check_email)) {
+      $password = hash("sha512", $_POST["password"]);
+      $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
+      if (mysqli_num_rows($isRegister) > 0) {
+        while ($row = mysqli_fetch_assoc($isRegister)) {
 
           $db_password = $row["user_password"];
           $user_id = $row["_id"];
-          $sessions = $row["session_ids"];
-          if (!empty($sessions)) {
-            $sessions = json_decode($row["session_ids"]);
-          } else {
-            $sessions = json_decode("[]");
-          }
 
-          if ($db_password == hash("sha512", $password)) {
+          if (strcasecmp($db_password, $password) == 0) {
 
-            $sql = "INSERT INTO account_session (user_agent, session_started) VALUES ";
+            $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
             $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
             $today = date("Y-m-d H:i:s");
-            $sql .= "('$device_id', '$today')";
+            $sql .= "('$device_id', '$today', 'active', $user_id, '$today')";
             if ($conn->query($sql) === TRUE) {
-              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session where session_started = '$today'");
+              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $user_id");
 
               if (mysqli_num_rows($getSessionID) > 0) {
                 while ($row1 = mysqli_fetch_assoc($getSessionID)) {
                   $_SESSION['user_login'] = true;
-                  $_SESSION["session_id"] = $row1["_id"];
+                  $_SESSION["session_id"] = $row1["_sid"];
                   $_SESSION["user_id"] = $user_id;
-                  array_push($sessions, $row1["_id"]);
-                  $sessions = json_encode($sessions);
-                  // updating ids in progress
-                  $updateQuery = "UPDATE account SET session_ids = '$sessions' where _id = $user_id";
-                 if ($conn->query($updateQuery) === TRUE) {
-                    echo '<script>window.location.href = "../"</script>';
-                    die();
-                 }
+
+                  echo '<script>window.location.href = "../"</script>';
+                  die();
                 }
               }
             }
@@ -124,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
         }
       } else {
-        echo '<script>showErr("Email is not registered! Please create an account first.")</script>';
+        echo '<script>showErr("Email or Password incorrect!")</script>';
       }
     }
   }

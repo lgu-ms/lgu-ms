@@ -7,6 +7,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // 0 - 60
+    $num123 = (int)date("i");
+    if ($num123 % 3 == 0) {
+        $today = date("Y-m-d H:i:s");
+        $session_id = $_SESSION["session_id"];
+        $updateLastAccessed = "UPDATE account_session SET last_accessed = '$today' WHERE _sid = $session_id";
+        $conn->query($updateLastAccessed);
+    }
+
     $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 

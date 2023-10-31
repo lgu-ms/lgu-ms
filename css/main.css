@@ -848,3 +848,13 @@ video {
 .text-muted {
     color: var(--text-color) !important;
 }
+
+.toast-header {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+
+.toast-header strong {
+    font-family: 'Source Code Pro', sans-serif;
+}
