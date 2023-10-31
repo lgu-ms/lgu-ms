@@ -1,6 +1,8 @@
 # lgu-ms
 
-A proposed Local Government Unit Management System Project
+A proposed Local Government Unit Management System Project consist of 19 modules.
+
+https://digitalbarangay.com
 
 <img src="animated-roped-off-construction-barracades.gif">
 
@@ -18,10 +20,6 @@ git clone git@github.com:{username}/lgu-ms.git
 - Open XAMPP
 - Start Apache and MySQL server.
 - Open this link http://localhost/lgu-ms
-
-## Live Demo
-May not be up to date
-https://lgu-ms.mrepol742.repl.co
 
 ## Note
 Please avoid doing the following

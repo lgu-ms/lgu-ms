@@ -1,25 +1,25 @@
 <?php
-include("../include/session.php");
+include("../../include/session.php");
 
-$page_publisher = "https://facebook.com/melvinjonesrepol";
+$page_publisher = "https://github.com/reyes-9";
 $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Digital Barangay - A LGU Management System";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu-ms/images/ogimage.png";
-$page_author = "Melvin Jones Repol";
-$page_canonical = "http://localhost/lgu-ms/";
+$page_image = "https://digitalbarangay.com/images/ogimage.png";
+$page_author = "Enzo Reyes";
+$page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/users.php";
 $page_url = $page_canonical;
-$directory = "../";
-$directory_img = "../";
+$directory = "../../";
+$directory_img = "../../";
 $isForm = false;
 
-include("../include/header.php");
+include("../../include/header.php");
 echo '<link rel="stylesheet" href="../css/public-market-module.css">';
 ?>
 
 <body class="d-flex flex-column min-vh-100 ">
-    <?php include("../include/nav.php"); ?>
+    <?php include("../../include/nav.php"); ?>
 
     <div class="main vh-100">
 
@@ -138,7 +138,7 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
     </div>
 
     <!-- FORM -->
-    <?php include("../include/footer.php"); ?>
+    <?php include("../../include/footer.php"); ?>
 </body>
 
 </html>

@@ -1,27 +1,27 @@
 <?php
-include("../include/session.php");
+include("../../include/session.php");
 
-$page_publisher = "https://facebook.com/melvinjonesrepol";
+$page_publisher = "https://github.com/reyes-9";
 $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Public Market And Vendors Management Module";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
-$page_image = "http://localhost/lgu-ms/images/cover.png";
-$page_author = "Melvin Jones Repol";
-$page_canonical = "http://localhost/lgu-ms/public-market-and-vendors-management-module/";
+$page_image = "https://digitalbarangay.com/images/cover.png";
+$page_author = "Enzo Reyes";
+$page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/";
 $page_url = $page_canonical;
-$directory = "../";
-$directory_img = "../";
+$directory = "../../";
+$directory_img = "../../";
 $isForm = false;
 
-include("../include/header.php");
-echo '<link rel="stylesheet" href="../css/public-market-module.css">';
+include("../../include/header.php");
+echo '<link rel="stylesheet" href="../../css/public-market-module.css">';
 ?>
 
 <body class="d-flex flex-column min-vh-100">
 
   <div class="main vh-100">
-    <?php include("../include/nav.php"); ?>
+    <?php include("../../include/nav.php"); ?>
 
     <header>
       <div class="container pt-4 pt-xl-5">
@@ -39,12 +39,12 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
     <div class="container mt-5" id="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <img src="../images/market.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
+          <img src="<?php echo $directory; ?>images/market.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
         </div>
         <div class="col-md-6">
           <p>A Public Market and Vendors Management Module offers numerous advantages for a city. It ensures efficient vendor management, regulatory compliance, and fair stall allocation. By facilitating transparent communication, providing valuable insights through data analysis, and enhancing the public experience with digital navigation and security measures, the module contributes to vibrant, well-organized markets. Additionally, it supports local businesses, promotes economic growth, and optimizes resource usage, ultimately enriching the city's development and public satisfaction.</p>
           <a href="#sub" class="btn btn-primary shadow px-4" id="reduced">Get Started</a>
-          <a class="accnt px-3" href="../login/index.php" style="margin: 10px;">Login</a>
+          <a class="accnt px-3" href="<?php echo $directory; ?>login" style="margin: 10px;">Login</a>
         </div>
       </div>
     </div>
@@ -94,6 +94,6 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
   <!-- market management -->
 </body>
 
-<?php include("../include/footer.php"); ?>
+<?php include("../../include/footer.php"); ?>
 
 </html>

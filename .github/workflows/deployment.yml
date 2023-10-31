@@ -1,4 +1,4 @@
-name: "Obfuscate"
+name: "Build Deployment"
 
 on:
   pull_request:
@@ -21,6 +21,10 @@ jobs:
           node obfuscate.js
           cd ..
           rm -rf obfuscate
+          cd include
+          rm -rf config.php
+          echo '<?php\n\n\t$mysql_address = "localhost";\n\t$mysql_user = "u395039994_root";\n\t$mysql_password = "5]~SC!z^Y[f";\n\t$mysql_db = "u395039994_dsd34553dg35";\n\t$debug = false;\n?>' >> config.php
+          cd ..
       - name: Push to deployment Repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
