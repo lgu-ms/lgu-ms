@@ -15,20 +15,21 @@ $directory_img = "../../";
 $isForm = false;
 
 include("../../include/dbcon.php");
-
-if (isLogin()) {
-  $user_id = $_SESSION["user_id"];
-  $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
-  if (mysqli_num_rows($isNotUser) > 0) {
-    while ($row = mysqli_fetch_assoc($isNotUser)) {
-      if ($row["user_type"] == "User") {
-        header("Location: ../");
+if (!$debug) {
+  if (isLogin()) {
+    $user_id = $_SESSION["user_id"];
+    $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
+    if (mysqli_num_rows($isNotUser) > 0) {
+      while ($row = mysqli_fetch_assoc($isNotUser)) {
+        if ($row["user_type"] == "User") {
+          http_response_code(403);
+          die();
+        }
       }
     }
-  }
-} else {
-  if (!$debug) {
-    header("Location: ../");
+  } else {
+    http_response_code(403);
+    die();
   }
 }
 
