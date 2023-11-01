@@ -17,7 +17,7 @@ $page_canonical = "https://digitalbarangay.com/signup/";
 $page_url = $page_canonical;
 $directory = "../";
 $directory_img = $directory;
-$isForm = true;
+$hideLoginButton = true;
 
 include("../include/header.php");
 
@@ -76,7 +76,6 @@ include("../include/header.php");
 </html>
 
 <?php
-include("../include/dbcon.php");
 
 $email = $fullname = $password = $cpassword = "";
 

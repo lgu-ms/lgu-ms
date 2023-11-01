@@ -14,6 +14,17 @@ showErr = (err) => {
     document.getElementById("error").innerText = err;
 };
 
+showAnnoucement = (annc, url) => {
+    let bsAlert = new bootstrap.Toast(document.getElementById("announcement-toast"));
+    bsAlert.show();
+    document.getElementById("announcement").innerText = annc;
+    var textmuted = document.getElementById("announcement-url");
+    var a = document.createElement("a");
+    a.innerText = url;
+    a.setAttribute("href", url);
+    textmuted.append(a);
+};
+
 showPopup = (title, content, action) => {
     let bsModal = new bootstrap.Modal(document.getElementById("popupModal"));
     bsModal.show();
@@ -88,6 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
             last_scroll_top = scroll_top;
         });
     }
+    showAnnoucement("QC Alam mo ba? Real Property Tax", "https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/")
 });
 
 const queryString = window.location.search;

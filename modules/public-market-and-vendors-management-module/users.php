@@ -11,8 +11,7 @@ $page_author = "Enzo Reyes";
 $page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/users.php";
 $page_url = $page_canonical;
 $directory = "../../";
-$directory_img = "../../";
-$isForm = false;
+$directory_img = "../";
 
 include("../../include/header.php");
 echo '<link rel="stylesheet" href="../css/public-market-module.css">';
