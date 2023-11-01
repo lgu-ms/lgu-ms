@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2023 at 02:45 AM
+-- Generation Time: Nov 01, 2023 at 03:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,7 +79,40 @@ INSERT INTO `account_session` (`_sid`, `user_agent`, `session_started`, `session
 (1000000042, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:08:25', '2023-10-31 02:08:48', 'end', 2023000016, '2023-10-31 02:08:25'),
 (1000000043, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:08:54', '2023-10-31 02:09:52', 'end', 2023000016, '2023-10-31 02:08:54'),
 (1000000044, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:10:02', '2023-10-31 02:19:50', 'end', 2023000016, '2023-10-31 02:10:02'),
-(1000000045, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:20:13', NULL, 'active', 2023000017, '2023-10-31 02:36:33');
+(1000000045, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:20:13', '2023-11-01 03:22:28', 'end', 2023000017, '2023-11-01 03:18:58'),
+(1000000046, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-11-01 03:38:01', NULL, 'active', 2023000016, '2023-11-01 03:45:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `error`
+--
+
+CREATE TABLE `error` (
+  `_eid` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `error_code` int(11) NOT NULL,
+  `error_name` varchar(50) NOT NULL,
+  `error_date` text NOT NULL,
+  `session_id` int(11) UNSIGNED DEFAULT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `error`
+--
+
+INSERT INTO `error` (`_eid`, `error_code`, `error_name`, `error_date`, `session_id`, `user_id`) VALUES
+(0000000001, 404, 'File Not Found', '2023-11-01 03:18:58', 1000000045, 2023000017),
+(0000000002, 404, 'File Not Found', '2023-11-01 03:23:46', NULL, NULL),
+(0000000003, 404, 'File Not Found', '2023-11-01 03:34:31', NULL, NULL),
+(0000000004, 404, 'File Not Found', '2023-11-01 03:34:34', NULL, NULL),
+(0000000005, 404, 'File Not Found', '2023-11-01 03:34:57', NULL, NULL),
+(0000000006, 404, 'File Not Found', '2023-11-01 03:35:23', NULL, NULL),
+(0000000007, 404, 'File Not Found', '2023-11-01 03:35:27', NULL, NULL),
+(0000000008, 404, 'File Not Found', '2023-11-01 03:35:29', NULL, NULL),
+(0000000009, 404, 'File Not Found', '2023-11-01 03:41:08', 1000000046, 2023000016),
+(0000000010, 404, 'File Not Found', '2023-11-01 03:44:38', 1000000046, 2023000016),
+(0000000011, 404, 'File Not Found', '2023-11-01 03:45:30', 1000000046, 2023000016);
 
 -- --------------------------------------------------------
 
@@ -146,6 +179,14 @@ ALTER TABLE `account_session`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `error`
+--
+ALTER TABLE `error`
+  ADD PRIMARY KEY (`_eid`),
+  ADD KEY `error_session_id` (`session_id`),
+  ADD KEY `error_user_id` (`user_id`);
+
+--
 -- Indexes for table `otp`
 --
 ALTER TABLE `otp`
@@ -182,7 +223,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `account_session`
 --
 ALTER TABLE `account_session`
-  MODIFY `_sid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000046;
+  MODIFY `_sid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000047;
+
+--
+-- AUTO_INCREMENT for table `error`
+--
+ALTER TABLE `error`
+  MODIFY `_eid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `otp`
@@ -211,6 +258,13 @@ ALTER TABLE `profilepic`
 --
 ALTER TABLE `account_session`
   ADD CONSTRAINT `account_session_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
+
+--
+-- Constraints for table `error`
+--
+ALTER TABLE `error`
+  ADD CONSTRAINT `error_session_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`),
+  ADD CONSTRAINT `error_user_id` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
 
 --
 -- Constraints for table `otp`

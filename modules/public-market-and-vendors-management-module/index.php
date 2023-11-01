@@ -14,6 +14,24 @@ $directory = "../../";
 $directory_img = "../../";
 $isForm = false;
 
+include("../../include/dbcon.php");
+
+if (isLogin()) {
+  $user_id = $_SESSION["user_id"];
+  $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
+  if (mysqli_num_rows($isNotUser) > 0) {
+    while ($row = mysqli_fetch_assoc($isNotUser)) {
+      if ($row["user_type"] == "User") {
+        header("Location: ../");
+      }
+    }
+  }
+} else {
+  if (!$debug) {
+    header("Location: ../");
+  }
+}
+
 include("../../include/header.php");
 echo '<link rel="stylesheet" href="../../css/public-market-module.css">';
 ?>
@@ -39,10 +57,16 @@ echo '<link rel="stylesheet" href="../../css/public-market-module.css">';
     <div class="container mt-5" id="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <img src="<?php echo $directory; ?>images/market.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
+          <img src="<?php echo $directory; ?>images/market.jpg" class="rounded mx-auto d-block img-fluid"
+            alt="Hero Image">
         </div>
         <div class="col-md-6">
-          <p>A Public Market and Vendors Management Module offers numerous advantages for a city. It ensures efficient vendor management, regulatory compliance, and fair stall allocation. By facilitating transparent communication, providing valuable insights through data analysis, and enhancing the public experience with digital navigation and security measures, the module contributes to vibrant, well-organized markets. Additionally, it supports local businesses, promotes economic growth, and optimizes resource usage, ultimately enriching the city's development and public satisfaction.</p>
+          <p>A Public Market and Vendors Management Module offers numerous advantages for a city. It ensures efficient
+            vendor management, regulatory compliance, and fair stall allocation. By facilitating transparent
+            communication, providing valuable insights through data analysis, and enhancing the public experience with
+            digital navigation and security measures, the module contributes to vibrant, well-organized markets.
+            Additionally, it supports local businesses, promotes economic growth, and optimizes resource usage,
+            ultimately enriching the city's development and public satisfaction.</p>
           <a href="#sub" class="btn btn-primary shadow px-4" id="reduced">Get Started</a>
           <a class="accnt px-3" href="<?php echo $directory; ?>login" style="margin: 10px;">Login</a>
         </div>
@@ -58,7 +82,10 @@ echo '<link rel="stylesheet" href="../../css/public-market-module.css">';
       <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
         <div class="col d-flex flex-column align-items-start gap-2">
           <h2>What it is?</h2>
-          <p> It is the process of overseeing and organizing the activities related to markets (physical or online) and the vendors who sell products or services within those markets. This function involves various tasks and responsibilities to ensure the smooth operation of the market and the success of the vendors. Here are some key aspects of Market and Vendors Management</p>
+          <p> It is the process of overseeing and organizing the activities related to markets (physical or online) and
+            the vendors who sell products or services within those markets. This function involves various tasks and
+            responsibilities to ensure the smooth operation of the market and the success of the vendors. Here are some
+            key aspects of Market and Vendors Management</p>
         </div>
 
         <div class="col">
