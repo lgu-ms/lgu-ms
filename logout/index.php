@@ -6,8 +6,6 @@ if (!isLogin()) {
     die();
 }
 
-include("../include/dbcon.php");
-
 $user_id = $_SESSION["user_id"];
 $session_id = $_SESSION["session_id"];
 $today = date("Y-m-d H:i:s");

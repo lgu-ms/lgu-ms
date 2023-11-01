@@ -1,5 +1,6 @@
 <?php
 include("config.php");
+include("dbcon.php");
 
 if ($debug) {
     ini_set('display_errors', 1);

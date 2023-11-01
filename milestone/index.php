@@ -12,7 +12,6 @@ $page_canonical = "https://digitalbarangay.com/milestone";
 $page_url = $page_canonical;
 $directory = "../";
 $directory_img = "../";
-$isForm = false;
 
 include("../include/header.php");
 ?>

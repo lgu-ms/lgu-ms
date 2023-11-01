@@ -27,12 +27,12 @@ include("include/header.php");
     <div class="header">
       <?php include("include/nav.php"); ?>
       <header>
-        <div class="card mb-3" style="background: transparent">
+        <img class="rounded mx-auto d-block img-fluid" src="images/dial122-web-banner-v2.jpg" alt="Banner" width="500">
+
+        <div class="card headerv5" style="background: transparent">
           <div class="card-body">
+
             <div class="row">
-              <div class="col-md-4 mb-5" id="mobile">
-                <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
-              </div>
               <div class="col-md-8">
                 <h5 style="color: #4285f4;">#quezoncity</h5>
                 <h1 class="card-title"><strong>Digital Barangay</strong></h1>
@@ -41,9 +41,6 @@ include("include/header.php");
                 <br>
                 <a type="button" class="btn btn-primary shadow px-4" href="learnmore">Learn more</a>
                 <a type="button" class="btn btn-outline-primary px-4" href="milestone">Milestone</a>
-              </div>
-              <div class="col-md-4" id="desktop">
-                <img class="rounded mx-auto d-block img-fluid" src="images/cover.png" width="270">
               </div>
             </div>
           </div>
@@ -55,21 +52,23 @@ include("include/header.php");
     <div class="container pt-4 pt-xl-5 mt-5">
       <div class="row pt-5">
         <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
-          <div class="text-center">
-            <h4 style="color: #4285f4 ;">Lorem Ipsum Dolor</h4>
-            <p class="fw-bold">Nunc quis neque id libero bibendum posuere a ut nunc.</p>
+          <div class="text-center mt-5">
+            <h2 style="color: #4285f4 ;">City Programs</h2>
           </div>
         </div>
         <div class="col-12 col-lg-10 mx-auto">
           <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
             <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);">
-              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
+              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
+                src="images/program1.jpg">
             </div>
             <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);">
-              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.4" src="https://source.unsplash.com/1080x700?management">
+              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.4"
+                src="images/program2.jpg">
             </div>
             <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);">
-              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.25" src="https://source.unsplash.com/1080x700?government">
+              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.25"
+                src="images/program3.webp">
             </div>
           </div>
         </div>
@@ -78,31 +77,31 @@ include("include/header.php");
     <br>
     <div class="container pt-4 pt-xl-5">
       <div class="text-center">
-        <h4>The Lorem Ipsum Dolor</h4>
+        <h4>Latest News</h4>
       </div>
       <div class="card-group">
         <div class="card mb-3">
-          <img src="https://source.unsplash.com/1080x700?support" class="card-img-top">
+          <img src="images/noimage.webp" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">Lorem Ipsum Dolor</h5>
-            <p class="card-text">Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.</p>
-            <p class="card-text"><small class="text-muted">10-2023</small></p>
+            <h5 class="card-title">REAL PROPERTY TAX DISCOUNTS ON EARLY FULL PAYMENTS</h5>
+            <p class="card-text">MAHALAGANG ANUNSYO MULA SA CITY TREASURER’S OFFICE QCitizens, magbayad nang maaga para
+              maka-DISKWENTO sa inyong REAL PROPERTY TAX (amilyar)! ADVANCE...</p>
           </div>
         </div>
         <div class="card mb-3">
-          <img src="https://source.unsplash.com/1080x700?support" class="card-img-top">
+          <img src="images/noimage.webp" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">Lorem Ipsum Dolor</h5>
-            <p class="card-text">Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.</p>
-            <p class="card-text"><small class="text-muted">10-2023</small></p>
+            <h5 class="card-title">TRAFFIC ADVISORY – OCTOBER 27, 2023</h5>
+            <p class="card-text">MAHALAGANG ABISO SA MGA MOTORISTA Asahan ang pagbagal ng daloy ng trapiko sa paligid ng
+              Amoranto Sports Complex at sa...</p>
           </div>
         </div>
         <div class="card mb-3">
-          <img src="https://source.unsplash.com/1080x700?support" class="card-img-top">
+          <img src="images/noimage.webp" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">Lorem Ipsum Dolor</h5>
-            <p class="card-text">Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.</p>
-            <p class="card-text"><small class="text-muted">10-2023</small></p>
+            <h5 class="card-title">Q CITY BUS SERVICE ADVISORY – OCTOBER 28, 2023 TO NOVEMBER 2, 2023</h5>
+            <p class="card-text">Narito ang schedule ng operasyon ng Q City Bus mula October 28, 2023 (Saturday)
+              hanggang November 2, 2023 (Thursday).</p>
           </div>
         </div>
       </div>
@@ -111,33 +110,36 @@ include("include/header.php");
       <div class="card mb-3">
         <div class="row g-0">
           <div class="col-md-6 p-3">
-            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
+            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
+              src="images/qcmayor-2-1.png">
           </div>
           <div class="col-md-6 p-1">
-            <h2>Lorem Ipsum Dolor</h2>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
+            <h2>FROM THE MAYOR’S DESK</h2>
+            “Ang lahat ng ating nagawa at gagawin pa sa mga susunod na taon ay bunga ng hindi nagbabagong pangako natin sa isa’t isa – na lagi tayong magtutulungan para sa kabutihan ng lahat. I am proud of our accomplishments as a city, because these are the results of our collective efforts and commitment for positive change.”
           </div>
         </div>
       </div>
       <div class="card mb-3">
         <div class="row g-0">
           <div class="col-md-6 p-1">
-            <h2>Lorem Ipsum Dolor</h2>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
+            <h2>The Heart of Quezon City</h2>
+            Nowadays, it was considered as the center of Quezon City and it serves as the people’s park. Its main feature is a mausoleum containing the remains of Manuel L. Quezon, the second President of the Philippines, and his wife, First Lady Aurora Quezon.
           </div>
           <div class="col-md-6 p-3">
-            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
+            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
+              src="images/The_Heart_of_Quezon_City.jpg">
           </div>
         </div>
       </div>
       <div class="card mb-3 ">
         <div class="row g-0">
           <div class="col-md-6 p-3">
-            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="https://source.unsplash.com/1080x700?support">
+            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
+              src="images/cityhall.jpg">
           </div>
           <div class="col-md-6 p-1">
-            <h2>Lorem Ipsum Dolor</h2>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis neque id libero bibendum posuere a ut nunc. Nam egestas dictum velit, eu lacinia nulla ultricies nec.
+            <h2>City Hall</h2>
+            The Quezon City Hall is a government building which houses the office of the Mayor of Quezon City located along the Elliptical Road. The Quezon City Council is housed within the adjacent Legislative Wing.
           </div>
         </div>
       </div>
