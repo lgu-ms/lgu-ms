@@ -680,7 +680,7 @@ video {
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-    border: 0px solid #2196F3;
+    background-color: transparent;
 }
 
 .timeline-page:after {
@@ -928,4 +928,8 @@ video {
 
 .btn-close {
     --bs-btn-close-bg: var(--close-button);
+}
+
+.toast-body {
+    color: var(--text-color);
 }

@@ -33,6 +33,9 @@ include("include/header.php");
           <div class="card-body">
 
             <div class="row">
+              <div class="col-md-4" id="mobile">
+                <img class="mx-auto d-block img-fluid" src="images/cover.png" width="320" alt="Digital Barangay">
+              </div>
               <div class="col-md-8">
                 <h5 style="color: #4285f4;">#quezoncity</h5>
                 <h1 class="card-title"><strong>Digital Barangay</strong></h1>
@@ -41,6 +44,9 @@ include("include/header.php");
                 <br>
                 <a type="button" class="btn btn-primary shadow px-4" href="learnmore">Learn more</a>
                 <a type="button" class="btn btn-outline-primary px-4" href="milestone">Milestone</a>
+              </div>
+              <div class="col-md-4" id="desktop">
+                <img class="mx-auto d-block img-fluid" src="images/cover.png" width="320" alt="Digital Barangay">
               </div>
             </div>
           </div>
@@ -53,22 +59,24 @@ include("include/header.php");
       <div class="row pt-5">
         <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
           <div class="text-center mt-5">
-            <h2 style="color: #4285f4 ;">City Programs</h2>
+            <hr>
+            <h2 style="color: #4285f4;">Quezon City Programs</h2>
           </div>
         </div>
+
         <div class="col-12 col-lg-10 mx-auto">
           <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
             <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);">
-              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
-                src="images/program1.jpg">
+              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="images/program1.jpg"
+                title="QC ID">
             </div>
             <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);">
-              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.4"
-                src="images/program2.jpg">
+              <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.4" src="images/program2.jpg"
+                title="Covid Response">
             </div>
             <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);">
               <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.25"
-                src="images/program3.webp">
+                src="images/program3.webp" title="QC Bus">
             </div>
           </div>
         </div>
@@ -76,9 +84,12 @@ include("include/header.php");
     </div>
     <br>
     <div class="container pt-4 pt-xl-5">
+    <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
       <div class="text-center">
+        <hr>
         <h4>Latest News</h4>
       </div>
+    </div>
       <div class="card-group">
         <div class="card mb-3">
           <img src="images/noimage.webp" class="card-img-top">
@@ -115,7 +126,9 @@ include("include/header.php");
           </div>
           <div class="col-md-6 p-1">
             <h2>FROM THE MAYOR’S DESK</h2>
-            “Ang lahat ng ating nagawa at gagawin pa sa mga susunod na taon ay bunga ng hindi nagbabagong pangako natin sa isa’t isa – na lagi tayong magtutulungan para sa kabutihan ng lahat. I am proud of our accomplishments as a city, because these are the results of our collective efforts and commitment for positive change.”
+            “Ang lahat ng ating nagawa at gagawin pa sa mga susunod na taon ay bunga ng hindi nagbabagong pangako natin
+            sa isa’t isa – na lagi tayong magtutulungan para sa kabutihan ng lahat. I am proud of our accomplishments as
+            a city, because these are the results of our collective efforts and commitment for positive change.”
           </div>
         </div>
       </div>
@@ -123,7 +136,9 @@ include("include/header.php");
         <div class="row g-0">
           <div class="col-md-6 p-1">
             <h2>The Heart of Quezon City</h2>
-            Nowadays, it was considered as the center of Quezon City and it serves as the people’s park. Its main feature is a mausoleum containing the remains of Manuel L. Quezon, the second President of the Philippines, and his wife, First Lady Aurora Quezon.
+            Nowadays, it was considered as the center of Quezon City and it serves as the people’s park. Its main
+            feature is a mausoleum containing the remains of Manuel L. Quezon, the second President of the Philippines,
+            and his wife, First Lady Aurora Quezon.
           </div>
           <div class="col-md-6 p-3">
             <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
@@ -134,12 +149,12 @@ include("include/header.php");
       <div class="card mb-3 ">
         <div class="row g-0">
           <div class="col-md-6 p-3">
-            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8"
-              src="images/cityhall.jpg">
+            <img class="img-fluid shadow" data-bss-parallax="" data-bss-parallax-speed="0.8" src="images/cityhall.jpg">
           </div>
           <div class="col-md-6 p-1">
             <h2>City Hall</h2>
-            The Quezon City Hall is a government building which houses the office of the Mayor of Quezon City located along the Elliptical Road. The Quezon City Council is housed within the adjacent Legislative Wing.
+            The Quezon City Hall is a government building which houses the office of the Mayor of Quezon City located
+            along the Elliptical Road. The Quezon City Council is housed within the adjacent Legislative Wing.
           </div>
         </div>
       </div>
