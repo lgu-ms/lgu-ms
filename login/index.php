@@ -32,7 +32,7 @@ include("../include/header.php");
       <div class="row g-0">
         <div class="col-md-7">
           <div class="container">
-            <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
+            <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
               <div class="row">
                 <div class="col-md-6">
                   <h1>Login to continue</h1>
@@ -48,7 +48,7 @@ include("../include/header.php");
                   </div>
 
                   <div class="mt-2">
-                    <button id="login" class="btn btn-primary px-5 shadow">Login</button>
+                    <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="button">Login</button>
                     <a type="button" class="btn btn-outline-primary px-4" href="../signup?utm_source=login">Signup</a>
                     <br><br>
                     <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>

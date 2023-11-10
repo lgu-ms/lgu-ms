@@ -26,7 +26,7 @@ include("../include/header.php");
       <div class="row g-0">
         <div class="col-md-7">
           <div class="container">
-            <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
+            <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
               <div class="row">
                 <div class="col-md-6">
                   <h1>Change Password</h1>
@@ -44,7 +44,7 @@ include("../include/header.php");
                     <i class="fa fa-arrows-rotate"></i>
                   </div>
                   <div class="form-group mt-2">
-                    <button id="updatep" class="btn btn-primary px-5 shadow">Update</button>
+                    <button id="executeCaptcha" class="btn btn-primary px-5 shadow">Update</button>
                   </div>
                 </div>
               </div>

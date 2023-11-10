@@ -90,6 +90,12 @@
 </footer>
 <script src="<?php echo $directory; ?>assets/jquery-3.7.1.min.js"></script>
 <script src="<?php echo $directory; ?>assets/bootstrap-5.3.0-alpha1.min.js"></script>
+<?php 
+if ($hideLoginButton) {
+  echo '<script src="https://www.google.com/recaptcha/api.js?render=6LcbAQopAAAAAPqiUSbgE4FWJrHdKfpFIK_s6rU-"></script>';
+  echo '<script src="' . $directory . 'js/grecaptcha.js"></script>';
+}
+?>
 <script src="<?php echo $directory; ?>js/main.js"></script>
 <script>
   if ("serviceWorker" in navigator) {
@@ -120,4 +126,4 @@
       }
     );
   });
-</script>
+</script> 
