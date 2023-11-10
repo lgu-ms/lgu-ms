@@ -27,22 +27,25 @@ include("../include/header.php");
       <div class="row g-0">
         <div class="col-md-7">
           <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <h1>Forgot Password</h1>
-                <br>
-                <div class="input-group2">
-                  <input type="email" placeholder="Email" name="email" required>
-                  <i class="fa fa-user"></i>
-                </div>
-                <div class="form-group mt-2">
-                  <button id="forgot" class="btn btn-primary shadow px-5">Forgot</button>
-                  <a type="button" class="btn btn-outline-primary px-4" href="../login?utm_source=forgot-password">Login</a>
-                  <br><br>
-                  <a class="fpass" href="../signup?utm_source=forgot-password">No account yet?</a>
+            <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Forgot Password</h1>
+                  <br>
+                  <div class="input-group2">
+                    <input type="email" placeholder="Email" name="email" required>
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <div class="form-group mt-2">
+                    <button id="executeCaptcha" class="btn btn-primary shadow px-5">Forgot</button>
+                    <a type="button" class="btn btn-outline-primary px-4"
+                      href="../login?utm_source=forgot-password">Login</a>
+                    <br><br>
+                    <a class="fpass" href="../signup?utm_source=forgot-password">No account yet?</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -115,6 +115,17 @@ if (typeof login !== "undefined") {
     email.value = user_email;
 }
 
+if (typeof executeCaptcha !== "undefined") {
+    executeCaptcha.onclick = function(e) {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute(grecaptcha_auth_key, {action: 'submit'}).then(function(token) {
+            document.getElementById("form").submit();
+          });
+        });
+    }
+}
+
 /*
  * THEME CONTROLS
  */
