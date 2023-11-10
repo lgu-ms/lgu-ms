@@ -110,12 +110,10 @@ if (rdr != null) {
     window.location.href = rdr + "?utm_source=" + btoa(window.location);
 }
 
-if (typeof login !== "undefined") {
+if (typeof executeCaptcha !== "undefined") {
     const user_email = urlParams.get("email");
     email.value = user_email;
-}
 
-if (typeof executeCaptcha !== "undefined") {
     executeCaptcha.onclick = function(e) {
         e.preventDefault();
         grecaptcha.ready(function() {

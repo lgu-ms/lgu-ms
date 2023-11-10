@@ -41,7 +41,7 @@ function findHtmlCssFiles(location) {
                                 debugProtectionInterval: 0,
                                 disableConsoleOutput: false,
                                 identifierNamesGenerator: 'hexadecimal',
-                                log: false,
+                                log: true,
                                 numbersToExpressions: false,
                                 renameGlobals: false,
                                 selfDefending: false,
