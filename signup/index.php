@@ -32,10 +32,10 @@ include("../include/header.php");
       <div class="row g-0">
         <div class="col-md-7">
           <div class="container">
-            <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
+            <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
               <div class="row">
                 <div class="col-md-6">
-                  <h1>Signup for free</h1>
+                  <h1>Signup now</h1>
                   <br>
                   <div class="input-group2">
                     <input type="email" placeholder="Email" name="email" required>
@@ -55,7 +55,7 @@ include("../include/header.php");
                   </div>
                   <small>By clicking Signup, you agree to our <u><a href="/terms">Terms</a></u>, <u><a href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie Policy</a></u>.</small>
                   <div class="mt-2">
-                    <button id="create" class="btn btn-primary px-5 shadow">Signup</button>
+                    <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="button">Signup</button>
                     <a type="button" class="btn btn-outline-primary px-4" href="../login?utm_source=signup">Login</a>
                     <br><br>
                     <a class="fpass" href="../forgot-password?utm_source=signup">Forgot password?</a>
