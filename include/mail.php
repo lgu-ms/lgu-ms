@@ -6,8 +6,8 @@ $msg = '';
 require 'vendor/autoload.php';
 $mail = new PHPMailer;
 $mail->isSMTP();
-$mail->Host = 'smtp.hostinger.com';
-$mail->Port = 587;
+$mail->Host = $mailhost;
+$mail->Port = $mailport;
 if ($debug) {
     $mail->SMTPDebug = 2;
 } else {
