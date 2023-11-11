@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 01, 2023 at 03:47 AM
+-- Generation Time: Nov 11, 2023 at 02:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -80,7 +80,7 @@ INSERT INTO `account_session` (`_sid`, `user_agent`, `session_started`, `session
 (1000000043, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:08:54', '2023-10-31 02:09:52', 'end', 2023000016, '2023-10-31 02:08:54'),
 (1000000044, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:10:02', '2023-10-31 02:19:50', 'end', 2023000016, '2023-10-31 02:10:02'),
 (1000000045, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-10-31 02:20:13', '2023-11-01 03:22:28', 'end', 2023000017, '2023-11-01 03:18:58'),
-(1000000046, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-11-01 03:38:01', NULL, 'active', 2023000016, '2023-11-01 03:45:30');
+(1000000046, '13421c7434b48507a2be73e73078d1c6604e54d3a88a89c4f5037e79edb10406daef78d23dd54a8636d8ffe5d96ee1b182829c16bc1084e90a9d2f3fbd48e6a1', '2023-11-01 03:38:01', '2023-11-01 16:20:24', 'end', 2023000016, '2023-11-01 03:45:30');
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,36 @@ INSERT INTO `error` (`_eid`, `error_code`, `error_name`, `error_date`, `session_
 (0000000008, 404, 'File Not Found', '2023-11-01 03:35:29', NULL, NULL),
 (0000000009, 404, 'File Not Found', '2023-11-01 03:41:08', 1000000046, 2023000016),
 (0000000010, 404, 'File Not Found', '2023-11-01 03:44:38', 1000000046, 2023000016),
-(0000000011, 404, 'File Not Found', '2023-11-01 03:45:30', 1000000046, 2023000016);
+(0000000011, 404, 'File Not Found', '2023-11-01 03:45:30', 1000000046, 2023000016),
+(0000000012, 404, 'File Not Found', '2023-11-01 12:02:07', 1000000046, 2023000016),
+(0000000013, 404, 'File Not Found', '2023-11-01 12:07:52', 1000000046, 2023000016),
+(0000000014, 404, 'File Not Found', '2023-11-01 12:08:15', 1000000046, 2023000016),
+(0000000015, 404, 'File Not Found', '2023-11-01 12:08:44', 1000000046, 2023000016),
+(0000000016, 404, 'File Not Found', '2023-11-01 12:08:48', 1000000046, 2023000016),
+(0000000017, 404, 'File Not Found', '2023-11-01 12:08:52', 1000000046, 2023000016),
+(0000000018, 404, 'File Not Found', '2023-11-01 16:29:07', NULL, NULL),
+(0000000019, 404, 'File Not Found', '2023-11-01 20:14:46', NULL, NULL),
+(0000000020, 404, 'File Not Found', '2023-11-01 20:15:33', NULL, NULL),
+(0000000021, 404, 'File Not Found', '2023-11-01 20:16:46', NULL, NULL),
+(0000000022, 404, 'File Not Found', '2023-11-01 20:17:00', NULL, NULL),
+(0000000023, 404, 'File Not Found', '2023-11-01 20:17:13', NULL, NULL),
+(0000000024, 404, 'File Not Found', '2023-11-01 20:17:26', NULL, NULL),
+(0000000025, 404, 'File Not Found', '2023-11-01 20:17:32', NULL, NULL),
+(0000000026, 404, 'File Not Found', '2023-11-01 20:18:46', NULL, NULL),
+(0000000027, 404, 'File Not Found', '2023-11-01 20:19:00', NULL, NULL),
+(0000000028, 404, 'File Not Found', '2023-11-01 20:20:57', NULL, NULL),
+(0000000029, 404, 'File Not Found', '2023-11-01 20:21:30', NULL, NULL),
+(0000000030, 404, 'File Not Found', '2023-11-01 20:22:21', NULL, NULL),
+(0000000031, 404, 'File Not Found', '2023-11-01 20:22:33', NULL, NULL),
+(0000000032, 404, 'File Not Found', '2023-11-01 20:22:50', NULL, NULL),
+(0000000033, 404, 'File Not Found', '2023-11-01 20:24:12', NULL, NULL),
+(0000000034, 404, 'File Not Found', '2023-11-01 20:26:21', NULL, NULL),
+(0000000035, 404, 'File Not Found', '2023-11-01 20:27:01', NULL, NULL),
+(0000000036, 404, 'File Not Found', '2023-11-01 20:27:09', NULL, NULL),
+(0000000037, 404, 'File Not Found', '2023-11-01 20:27:17', NULL, NULL),
+(0000000038, 404, 'File Not Found', '2023-11-01 20:28:06', NULL, NULL),
+(0000000039, 404, 'File Not Found', '2023-11-01 20:28:14', NULL, NULL),
+(0000000040, 404, 'File Not Found', '2023-11-01 20:28:22', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,10 +151,11 @@ INSERT INTO `error` (`_eid`, `error_code`, `error_name`, `error_date`, `session_
 
 CREATE TABLE `otp` (
   `_oid` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `code` varchar(20) NOT NULL,
-  `session_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `created_time` int(11) NOT NULL COMMENT 'The time this opt was generated expired every 15 minutes'
+  `code` int(11) NOT NULL,
+  `session_id` int(10) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_time` int(11) NOT NULL COMMENT 'The time this opt was generated expired every 15 minutes',
+  `action_type` varchar(20) NOT NULL COMMENT 'LOGIN\r\nACCOUNT_CREATION\r\nFORGOT_PASSWORD'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -229,7 +259,7 @@ ALTER TABLE `account_session`
 -- AUTO_INCREMENT for table `error`
 --
 ALTER TABLE `error`
-  MODIFY `_eid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `_eid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `otp`

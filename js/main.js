@@ -112,7 +112,9 @@ if (rdr != null) {
 
 if (typeof executeCaptcha !== "undefined") {
     const user_email = urlParams.get("email");
-    email.value = user_email;
+    if (typeof email !== "undefined") {
+        email.value = user_email;
+    }
 
     executeCaptcha.onclick = function(e) {
         e.preventDefault();
