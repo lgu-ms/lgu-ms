@@ -4,6 +4,7 @@
 
 body.light-mode {
     --background-color: #fff;
+    --toast-background-color: #c5bdbd;
     --text-color: #2e475d;
     --hover: rgba(0, 0, 0, 0.9);
     --box-shdow: rgba(36, 35, 35, 0.1);
@@ -13,6 +14,7 @@ body.light-mode {
 
 body {
     --background-color: #1b1818;
+    --toast-background-color: #353030;
     --text-color: #90b8dd;
     --hover: #2e475de6;
     --box-shdow: #2e475d1e;
@@ -491,7 +493,7 @@ label {
 
 .toast {
     box-shadow: 0 0 5em rgba(0, 0, 0, .10);
-    background-color: var(--background-color);
+    background-color: var(--toast-background-color);
     transition: box-shadow .3s;
     padding: 10px;
     margin-top: 10px;

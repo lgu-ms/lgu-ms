@@ -25,6 +25,10 @@ include("../include/header.php");
   <main>
     <div class="card mb-3">
       <div class="row g-0">
+      <div class="col-md-4" id="mobile">
+            <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg" alt="Banner" width="500">
+            <img class="mt-3 mb-5 rounded mx-auto d-block img-fluid" src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
+        </div>
         <div class="col-md-7">
           <div class="container">
             <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
@@ -47,6 +51,10 @@ include("../include/header.php");
               </div>
             </form>
           </div>
+        </div>
+        <div class="col-md-4" id="desktop">
+            <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg" alt="Banner" width="500">
+            <img class="mt-3 rounded mx-auto d-block img-fluid" src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
         </div>
       </div>
 
