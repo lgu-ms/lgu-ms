@@ -9,7 +9,7 @@ function findHtmlCssFiles(location) {
     fs.readdir(location, function (err, files) {
         if (err) return console.error(err);
         for (let i = 0; i < files.length; i++) {
-            if (files[i] != "obfuscate" && files[i] != "assets") {
+            if (files[i] != "obfuscate" && files[i] != "fonts" && files[i] != "node_modules") {
                 const file = location + "/" + files[i];
                 fs.stat(file, async (err, stats) => {
                     if (err) {
