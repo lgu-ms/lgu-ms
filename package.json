@@ -1,0 +1,32 @@
+{
+  "name": "lgu-ms",
+  "version": "1.0.0",
+  "description": "A proposed Local Government Unit Management System Project.",
+  "main": "index.php",
+  "scripts": {
+    "start": "xampp start"
+  },
+  "author": {
+    "name": "Melvin Jones Repol",
+    "email": "mrepol742@gmail.com",
+    "url": "https://mrepol742.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lgu-ms/lgu-ms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lgu-ms/lgu-ms/issues",
+    "email": "mrepol742@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "clean-css": "^5.3.2",
+    "html-minifier": "^4.0.0",
+    "javascript-obfuscator": "^4.0.2",
+    "minify": "^10.5.2"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}

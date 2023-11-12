@@ -88,8 +88,8 @@
     ?>
     <span>© <?php echo $year; ?> Quezon City LGU</span>
 </footer>
-<script src="<?php echo $directory; ?>assets/jquery-3.7.1.min.js"></script>
-<script src="<?php echo $directory; ?>assets/bootstrap-5.3.0-alpha1.min.js"></script>
+<script src="<?php echo $directory; ?>vendor/components/jquery/jquery.min.js"></script>
+<script src="<?php echo $directory; ?>vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 <?php 
 if ($hideLoginButton) {
   echo '<script src="https://www.google.com/recaptcha/api.js?render='.$grecaptcha_auth_key.'"></script>';

@@ -1,8 +1,10 @@
 name: "Build Deployment"
 
 on:
+  push:
+    branches: [ "master" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 jobs:
@@ -15,15 +17,11 @@ jobs:
       - name: Start Obfuscating
         run: |
           rm -rf .github .gitignore .vscode lgu-ms.sql README.md .htaccess .git .replit replit.nix animated-roped-off-construction-barracades.gif
-          cd obfuscate
           npm i
-          npm install minify
+          cd obfuscate
           node obfuscate.js
           cd ..
-          rm -rf obfuscate
-          cd include
-          rm -rf config.php
-          cd ..
+          rm -rf obfuscate node_modules package.json package-lock.json .prettierrc.json include/config.php js/grecaptcha.js
       - name: Push to deployment Repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
