@@ -4,7 +4,7 @@
 
 body.light-mode {
     --background-color: #fff;
-    --toast-background-color: #c5bdbd;
+    --toast-background-color: #ddd4d4;
     --text-color: #2e475d;
     --hover: rgba(0, 0, 0, 0.9);
     --box-shdow: rgba(36, 35, 35, 0.1);
@@ -37,6 +37,7 @@ h2 span {
 
 * {
     font-family: 'Maven Pro', sans-serif;
+    color: var(--text-color);
 }
 
 html {
@@ -45,7 +46,6 @@ html {
 
 body {
     background-color: var(--background-color);
-    color: var(--text-color);
     padding-top: 70px;
 }
 

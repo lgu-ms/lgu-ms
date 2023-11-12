@@ -1,2 +1,3 @@
 *.class
-/obfuscate/node_modules
+/vendor
+/node_modules

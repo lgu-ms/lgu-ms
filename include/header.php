@@ -21,7 +21,7 @@
       font-style: normal;
       font-weight: 400;
       font-display: swap;
-      src: url("<?php echo $directory; ?>assets/SourceCodePro-Regular.ttf");
+      src: url("<?php echo $directory; ?>fonts/SourceCodePro-Regular.ttf");
     }
 
     @font-face {
@@ -29,7 +29,7 @@
       font-style: normal;
       font-weight: 400;
       font-display: swap;
-      src: url("<?php echo $directory; ?>assets/MavenPro.woff2");
+      src: url("<?php echo $directory; ?>fonts/MavenPro.woff2");
     }
 
     body.light-mode {
@@ -40,11 +40,11 @@
       --menu: url("<?php echo $directory_img; ?>images/hamburger-dark.svg");
     }
   </style>
-  <link href="<?php echo $directory; ?>assets/fontawesome-6.4.2/css/fontawesome.min.css" rel="stylesheet">
-  <link href="<?php echo $directory; ?>assets/fontawesome-6.4.2/css/brands.min.css" rel="stylesheet">
-  <link href="<?php echo $directory; ?>assets/fontawesome-6.4.2/css/solid.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo $directory; ?>assets/bootstrap-5.3.0-alpha1.min.css">
-  <link rel="stylesheet" href="<?php echo $directory; ?>css/main.css">
+  <link href="<?php echo $directory; ?>vendor/components/font-awesome/css/fontawesome.min.css" rel="stylesheet">
+  <link href="<?php echo $directory; ?>vendor/components/font-awesome/css/brands.min.css" rel="stylesheet">
+  <link href="<?php echo $directory; ?>vendor/components/font-awesome/css/solid.min.css" rel="stylesheet">
+  <link href="<?php echo $directory; ?>vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo $directory; ?>css/main.css" rel="stylesheet">
 
   <link rel="icon" href="<?php echo $directory; ?>favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="<?php echo $directory; ?>favicon.png">

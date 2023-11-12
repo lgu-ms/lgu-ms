@@ -7,19 +7,22 @@ https://digitalbarangay.com
 <img src="animated-roped-off-construction-barracades.gif">
 
 ## Required Software
-- XAMPP
+- XAMPP/LAMPP
+- Composer
+- NodeJS
 
-## Install
+## Contribute
 - Forked this repository to your own Github Account
 - Clone this repository to xampp/htdocs
 ```bash
 git clone git@github.com:{username}/lgu-ms.git
 ```
 
-## Run
-- Open XAMPP
-- Start Apache and MySQL server.
-- Open this link http://localhost/lgu-ms
+## Install Dependencies
+```bash
+composer install --prefer-dist --no-progress
+npm install
+```
 
 ## Note
 Please avoid doing the following
