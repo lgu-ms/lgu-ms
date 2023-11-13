@@ -111,90 +111,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
     $result = json_decode($response->getBody());
     if ($result->success) {
-        if (isset($_POST["otp"])) {
-
+        $email = $fullname = $password = $cpassword = "";
+        if (empty($_POST["email"])) {
+            echo '<script>showErr("Email is required!")</script>';
         } else {
-            initLogin();
-        }
-    } else {
-        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
-    }
-}
-
-function initLogin()
-{
-    $email = $fullname = $password = $cpassword = "";
-    if (empty($_POST["email"])) {
-        echo '<script>showErr("Email is required!")</script>';
-    } else {
-        $email = $_POST["email"];
-        if (empty($_POST["fullname"])) {
-            echo '<script>showErr("Fullname is required!")</script>';
-        } else {
-            $fullname = $_POST["fullname"];
-            if (empty($_POST["password"])) {
-                echo '<script>showErr("Password is required!")</script>';
+            $email = $_POST["email"];
+            if (empty($_POST["fullname"])) {
+                echo '<script>showErr("Fullname is required!")</script>';
             } else {
-                $password = $_POST["password"];
-                if (strlen($_POST["password"]) <= '8') {
-                    echo '<script>showErr("Your Password Must Contain At Least 8 Characters!")</script>';
-                } else if (!preg_match("#[0-9]+#", $password)) {
-                    echo '<script>showErr("Your Password Must Contain At Least 1 Number!")</script>';
-                } else if (!preg_match("#[A-Z]+#", $password)) {
-                    echo '<script>showErr("Your Password Must Contain At Least 1 Uppercase Letter!")</script>';
-                } else if (!preg_match("#[a-z]+#", $password)) {
-                    echo '<script>showErr("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
-                } else if (!preg_match("@[^\w]@", $password)) {
-                    echo '<script>showErr("Your Password Must Contain At Least 1 Special Characters!")</script>';
-                } else if (empty($_POST["cpassword"])) {
-                    echo '<script>showErr("You need to retype your password again!")</script>';
+                $fullname = $_POST["fullname"];
+                if (empty($_POST["password"])) {
+                    echo '<script>showErr("Password is required!")</script>';
                 } else {
-                    $cpassword = $_POST["cpassword"];
-                    if ($password != $cpassword) {
-                        echo '<script>showErr("Password did not match!")</script>';
+                    $password = $_POST["password"];
+                    if (strlen($_POST["password"]) <= '8') {
+                        echo '<script>showErr("Your Password Must Contain At Least 8 Characters!")</script>';
+                    } else if (!preg_match("#[0-9]+#", $password)) {
+                        echo '<script>showErr("Your Password Must Contain At Least 1 Number!")</script>';
+                    } else if (!preg_match("#[A-Z]+#", $password)) {
+                        echo '<script>showErr("Your Password Must Contain At Least 1 Uppercase Letter!")</script>';
+                    } else if (!preg_match("#[a-z]+#", $password)) {
+                        echo '<script>showErr("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
+                    } else if (!preg_match("@[^\w]@", $password)) {
+                        echo '<script>showErr("Your Password Must Contain At Least 1 Special Characters!")</script>';
+                    } else if (empty($_POST["cpassword"])) {
+                        echo '<script>showErr("You need to retype your password again!")</script>';
                     } else {
-                        $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email= '$email'");
-                        if (mysqli_num_rows($isRegister) > 0) {
-                            echo '<script>showErr("Email is already registered!")</script>';
+                        $cpassword = $_POST["cpassword"];
+                        if ($password != $cpassword) {
+                            echo '<script>showErr("Password did not match!")</script>';
                         } else {
-                            $_SESSION["signup_temp"] = true;
-                            $_SESSION["signup_temp_email"] = $email;
-                            $_SESSION["signup_temp_fullname"] = $fullname;
-                            $_SESSION["signup_temp_password"] = hash("sha512", $password);
-
-                            $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-                            $sqlOtp = "INSERT INTO otp (code, created_time, action_type) VALUES ";
-                            $timeGenerated = strtotime("now");
-                            $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION')";
-                            if ($conn->query($sqlOtp) === TRUE) {
-                                require_once "../include/mail.php";
-                                $mail = initMail($email, $fullname, "DO NOT REPLY", '
-                                <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-                                    <div style="margin:50px auto;width:70%;padding:20px 0">
-                                        <div style="border-bottom:1px solid #eee">
-                                            <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
-                                        </div>
-                                        <p style="font-size:1.1em">Hi,</p>
-                                        <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Sign Up procedures. OTP is valid for 15 minutes</p>
-                                        <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . otp . '</h2>
-                                        <p style="font-size:0.9em;">Regards,<br />Digital Barangay</p>
-                                        <hr style="border:none;border-top:1px solid #eee" />
-                                        <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-                                            <p>Quezon City</p>
-                                            <p>mrepol742@gmail.com</p>
+                            $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email= '$email'");
+                            if (mysqli_num_rows($isRegister) > 0) {
+                                echo '<script>showErr("Email is already registered!")</script>';
+                            } else {
+                                $_SESSION["signup_temp"] = true;
+                                $_SESSION["signup_temp_email"] = $email;
+                                $_SESSION["signup_temp_fullname"] = $fullname;
+                                $_SESSION["signup_temp_password"] = hash("sha512", $password);
+    
+                                $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+                                $sqlOtp = "INSERT INTO otp (code, created_time, action_type) VALUES ";
+                                $timeGenerated = strtotime("now");
+                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION')";
+                                if ($conn->query($sqlOtp) === TRUE) {
+                                    require_once "../include/mail.php";
+                                    $mail = initMail($email, $fullname, "DO NOT REPLY", '
+                                    <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                        <div style="margin:50px auto;width:70%;padding:20px 0">
+                                            <div style="border-bottom:1px solid #eee">
+                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                            </div>
+                                            <p style="font-size:1.1em">Hi,</p>
+                                            <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Sign Up procedures. OTP is valid for 15 minutes</p>
+                                            <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . $otp . '</h2>
+                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay</p>
+                                            <hr style="border:none;border-top:1px solid #eee" />
+                                            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                                <p>Quezon City</p>
+                                                <p>mrepol742@gmail.com</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                ');
-                                sendMail($mail);
-                                echo '<script>window.location.href = "verification?utm_source=signup"</script>';
-                                die();
+                                    ');
+                                    if (sendMail($mail)) {
+                                        echo '<script>window.location.href = "verification?utm_source=signup"</script>';
+                                        die();
+                                    } else {
+                                        echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
+    } else {
+        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 
