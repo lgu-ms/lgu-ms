@@ -12,7 +12,7 @@ $page_canonical = "https://digitalbarangay.com/";
 $page_url = $page_canonical;
 $directory = "";
 $directory_img = "../";
-$isForm = false;
+$home = true;
 
 include("include/header.php");
 ?>
