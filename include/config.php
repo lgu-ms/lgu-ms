@@ -5,7 +5,8 @@
     $mysql_db = "lgu-ms";
     $debug = true;
     $mailpassword = "a$$";
-    $grecaptcha_auth_key = "6LcbAQopAAAAAPqiUSbgE4FWJrHdKfpFIK_s6rU-";
+    $captcha_site_key = "6LcbAQopAAAAAPqiUSbgE4FWJrHdKfpFIK_s6rU-";
+    $captcha_secret_key = "6LcbAQopAAAAAFaui96IVlLAyN_ggZIYKmUByDdz";
     $mailhost = "localhost";
     $mailport = 8000;
     /*

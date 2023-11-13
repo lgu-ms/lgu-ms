@@ -2,8 +2,8 @@
 include("../include/session.php");
 
 if (isLogin()) {
-  header('Location: ../');
-  die();
+    header('Location: ../');
+    die();
 }
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
@@ -25,104 +25,126 @@ include("../include/header.php");
 
 
 <body class="d-flex flex-column min-vh-100">
-  <?php include("../include/nav.php"); ?>
+    <?php include("../include/nav.php"); ?>
 
-  <main>
-    <div class="card mb-3">
-      <div class="row g-0">
-      <div class="col-md-4" id="mobile">
-            <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg" alt="Banner" width="500">
-            <img class="mt-3 mb-5 rounded mx-auto d-block img-fluid" src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
-        </div>
-        <div class="col-md-7">
-          <div class="container">
-            <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
-              <div class="row">
-                <div class="col-md-6">
-                  <h1>Login to continue</h1>
-                  <br>
-                  <div class="input-group2">
-                    <input id="email" type="email" placeholder="Email" name="email" required>
-                    <i class="fa fa-user"></i>
-                  </div>
-
-                  <div class="input-group2">
-                    <input type="password" placeholder="Password" name="password" required>
-                    <i class="fa fa-key"></i>
-                  </div>
-
-                  <div class="mt-2">
-                    <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="button">Login</button>
-                    <a type="button" class="btn btn-outline-primary px-4" href="../signup?utm_source=login">Signup</a>
-                    <br><br>
-                    <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
-                  </div>
+    <main>
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4" id="mobile">
+                    <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg"
+                        alt="Banner" width="500">
+                    <img class="mt-3 mb-5 rounded mx-auto d-block img-fluid"
+                        src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-4" id="desktop">
-            <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg" alt="Banner" width="500">
-            <img class="mt-3 rounded mx-auto d-block img-fluid" src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
-        </div>
-      </div>
+                <div class="col-md-7">
+                    <div class="container">
+                        <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1>Login to continue</h1>
+                                    <br>
+                                    <div class="input-group2">
+                                        <input id="email" type="email" placeholder="Email" name="email" required>
+                                        <i class="fa fa-user"></i>
+                                    </div>
 
-    </div>
-  </main>
+                                    <div class="input-group2">
+                                        <input type="password" placeholder="Password" name="password" required>
+                                        <i class="fa fa-key"></i>
+                                    </div>
 
-  <?php include("../include/footer.php"); ?>
+                                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                                    <input type="hidden" name="action" value="validate_captcha">
+
+                                    <div class="mt-2">
+                                        <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
+                                            name="submit">Login</button>
+                                        <a type="button" class="btn btn-outline-primary px-4"
+                                            href="../signup?utm_source=login">Signup</a>
+                                        <br><br>
+                                        <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4" id="desktop">
+                    <img class="rounded mx-auto d-block img-fluid" src="../images/dial122-web-banner-v2.jpg"
+                        alt="Banner" width="500">
+                    <img class="mt-3 rounded mx-auto d-block img-fluid"
+                        src="../images/coronavirus-safety-tw.jpg.img.jpeg" alt="Banner" width="500">
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <?php include("../include/footer.php"); ?>
 </body>
 
 </html>
 <?php
-
-$email = $password = "";
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (empty($_POST["email"])) {
-    echo '<script>showErr("Email is required!")</script>';
-  } else {
-    $email = $_POST["email"];
-    if (empty($_POST["password"])) {
-      echo '<script>showErr("Password is required!")</script>';
-    } else {
-      $password = hash("sha512", $_POST["password"]);
-      $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
-      if (mysqli_num_rows($isRegister) > 0) {
-        while ($row = mysqli_fetch_assoc($isRegister)) {
 
-          $db_password = $row["user_password"];
-          $user_id = $row["_id"];
+    require_once '../vendor/autoload.php';
+    $client = new GuzzleHttp\Client();
+    $token = $_POST["g-recaptcha-response"];
+    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+        'form_params' => [
+            'secret' => $captcha_secret_key,
+            'response' => $token
+        ]
+    ]);
+    $result = json_decode($response->getBody());
+    if ($result->success) {
+        $email = $password = "";
+        if (empty($_POST["email"])) {
+            echo '<script>showErr("Email is required!")</script>';
+        } else {
+            $email = $_POST["email"];
+            if (empty($_POST["password"])) {
+                echo '<script>showErr("Password is required!")</script>';
+            } else {
+                $password = hash("sha512", $_POST["password"]);
+                $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
+                if (mysqli_num_rows($isRegister) > 0) {
+                    while ($row = mysqli_fetch_assoc($isRegister)) {
 
-          if (strcasecmp($db_password, $password) == 0) {
+                        $db_password = $row["user_password"];
+                        $user_id = $row["_id"];
 
-            $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
-            $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
-            $today = date("Y-m-d H:i:s");
-            $sql .= "('$device_id', '$today', 'active', $user_id, '$today')";
-            if ($conn->query($sql) === TRUE) {
-              $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $user_id");
+                        if (strcasecmp($db_password, $password) == 0) {
 
-              if (mysqli_num_rows($getSessionID) > 0) {
-                while ($row1 = mysqli_fetch_assoc($getSessionID)) {
-                  $_SESSION['user_login'] = true;
-                  $_SESSION["session_id"] = $row1["_sid"];
-                  $_SESSION["user_id"] = $user_id;
+                            $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
+                            $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+                            $today = date("Y-m-d H:i:s");
+                            $sql .= "('$device_id', '$today', 'active', $user_id, '$today')";
+                            if ($conn->query($sql) === TRUE) {
+                                $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $user_id");
 
-                  echo '<script>window.location.href = "../"</script>';
-                  die();
+                                if (mysqli_num_rows($getSessionID) > 0) {
+                                    while ($row1 = mysqli_fetch_assoc($getSessionID)) {
+                                        $_SESSION['user_login'] = true;
+                                        $_SESSION["session_id"] = $row1["_sid"];
+                                        $_SESSION["user_id"] = $user_id;
+
+                                        echo '<script>window.location.href = "../"</script>';
+                                        die();
+                                    }
+                                }
+                            }
+                        } else {
+                            echo '<script>showErr("Email or Password incorrect!")</script>';
+                        }
+                    }
+                } else {
+                    echo '<script>showErr("Email or Password incorrect!")</script>';
                 }
-              }
             }
-          } else {
-            echo '<script>showErr("Email or Password incorrect!")</script>';
-          }
         }
-      } else {
-        echo '<script>showErr("Email or Password incorrect!")</script>';
-      }
+    } else {
+        echo '<script>showErr("Seems like you failed in I am not a robot test.")</script>';
     }
-  }
 }
 ?>

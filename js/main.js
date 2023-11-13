@@ -9,20 +9,72 @@ insertParam = (key, value) => {
 };
 
 showErr = (err) => {
-    let bsAlert = new bootstrap.Toast(document.getElementById("error-toast"));
-    bsAlert.show();
-    document.getElementById("error").innerText = err;
+    let toast = document.createElement("div");
+    toast.setAttribute("data-bs-autohide", true);
+    toast.setAttribute("class", "toast");
+    let toastheader = document.createElement("div");
+    toastheader.setAttribute("class", "toast-header");
+    let strong = document.createElement("strong");
+    strong.setAttribute("class", "me-auto");
+  
+    strong.innerHTML = "<i class=\"fa-solid fa-circle-exclamation\"></i> Houston!";
+    toastheader.append(strong);
+    let actionbutton = document.createElement("button");
+    actionbutton.setAttribute("type", "button");
+    actionbutton.setAttribute("class", "btn-close");
+    actionbutton.setAttribute("data-bs-dismiss", "toast");
+    actionbutton.setAttribute("aria-label", "Close");
+    toastheader.append(actionbutton);
+
+    let toastbody = document.createElement("div");
+    toastbody.setAttribute("class", "toast-body");
+    let error = document.createElement("p");
+    error.innerHTML = err;
+    toastbody.append(error);
+    toast.append(toastheader);
+    toast.append(toastbody);
+
+    let alert = new bootstrap.Toast(toast);
+    alert.show();
+
+    document.getElementById("toastcontainer").append(toast);
 };
 
 showAnnoucement = (annc, url) => {
-    let bsAlert = new bootstrap.Toast(document.getElementById("announcement-toast"));
-    bsAlert.show();
-    document.getElementById("announcement").innerText = annc;
-    var textmuted = document.getElementById("announcement-url");
-    var a = document.createElement("a");
-    a.innerText = url;
-    a.setAttribute("href", url);
-    textmuted.append(a);
+        let toast = document.createElement("div");
+        toast.setAttribute("data-bs-autohide", true);
+        toast.setAttribute("class", "toast");
+        let toastheader = document.createElement("div");
+        toastheader.setAttribute("class", "toast-header");
+        let strong = document.createElement("strong");
+        strong.setAttribute("class", "me-auto");
+      
+        strong.innerHTML = "<i class=\"fa-solid fa-bell\"></i> Announcement!";
+        toastheader.append(strong);
+        let actionbutton = document.createElement("button");
+        actionbutton.setAttribute("type", "button");
+        actionbutton.setAttribute("class", "btn-close");
+        actionbutton.setAttribute("data-bs-dismiss", "toast");
+        actionbutton.setAttribute("aria-label", "Close");
+        toastheader.append(actionbutton);
+    
+        let toastbody = document.createElement("div");
+        toastbody.setAttribute("class", "toast-body");
+        let announcement = document.createElement("p");
+        announcement.innerHTML = annc;
+        announcement.setAttribute("href", annc);
+        let announcementurl = document.createElement("a");
+        announcementurl.setAttribute("class", "text-muted mb-0");
+        announcementurl.innerHTML = url;
+        toastbody.append(announcement);
+        toastbody.append(announcementurl);
+        toast.append(toastheader);
+        toast.append(toastbody);
+    
+        let alert = new bootstrap.Toast(toast);
+        alert.show();
+    
+        document.getElementById("toastcontainer").append(toast);
 };
 
 showPopup = (title, content, action) => {
@@ -78,7 +130,7 @@ window.onerror = function a(msm, url, num) {
 window.addEventListener("DOMContentLoaded", () => {
     scrollProgressBar();
     el_autohide = document.querySelector(".autohide");
-    navbar_height = document.querySelector(".navbar").offsetHeight;
+    navbar_height = document.querySelector(".navbar");
     document.body.style.paddingTop = navbar_height + "px";
     if (el_autohide) {
         var last_scroll_top = 0;
@@ -115,15 +167,12 @@ if (typeof executeCaptcha !== "undefined") {
     if (typeof email !== "undefined") {
         email.value = user_email;
     }
-
-    executeCaptcha.onclick = function(e) {
-        e.preventDefault();
-        grecaptcha.ready(function() {
-          grecaptcha.execute(grecaptcha_auth_key, {action: 'submit'}).then(function(token) {
-            document.getElementById("form").submit();
-          });
+ 
+    grecaptcha.ready(function() {
+        grecaptcha.execute(captcha_site_key, {action: 'validate_captcha'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
         });
-    }
+    });
 }
 
 /*
