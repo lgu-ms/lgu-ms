@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 function initMail($mailrecepient, $mailrecepientname, $mailsubject, $mailbody) {
     require_once "config.php";
-    require_once 'vendor/autoload.php';
+    require_once '../vendor/autoload.php';
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->Host = $mailhost;
