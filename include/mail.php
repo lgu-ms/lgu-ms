@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 
 function initMail($mailrecepient, $mailrecepientname, $mailsubject, $mailbody) {
-    require_once "config.php";
+    include("config.php");
     require_once '../vendor/autoload.php';
     $mail = new PHPMailer;
     $mail->isSMTP();
