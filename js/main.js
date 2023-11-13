@@ -1,1 +1,251 @@
-const _0x5811cb=_0x4712;(function(_0x524457,_0x2e1e1d){const _0x3b2de5=_0x4712,_0x43c61a=_0x524457();while(!![]){try{const _0x39d197=-parseInt(_0x3b2de5(0x109))/0x1*(-parseInt(_0x3b2de5(0xeb))/0x2)+-parseInt(_0x3b2de5(0x133))/0x3*(-parseInt(_0x3b2de5(0x120))/0x4)+parseInt(_0x3b2de5(0xed))/0x5+parseInt(_0x3b2de5(0x123))/0x6+parseInt(_0x3b2de5(0xea))/0x7+parseInt(_0x3b2de5(0xd6))/0x8*(-parseInt(_0x3b2de5(0xfc))/0x9)+parseInt(_0x3b2de5(0xf3))/0xa;if(_0x39d197===_0x2e1e1d)break;else _0x43c61a['push'](_0x43c61a['shift']());}catch(_0x2b4481){_0x43c61a['push'](_0x43c61a['shift']());}}}(_0x5afc,0x75916),insertParam=(_0x16553c,_0x59d635)=>{const _0x5906d0=_0x4712,_0x4d6a44=new URL(window[_0x5906d0(0xda)]['href']);_0x4d6a44['searchParams'][_0x5906d0(0x12b)](_0x16553c,_0x59d635),window[_0x5906d0(0xf5)][_0x5906d0(0xe7)]({'path':_0x4d6a44[_0x5906d0(0xdc)]},'',_0x4d6a44[_0x5906d0(0xdc)]);},showErr=_0x24afd3=>{const _0x3d5a0d=_0x4712;let _0x69cc5=document['createElement'](_0x3d5a0d(0x115));_0x69cc5[_0x3d5a0d(0x128)](_0x3d5a0d(0x12c),!![]),_0x69cc5[_0x3d5a0d(0x128)](_0x3d5a0d(0x107),_0x3d5a0d(0x12f));let _0x3beeff=document[_0x3d5a0d(0x11f)](_0x3d5a0d(0x115));_0x3beeff[_0x3d5a0d(0x128)]('class','toast-header');let _0x577e74=document['createElement'](_0x3d5a0d(0xd1));_0x577e74[_0x3d5a0d(0x128)]('class',_0x3d5a0d(0xdb)),_0x577e74[_0x3d5a0d(0xce)]='<i\x20class=\x22fa-solid\x20fa-circle-exclamation\x22></i>\x20Houston!',_0x3beeff[_0x3d5a0d(0xe3)](_0x577e74);let _0x3080bc=document[_0x3d5a0d(0x11f)](_0x3d5a0d(0x10b));_0x3080bc[_0x3d5a0d(0x128)]('type',_0x3d5a0d(0x10b)),_0x3080bc['setAttribute']('class',_0x3d5a0d(0x10f)),_0x3080bc[_0x3d5a0d(0x128)]('data-bs-dismiss','toast'),_0x3080bc[_0x3d5a0d(0x128)]('aria-label',_0x3d5a0d(0x112)),_0x3beeff[_0x3d5a0d(0xe3)](_0x3080bc);let _0x5babdd=document[_0x3d5a0d(0x11f)]('div');_0x5babdd['setAttribute'](_0x3d5a0d(0x107),_0x3d5a0d(0xcc));let _0x224abf=document[_0x3d5a0d(0x11f)]('p');_0x224abf[_0x3d5a0d(0xce)]=_0x24afd3,_0x5babdd[_0x3d5a0d(0xe3)](_0x224abf),_0x69cc5[_0x3d5a0d(0xe3)](_0x3beeff),_0x69cc5[_0x3d5a0d(0xe3)](_0x5babdd);let _0x52bf6e=new bootstrap[(_0x3d5a0d(0xe9))](_0x69cc5);_0x52bf6e[_0x3d5a0d(0xfd)](),document[_0x3d5a0d(0x118)]('toastcontainer')['append'](_0x69cc5);},showAnnoucement=(_0x2d0a34,_0x29ca30)=>{const _0x1f0e56=_0x4712;let _0x29245d=document[_0x1f0e56(0x11f)](_0x1f0e56(0x115));_0x29245d[_0x1f0e56(0x128)]('data-bs-autohide',!![]),_0x29245d['setAttribute'](_0x1f0e56(0x107),_0x1f0e56(0x12f));let _0x53a0b8=document[_0x1f0e56(0x11f)](_0x1f0e56(0x115));_0x53a0b8[_0x1f0e56(0x128)](_0x1f0e56(0x107),_0x1f0e56(0x110));let _0x3a1a5f=document['createElement'](_0x1f0e56(0xd1));_0x3a1a5f[_0x1f0e56(0x128)](_0x1f0e56(0x107),_0x1f0e56(0xdb)),_0x3a1a5f['innerHTML']=_0x1f0e56(0x116),_0x53a0b8['append'](_0x3a1a5f);let _0x185d10=document[_0x1f0e56(0x11f)](_0x1f0e56(0x10b));_0x185d10[_0x1f0e56(0x128)](_0x1f0e56(0xee),_0x1f0e56(0x10b)),_0x185d10['setAttribute'](_0x1f0e56(0x107),_0x1f0e56(0x10f)),_0x185d10[_0x1f0e56(0x128)](_0x1f0e56(0xe4),'toast'),_0x185d10['setAttribute'](_0x1f0e56(0x117),_0x1f0e56(0x112)),_0x53a0b8['append'](_0x185d10);let _0x5e5d63=document[_0x1f0e56(0x11f)](_0x1f0e56(0x115));_0x5e5d63[_0x1f0e56(0x128)](_0x1f0e56(0x107),_0x1f0e56(0xcc));let _0x52108d=document['createElement']('p');_0x52108d[_0x1f0e56(0xce)]=_0x2d0a34,_0x52108d[_0x1f0e56(0x128)](_0x1f0e56(0xdc),_0x2d0a34);let _0x50ad39=document[_0x1f0e56(0x11f)]('a');_0x50ad39[_0x1f0e56(0x128)](_0x1f0e56(0x107),_0x1f0e56(0xd2)),_0x50ad39[_0x1f0e56(0xce)]=_0x29ca30,_0x5e5d63['append'](_0x52108d),_0x5e5d63[_0x1f0e56(0xe3)](_0x50ad39),_0x29245d[_0x1f0e56(0xe3)](_0x53a0b8),_0x29245d[_0x1f0e56(0xe3)](_0x5e5d63);let _0x1630fe=new bootstrap[(_0x1f0e56(0xe9))](_0x29245d);_0x1630fe[_0x1f0e56(0xfd)](),document[_0x1f0e56(0x118)](_0x1f0e56(0x12d))[_0x1f0e56(0xe3)](_0x29245d);},showPopup=(_0x702900,_0x42256c,_0x375032)=>{const _0xe91967=_0x4712;let _0x13c43f=new bootstrap[(_0xe91967(0x121))](document[_0xe91967(0x118)]('popupModal'));_0x13c43f[_0xe91967(0xfd)](),document[_0xe91967(0x118)]('popupModalLabel')[_0xe91967(0xd7)]=_0x702900,document[_0xe91967(0x118)](_0xe91967(0x130))[_0xe91967(0xd7)]=_0x42256c,$('#popupModal')['on'](_0xe91967(0xe5),function(){const _0x31ce57=_0xe91967;window[_0x31ce57(0xda)][_0x31ce57(0xdc)]=_0x375032;});},setSession=(_0x2f3c44,_0x452f58)=>{const _0x4c2e0e=_0x4712;sessionStorage[_0x4c2e0e(0x12e)](_0x2f3c44,_0x452f58);},getSession=_0x51b8b5=>{return sessionStorage['getItem'](_0x51b8b5);},setCookies=(_0x1422cf,_0x211f22,_0x3dbc48)=>{const _0x1ad71a=_0x4712,_0x2e73f2=new Date();_0x2e73f2[_0x1ad71a(0x113)](_0x2e73f2[_0x1ad71a(0x102)]()+_0x3dbc48*0x18*0x3c*0x3c*0x3e8);var _0x53d7ce=_0x1ad71a(0xfb)+_0x2e73f2['toUTCString']();document['cookie']=_0x1422cf+'='+_0x211f22+';'+_0x53d7ce+_0x1ad71a(0x134);},getCookies=_0x2c17e9=>{const _0x242796=_0x4712;var _0x2cb0ef=_0x2c17e9+'=',_0x5990e8=decodeURIComponent(document[_0x242796(0xde)]),_0x4e6b62=_0x5990e8['split'](';');for(var _0x1edc5f=0x0;_0x1edc5f<_0x4e6b62[_0x242796(0x124)];_0x1edc5f++){var _0x4a48e6=_0x4e6b62[_0x1edc5f];while(_0x4a48e6[_0x242796(0x114)](0x0)=='\x20'){_0x4a48e6=_0x4a48e6['substring'](0x1);}if(_0x4a48e6[_0x242796(0xfa)](_0x2cb0ef)==0x0)return _0x4a48e6[_0x242796(0xdd)](_0x2cb0ef['length'],_0x4a48e6['length']);}return'';},window[_0x5811cb(0xf2)]=function a(_0x5702e0,_0x375594,_0x365de4){return alert(_0x5702e0+'\x0a\x0a'+_0x375594),![];},window[_0x5811cb(0x119)]('DOMContentLoaded',()=>{const _0x28e7c2=_0x5811cb;scrollProgressBar(),el_autohide=document[_0x28e7c2(0xf7)]('.autohide'),navbar_height=document['querySelector'](_0x28e7c2(0xd5)),document[_0x28e7c2(0x10c)][_0x28e7c2(0xcd)][_0x28e7c2(0x11b)]=navbar_height+'px';if(el_autohide){var _0x502062=0x0;window[_0x28e7c2(0x119)](_0x28e7c2(0x10d),function(){const _0xec806a=_0x28e7c2;let _0x58f6a3=window[_0xec806a(0xf9)];_0x58f6a3==0x0?el_autohide[_0xec806a(0x11a)][_0xec806a(0x10e)](_0xec806a(0x132)):el_autohide['classList'][_0xec806a(0x129)]('scrolled-up-tr'),_0x58f6a3<_0x502062?(el_autohide[_0xec806a(0x11a)][_0xec806a(0x129)](_0xec806a(0x100)),el_autohide['classList'][_0xec806a(0x10e)](_0xec806a(0x101))):(el_autohide[_0xec806a(0x11a)][_0xec806a(0x129)](_0xec806a(0x101)),el_autohide[_0xec806a(0x11a)][_0xec806a(0x10e)](_0xec806a(0x100))),_0x502062=_0x58f6a3;});}showAnnoucement('QC\x20Alam\x20mo\x20ba?\x20Real\x20Property\x20Tax','https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/');}));function _0x4712(_0x58ea28,_0x4f5e2d){const _0x5afc16=_0x5afc();return _0x4712=function(_0x47122b,_0x3bf652){_0x47122b=_0x47122b-0xcc;let _0x426357=_0x5afc16[_0x47122b];return _0x426357;},_0x4712(_0x58ea28,_0x4f5e2d);}function _0x5afc(){const _0x2fccec=['75123KMNAeV',';path=/','value','toast-body','style','innerHTML','resize','for','strong','text-muted\x20mb-0','themeswitch','themelabel','.navbar','24784frpOsS','innerText','search','scrollTop','location','me-auto','href','substring','cookie','undefined','matches','form-check-label','theme','append','data-bs-dismiss','hidden.bs.modal','ready','pushState','css','Toast','546560lSZPUF','4388KvmTFG','light','819525rKImsH','type','dark-mode','Dark','g-recaptcha-response','onerror','4373540qefJwf','.progress-bar','history','toggle','querySelector','?utm_source=','scrollY','indexOf','expires=','2403HvSATB','show','execute','light-mode','scrolled-down','scrolled-up','getTime','(prefers-color-scheme:\x20dark)','label','email','checkbox','class','getItem','5JHUVRP','dark','button','body','scroll','add','btn-close','toast-header','role','Close','setTime','charAt','div','<i\x20class=\x22fa-solid\x20fa-bell\x22></i>\x20Announcement!','aria-label','getElementById','addEventListener','classList','paddingTop','contains','Light','matchMedia','createElement','84eCBICs','Modal','click','555324QMcBpl','length','get','validate_captcha','switch','setAttribute','remove','height','set','data-bs-autohide','toastcontainer','setItem','toast','popupModalContent','rdr','scrolled-up-tr'];_0x5afc=function(){return _0x2fccec;};return _0x5afc();}const queryString=window[_0x5811cb(0xda)][_0x5811cb(0xd8)],urlParams=new URLSearchParams(queryString),rdr=urlParams[_0x5811cb(0x125)](_0x5811cb(0x131));rdr!=null&&(window[_0x5811cb(0xda)][_0x5811cb(0xdc)]=rdr+_0x5811cb(0xf8)+btoa(window[_0x5811cb(0xda)]));if(typeof executeCaptcha!=='undefined'){const user_email=urlParams[_0x5811cb(0x125)](_0x5811cb(0x105));typeof email!==_0x5811cb(0xdf)&&(email[_0x5811cb(0x135)]=user_email),grecaptcha[_0x5811cb(0xe6)](function(){const _0x25bf0a=_0x5811cb;grecaptcha[_0x25bf0a(0xfe)](captcha_site_key,{'action':_0x25bf0a(0x126)})['then'](function(_0x4f5eab){const _0x1792bc=_0x25bf0a;document[_0x1792bc(0x118)](_0x1792bc(0xf1))[_0x1792bc(0x135)]=_0x4f5eab;});});}let themeswitch=document[_0x5811cb(0x118)](_0x5811cb(0xd3)),input=document[_0x5811cb(0x11f)]('input');input['setAttribute'](_0x5811cb(0x107),'form-check-input'),input[_0x5811cb(0x128)](_0x5811cb(0xee),_0x5811cb(0x106)),input[_0x5811cb(0x128)](_0x5811cb(0x111),_0x5811cb(0x127)),input['setAttribute']('id','theme'),themeswitch['append'](input);let label=document[_0x5811cb(0x11f)](_0x5811cb(0x104));label[_0x5811cb(0x128)](_0x5811cb(0x107),_0x5811cb(0xe1)),label[_0x5811cb(0x128)](_0x5811cb(0xd0),'theme'),label[_0x5811cb(0x128)]('id',_0x5811cb(0xd4)),themeswitch[_0x5811cb(0xe3)](label);const currentTheme=localStorage[_0x5811cb(0x108)](_0x5811cb(0xe2));if(currentTheme==_0x5811cb(0x10a)&&window[_0x5811cb(0x11e)](_0x5811cb(0x103))['matches'])document[_0x5811cb(0x10c)]['classList'][_0x5811cb(0xf6)](_0x5811cb(0xef)),label[_0x5811cb(0xce)]='Dark',input['setAttribute']('checked',null);else currentTheme=='light'&&(document[_0x5811cb(0x10c)][_0x5811cb(0x11a)][_0x5811cb(0xf6)](_0x5811cb(0xff)),label[_0x5811cb(0xce)]='Light');input[_0x5811cb(0x119)](_0x5811cb(0x122),function(){const _0x5571f6=_0x5811cb;if(window[_0x5571f6(0x11e)](_0x5571f6(0x103))[_0x5571f6(0xe0)]){document['body'][_0x5571f6(0x11a)][_0x5571f6(0xf6)]('light-mode');var _0x5a0baf=document[_0x5571f6(0x10c)][_0x5571f6(0x11a)][_0x5571f6(0x11c)]('light-mode')?'light':'dark';}else{document[_0x5571f6(0x10c)][_0x5571f6(0x11a)][_0x5571f6(0xf6)](_0x5571f6(0xef));var _0x5a0baf=document[_0x5571f6(0x10c)][_0x5571f6(0x11a)][_0x5571f6(0x11c)](_0x5571f6(0xef))?_0x5571f6(0x10a):_0x5571f6(0xec);}_0x5a0baf==_0x5571f6(0x10a)?label['innerHTML']=_0x5571f6(0xf0):label[_0x5571f6(0xce)]=_0x5571f6(0x11d),localStorage[_0x5571f6(0x12e)](_0x5571f6(0xe2),_0x5a0baf);});function scrollProgressBar(){const _0x87ea2a=_0x5811cb;var _0x53f709=function(){const _0x5f4328=_0x4712;return $(document)['height']()-$(window)[_0x5f4328(0x12a)]();},_0x13830f=function(){const _0x21fe14=_0x4712;return $(window)[_0x21fe14(0xd9)]();},_0x52bff9=$(_0x87ea2a(0xf4)),_0x1ae377=_0x53f709(),_0xb077de,_0x452153,_0x5ac2a8=function(){return _0xb077de=_0x13830f(),_0x452153=_0xb077de/_0x1ae377*0x64,_0x452153=_0x452153+'%',_0x452153;},_0x29bb06=function(){const _0x29a77a=_0x87ea2a;_0x52bff9[_0x29a77a(0xe8)]({'width':_0x5ac2a8()});};$(document)['on'](_0x87ea2a(0x10d),_0x29bb06),$(window)['on'](_0x87ea2a(0xcf),function(){_0x1ae377=_0x53f709(),_0x29bb06();});}
+/*
+ * FUNCTIONS
+ */
+
+insertParam = (key, value) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    window.history.pushState({ path: url.href }, "", url.href);
+};
+
+showErr = (err) => {
+    let toast = document.createElement("div");
+    toast.setAttribute("data-bs-autohide", true);
+    toast.setAttribute("class", "toast");
+    let toastheader = document.createElement("div");
+    toastheader.setAttribute("class", "toast-header");
+    let strong = document.createElement("strong");
+    strong.setAttribute("class", "me-auto");
+  
+    strong.innerHTML = "<i class=\"fa-solid fa-circle-exclamation\"></i> Houston!";
+    toastheader.append(strong);
+    let actionbutton = document.createElement("button");
+    actionbutton.setAttribute("type", "button");
+    actionbutton.setAttribute("class", "btn-close");
+    actionbutton.setAttribute("data-bs-dismiss", "toast");
+    actionbutton.setAttribute("aria-label", "Close");
+    toastheader.append(actionbutton);
+
+    let toastbody = document.createElement("div");
+    toastbody.setAttribute("class", "toast-body");
+    let error = document.createElement("p");
+    error.innerHTML = err;
+    toastbody.append(error);
+    toast.append(toastheader);
+    toast.append(toastbody);
+
+    let alert = new bootstrap.Toast(toast);
+    alert.show();
+
+    document.getElementById("toastcontainer").append(toast);
+};
+
+showAnnoucement = (annc, url) => {
+        let toast = document.createElement("div");
+        toast.setAttribute("data-bs-autohide", true);
+        toast.setAttribute("class", "toast");
+        let toastheader = document.createElement("div");
+        toastheader.setAttribute("class", "toast-header");
+        let strong = document.createElement("strong");
+        strong.setAttribute("class", "me-auto");
+      
+        strong.innerHTML = "<i class=\"fa-solid fa-bell\"></i> Announcement!";
+        toastheader.append(strong);
+        let actionbutton = document.createElement("button");
+        actionbutton.setAttribute("type", "button");
+        actionbutton.setAttribute("class", "btn-close");
+        actionbutton.setAttribute("data-bs-dismiss", "toast");
+        actionbutton.setAttribute("aria-label", "Close");
+        toastheader.append(actionbutton);
+    
+        let toastbody = document.createElement("div");
+        toastbody.setAttribute("class", "toast-body");
+        let announcement = document.createElement("p");
+        announcement.innerHTML = annc;
+        announcement.setAttribute("href", annc);
+        let announcementurl = document.createElement("a");
+        announcementurl.setAttribute("class", "text-muted mb-0");
+        announcementurl.innerHTML = url;
+        toastbody.append(announcement);
+        toastbody.append(announcementurl);
+        toast.append(toastheader);
+        toast.append(toastbody);
+    
+        let alert = new bootstrap.Toast(toast);
+        alert.show();
+    
+        document.getElementById("toastcontainer").append(toast);
+};
+
+showPopup = (title, content, action) => {
+    let bsModal = new bootstrap.Modal(document.getElementById("popupModal"));
+    bsModal.show();
+    document.getElementById("popupModalLabel").innerText = title;
+    document.getElementById("popupModalContent").innerText = content;
+    $("#popupModal").on("hidden.bs.modal", function () {
+        window.location.href = action;
+    });
+};
+
+setSession = (key, value) => {
+    sessionStorage.setItem(key, value);
+};
+
+getSession = (key) => {
+    return sessionStorage.getItem(key);
+};
+
+setCookies = (cname, cvalue, exdays) => {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+};
+
+getCookies = (cname) => {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+};
+
+window.onerror = function a(msm, url, num) {
+    alert(msm + "\n\n" + url);
+    return false;
+};
+
+/*
+ * NAVIGATION CONTROL
+ */
+
+window.addEventListener("DOMContentLoaded", () => {
+    scrollProgressBar();
+    el_autohide = document.querySelector(".autohide");
+    navbar_height = document.querySelector(".navbar");
+    document.body.style.paddingTop = navbar_height + "px";
+    if (el_autohide) {
+        var last_scroll_top = 0;
+        window.addEventListener("scroll", function () {
+            let scroll_top = window.scrollY;
+            if (scroll_top == 0) {
+                el_autohide.classList.add("scrolled-up-tr");
+            } else {
+                el_autohide.classList.remove("scrolled-up-tr");
+            }
+            if (scroll_top < last_scroll_top) {
+                el_autohide.classList.remove("scrolled-down");
+                el_autohide.classList.add("scrolled-up");
+            } else {
+                el_autohide.classList.remove("scrolled-up");
+                el_autohide.classList.add("scrolled-down");
+            }
+            last_scroll_top = scroll_top;
+        });
+    }
+    showAnnoucement("QC Alam mo ba? Real Property Tax", "https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/")
+});
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const rdr = urlParams.get("rdr");
+
+if (rdr != null) {
+    window.location.href = rdr + "?utm_source=" + btoa(window.location);
+}
+
+if (typeof executeCaptcha !== "undefined") {
+    const user_email = urlParams.get("email");
+    if (typeof email !== "undefined") {
+        email.value = user_email;
+    }
+ 
+    grecaptcha.ready(function() {
+        grecaptcha.execute(captcha_site_key, {action: 'validate_captcha'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+}
+
+/*
+ * THEME CONTROLS
+ */
+
+let themeswitch = document.getElementById("themeswitch");
+let input = document.createElement("input");
+input.setAttribute("class", "form-check-input");
+input.setAttribute("type", "checkbox");
+input.setAttribute("role", "switch");
+input.setAttribute("id", "theme");
+themeswitch.append(input);
+let label = document.createElement("label");
+label.setAttribute("class", "form-check-label");
+label.setAttribute("for", "theme");
+label.setAttribute("id", "themelabel");
+themeswitch.append(label);
+
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme == "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.body.classList.toggle("dark-mode");
+    label.innerHTML = "Dark";
+    input.setAttribute("checked", null);
+} else if (currentTheme == "light") {
+    document.body.classList.toggle("light-mode");
+    label.innerHTML = "Light";
+}
+
+input.addEventListener("click", function () {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.body.classList.toggle("light-mode");
+        var theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+    } else {
+        document.body.classList.toggle("dark-mode");
+        var theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    }
+    if (theme == "dark") {
+        label.innerHTML = "Dark";
+    } else {
+        label.innerHTML = "Light";
+    }
+    localStorage.setItem("theme", theme);
+});
+
+function scrollProgressBar() {
+    var getMax = function () {
+      return $(document).height() - $(window).height();
+    };
+  
+    var getValue = function () {
+      return $(window).scrollTop();
+    };
+  
+    var progressBar = $(".progress-bar"),
+      max = getMax(),
+      value,
+      width;
+  
+    var getWidth = function () {
+      value = getValue();
+      width = (value / max) * 100;
+      width = width + "%";
+      return width;
+    };
+  
+    var setWidth = function () {
+      progressBar.css({ width: getWidth() });
+    };
+  
+    $(document).on("scroll", setWidth);
+    $(window).on("resize", function () {
+      max = getMax();
+      setWidth();
+    });
+}
