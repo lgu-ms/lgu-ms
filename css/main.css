@@ -37,7 +37,7 @@ h2 span {
 
 * {
     font-family: 'Maven Pro', sans-serif;
-    color: var(--text-color);
+    color: var(--text-color) !important;
 }
 
 html {

@@ -1,4 +1,5 @@
-let grecaptcha_auth_key = "6LcbAQopAAAAAPqiUSbgE4FWJrHdKfpFIK_s6rU-";
+let captcha_site_key = "6LcbAQopAAAAAPqiUSbgE4FWJrHdKfpFIK_s6rU-";
+let captcha_secret_key = "6LcbAQopAAAAAFaui96IVlLAyN_ggZIYKmUByDdz";
 
     /*
       DO NOT ATTEMPT TO CHANGE THE VALUES AND COMMIT IT,
