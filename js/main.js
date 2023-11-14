@@ -118,10 +118,12 @@ getCookies = (cname) => {
     return "";
 };
 
+/*
 window.onerror = function a(msm, url, num) {
     alert(msm + "\n\n" + url);
     return false;
 };
+*/
 
 /*
  * NAVIGATION CONTROL
