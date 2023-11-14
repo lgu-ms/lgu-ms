@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION["signup_temp_otp"] = $temp_id;
                                 $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
                                 $timeGenerated = strtotime("now");
-                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION', $temp_id)";
+                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION', '$temp_id')";
                                 if ($conn->query($sqlOtp) === TRUE) {
                                     require_once "../include/mail.php";
                                     $mail = initMail($email, $fullname, "OTP Verification", '
