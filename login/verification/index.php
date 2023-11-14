@@ -1,7 +1,7 @@
 <?php
 include("../../include/session.php");
 
-if (isLogin() || !isset($_SESSION["signup_temp"])) {
+if (isLogin() || !isset($_SESSION["login_temp"])) {
     header('Location: ../');
     die();
 }
@@ -64,13 +64,13 @@ include("../../include/header.php");
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $signup_temp_email = $_SESSION["signup_temp_email"];
-    $signup_temp_fullname = $_SESSION["signup_temp_fullname"];
-    $signup_temp_password = $_SESSION["signup_temp_password"];
-    $signup_temp_id = $_SESSION["signup_temp_otp"];
+    $login_temp_email = $_SESSION["login_temp_email"];
+    $login_temp_password = $_SESSION["login_temp_password"];
+    $login_temp_id = $_SESSION["login_temp_otp"];
+    $login_user_id = $_SESSION["login_user_id"];
     $otp = hash("sha512", $_POST["otp"]);
 
-    $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$signup_temp_id'");
+    $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$login_temp_id'");
     if (mysqli_num_rows($getOtpFromDB) > 0) {
         while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
             if ($otp == hash("sha512", $row["code"])) {
@@ -79,15 +79,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     session_destroy();
                 } else {
                     session_destroy();
-                    $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
+                    // initiate a new season after the previous one being destroyed
+                    if (is_session_started() === FALSE) session_start();
+                    $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
+                    $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
                     $today = date("Y-m-d H:i:s");
-                    $default_username = explode("@", $signup_temp_email);
-                    $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
+                    $sql .= "('$device_id', '$today', 'active', $login_user_id, '$today')";
                     if ($conn->query($sql) === TRUE) {
-                        echo '<script>window.location.href = "../../login?utm_source=account_created&email=' . $signup_temp_email . '";</script>';
-                        die();
-                    } else {
-                        echo '<script>showErr("An error occured please try again later!")</script>';
+                        $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $login_user_id");
+
+                        if (mysqli_num_rows($getSessionID) > 0) {
+                            while ($row1 = mysqli_fetch_assoc($getSessionID)) {
+                                $_SESSION['user_login'] = true;
+                                $_SESSION["session_id"] = $row1["_sid"];
+                                $_SESSION["user_id"] = $login_user_id;
+
+                                echo '<script>window.location.href = "../../"</script>';
+                                die();
+                            }
+                        }
                     }
                 }
             } else {
