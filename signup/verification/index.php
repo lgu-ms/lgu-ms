@@ -62,5 +62,35 @@ include("../../include/header.php");
 </html>
 
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $signup_temp_email = $_SESSION["signup_temp_email"];
+    $signup_temp_fullname = $_SESSION["signup_temp_fullname"];
+    $signup_temp_password = $_SESSION["signup_temp_password"];
 
+    
+}
+
+function initOtp()
+{
+
+
+    /*
+    verifying the otp isnt expired.
+    $dbtimestamp = strtotime($date);
+    if (time() - $dbtimestamp > 15 * 60) {
+
+    }
+    */
+    $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
+    $today = date("Y-m-d H:i:s");
+    $default_username = explode("@", $email);
+    $hash = hash("sha512", $password);
+    $sql .= "('$default_username[0]', '$fullname', '$email', '$hash', 'User', '$today', '$today')";
+    if ($conn->query($sql) === TRUE) {
+        echo '<script>window.location.href = "../login?utm_source=account_created&email=' . $email . '";</script>';
+        die();
+    } else {
+        echo '<script>showErr("An error occured please try again later!")</script>';
+    }
+}
 ?>
