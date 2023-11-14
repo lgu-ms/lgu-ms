@@ -149,14 +149,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION["signup_temp_email"] = $email;
                                 $_SESSION["signup_temp_fullname"] = $fullname;
                                 $_SESSION["signup_temp_password"] = hash("sha512", $password);
-    
                                 $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-                                $sqlOtp = "INSERT INTO otp (code, created_time, action_type) VALUES ";
+                                $temp_id = hash("sha512", $otp);
+                                $_SESSION["signup_temp_otp"] = $temp_id;
+                                $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
                                 $timeGenerated = strtotime("now");
-                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION')";
+                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION', $temp_id)";
                                 if ($conn->query($sqlOtp) === TRUE) {
                                     require_once "../include/mail.php";
-                                    $mail = initMail($email, $fullname, "DO NOT REPLY", '
+                                    $mail = initMail($email, $fullname, "OTP Verification", '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                         <div style="margin:50px auto;width:70%;padding:20px 0">
                                             <div style="border-bottom:1px solid #eee">
@@ -165,11 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <p style="font-size:1.1em">Hi,</p>
                                             <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Sign Up procedures. OTP is valid for 15 minutes</p>
                                             <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . $otp . '</h2>
-                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay</p>
+                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
                                             <hr style="border:none;border-top:1px solid #eee" />
                                             <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-                                                <p>Quezon City</p>
-                                                <p>mrepol742@gmail.com</p>
+                                                <p>3W2+H2Q, Mayaman</p>
+                                                <p>Diliman</p>
+                                                <p>Lungsod Quezon</p>
+                                                <p>Kalakhang Maynila</p>
                                             </div>
                                         </div>
                                     </div>
@@ -189,30 +192,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
-    }
-}
-
-function initOtp()
-{
-
-
-    /*
-    verifying the otp isnt expired.
-    $dbtimestamp = strtotime($date);
-    if (time() - $dbtimestamp > 15 * 60) {
-
-    }
-    */
-    $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
-    $today = date("Y-m-d H:i:s");
-    $default_username = explode("@", $email);
-    $hash = hash("sha512", $password);
-    $sql .= "('$default_username[0]', '$fullname', '$email', '$hash', 'User', '$today', '$today')";
-    if ($conn->query($sql) === TRUE) {
-        echo '<script>window.location.href = "../login?utm_source=account_created&email=' . $email . '";</script>';
-        die();
-    } else {
-        echo '<script>showErr("An error occured please try again later!")</script>';
     }
 }
 ?>
