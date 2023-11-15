@@ -4,7 +4,7 @@ include("include/session.php");
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_title = "Digital Barangay - A LGU Management System";
-$page_description = "";
+$page_description = "A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
@@ -40,7 +40,7 @@ include("include/header.php");
                 <h5 style="color: #4285f4;">#quezoncity</h5>
                 <h1 class="card-title"><strong>Digital Barangay</strong></h1>
                 <p class="card-text sub-title">
-                  A proposed Local Government Unit Management<br>System Project</p>
+               A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to fostering a more responsive and connected governance structure.</p>
                 <br>
                 <a type="button" class="btn btn-primary shadow px-4" href="learnmore">Learn more</a>
                 <a type="button" class="btn btn-outline-primary px-4" href="milestone">Milestone</a>

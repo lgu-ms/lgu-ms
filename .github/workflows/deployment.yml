@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Start Obfuscating
         run: |
-          rm -rf .github .gitignore .vscode lgu-ms.sql README.md .htaccess .git .replit replit.nix animated-roped-off-construction-barracades.gif
+          rm -rf .github .gitignore .vscode lgu-ms.sql README.md .htaccess .git .replit replit.nix animated-roped-off-construction-barracades.gif dev
           rm -rf obfuscate node_modules package.json package-lock.json .prettierrc.json include/config.php js/grecaptcha.js
       - name: Push to deployment Repository
         id: push_directory

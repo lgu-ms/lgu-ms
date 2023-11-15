@@ -1,6 +1,6 @@
 # lgu-ms
 
-A proposed Local Government Unit Management System Project consist of 19 modules.
+A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.
 
 https://digitalbarangay.com
 
