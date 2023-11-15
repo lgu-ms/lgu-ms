@@ -89,26 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         session_destroy();
                     } else {
                         session_destroy();
-                        // initiate a new season after the previous one being destroyed
-                        if (is_session_started() === FALSE)
-                            session_start();
                         $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                         $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
                         $today = date("Y-m-d H:i:s");
                         $sql .= "('$device_id', '$today', 'active', $login_temp_user_id, '$today')";
                         if ($conn->query($sql) === TRUE) {
-                            $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $login_user_id");
+                            $_SESSION['user_login'] = true;
+                            $_SESSION["session_id"] = $login_temp_session_id;
+                            $_SESSION["user_id"] = $login_temp_user_id;
 
-                            if (mysqli_num_rows($getSessionID) > 0) {
-                                while ($row1 = mysqli_fetch_assoc($getSessionID)) {
-                                    $_SESSION['user_login'] = true;
-                                    $_SESSION["session_id"] = $login_temp_session_id;
-                                    $_SESSION["user_id"] = $login_temp_user_id;
-
-                                    echo '<script>window.location.href = "../../"</script>';
-                                    die();
-                                }
-                            }
+                            echo '<script>window.location.href = "../../"</script>';
+                            die();
                         }
                     }
                 } else {
