@@ -1,5 +1,5 @@
 const cacheName = 'lgu';
-const domain = "http://localhost/lgu-ms";
+const domain = "https://digitalbarangay.com";
 
 self.addEventListener('activate', event => {
   event.waitUntil(

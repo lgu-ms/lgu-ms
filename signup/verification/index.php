@@ -64,36 +64,50 @@ include("../../include/header.php");
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $signup_temp_email = $_SESSION["signup_temp_email"];
-    $signup_temp_fullname = $_SESSION["signup_temp_fullname"];
-    $signup_temp_password = $_SESSION["signup_temp_password"];
-    $signup_temp_id = $_SESSION["signup_temp_otp"];
-    $otp = hash("sha512", $_POST["otp"]);
+    require_once '../vendor/autoload.php';
+    $client = new GuzzleHttp\Client();
+    $token = $_POST["g-recaptcha-response"];
+    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+        'form_params' => [
+            'secret' => $captcha_secret_key,
+            'response' => $token
+        ]
+    ]);
+    $result = json_decode($response->getBody());
+    if ($result->success) {
+        $signup_temp_email = $_SESSION["signup_temp_email"];
+        $signup_temp_fullname = $_SESSION["signup_temp_fullname"];
+        $signup_temp_password = $_SESSION["signup_temp_password"];
+        $signup_temp_id = $_SESSION["signup_temp_otp"];
+        $otp = hash("sha512", $_POST["otp"]);
 
-    $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$signup_temp_id'");
-    if (mysqli_num_rows($getOtpFromDB) > 0) {
-        while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
-            if ($otp == hash("sha512", $row["code"])) {
-                if (time() - $row["created_time"] > 15 * 60) {
-                    echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
-                    session_destroy();
-                } else {
-                    session_destroy();
-                    $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
-                    $today = date("Y-m-d H:i:s");
-                    $default_username = explode("@", $signup_temp_email);
-                    $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
-                    if ($conn->query($sql) === TRUE) {
-                        echo '<script>window.location.href = "../../login?utm_source=account_created&email=' . $signup_temp_email . '";</script>';
-                        die();
+        $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$signup_temp_id'");
+        if (mysqli_num_rows($getOtpFromDB) > 0) {
+            while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
+                if ($otp == hash("sha512", $row["code"])) {
+                    if (time() - $row["created_time"] > 15 * 60) {
+                        echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
+                        session_destroy();
                     } else {
-                        echo '<script>showErr("An error occured please try again later!")</script>';
+                        session_destroy();
+                        $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
+                        $today = date("Y-m-d H:i:s");
+                        $default_username = explode("@", $signup_temp_email);
+                        $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
+                        if ($conn->query($sql) === TRUE) {
+                            echo '<script>window.location.href = "../../login?utm_source=account_created&email=' . $signup_temp_email . '";</script>';
+                            die();
+                        } else {
+                            echo '<script>showErr("An error occured please try again later!")</script>';
+                        }
                     }
+                } else {
+                    echo '<script>showErr("Invalid One Time Password!")</script>';
                 }
-            } else {
-                echo '<script>showErr("Invalid One Time Password!")</script>';
             }
         }
+    } else {
+        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 ?>

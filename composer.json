@@ -1,13 +1,14 @@
 {
     "name": "lgu-ms/lgu-ms",
-    "description": "A proposed Local Government Unit Management System Project.",
+    "description": "A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.",
     "license": "MIT",
     "type": "project",
     "authors": [
         {
             "name": "Melvin Jones Repol",
             "email": "mrepol742@gmail.com",
-            "homepage": "https://mrepol742.github.io"
+            "homepage": "https://mrepol742.github.io",
+            "role": "Developer"
         }
     ],
     "require": {
