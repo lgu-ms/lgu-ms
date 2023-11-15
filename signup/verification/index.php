@@ -64,7 +64,7 @@ include("../../include/header.php");
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once '../vendor/autoload.php';
+    require_once '../../vendor/autoload.php';
     $client = new GuzzleHttp\Client();
     $token = $_POST["g-recaptcha-response"];
     $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
