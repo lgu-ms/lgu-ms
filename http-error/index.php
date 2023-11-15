@@ -4,15 +4,15 @@ include("../include/session.php");
 $code = $_GET["code"];
 
 if (!isset($code) || is_numeric($code) != 1 || (is_numeric($code) == 1 && ($code != 400 && $code != 401 && $code != 403 && $code != 404 && $code != 500))) {
-  echo "<script>window.location.href = '/?utm_source=eeeeeeeeeeeeerrr';</script>";
-  die();
+    echo "<script>window.location.href = '/?utm_source=eeeeeeeeeeeeerrr';</script>";
+    die();
 }
 
 class ErrorCodes
 {
-  public $code;
-  public $name;
-  public $description;
+    public $code;
+    public $name;
+    public $description;
 }
 
 $err = array();
@@ -49,10 +49,10 @@ $errorCode = 0;
 $errorName = null;
 
 foreach ($err as $error) {
-  if ($error->code == $code) {
-    $errorCode = $error->code;
-    $errorName = $error->name;
-    $main = '
+    if ($error->code == $code) {
+        $errorCode = $error->code;
+        $errorName = $error->name;
+        $main = '
 
     <header>
     <div class="card mb-3 ">
@@ -72,12 +72,12 @@ foreach ($err as $error) {
       </div>
     </div>
   </header> ';
-    $page_title = $error->name . " - Digital Barangay";
-    $page_description = $error->description;
-    break;
-  }
+        $page_title = $error->name . " - Digital Barangay";
+        $page_description = $error->description;
+        break;
+    }
 }
- 
+
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-10-08T13:37:36+00:00";
 $page_keywords = "digital barangay, lgu, lgu management system";
@@ -94,13 +94,13 @@ include("../include/header.php");
 
 <body class="d-flex flex-column min-vh-100">
 
-  <?php include("../include/nav.php"); ?>
+    <?php include("../include/nav.php"); ?>
 
-  <main>
-    <?php echo $main; ?>
-  </main>
+    <main>
+        <?php echo $main; ?>
+    </main>
 
-  <?php include("../include/footer.php"); ?>
+    <?php include("../include/footer.php"); ?>
 </body>
 
 </html>
@@ -110,15 +110,15 @@ include("../include/header.php");
 $insertError = "INSERT INTO error (error_code, error_name, error_date";
 
 if (isLogin()) {
-  $insertError .= ", session_id, user_id";
+    $insertError .= ", session_id, user_id";
 }
 
 $today = date("Y-m-d H:i:s");
 $insertError .= ") VALUES ($errorCode, '$errorName', '$today'";
 
 if (isLogin()) {
-  $insertError .= ", " . $_SESSION["session_id"];
-  $insertError .= ", " . $_SESSION["user_id"];
+    $insertError .= ", " . $_SESSION["session_id"];
+    $insertError .= ", " . $_SESSION["user_id"];
 }
 
 $insertError .= ")";

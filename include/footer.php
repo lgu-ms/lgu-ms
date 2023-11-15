@@ -14,6 +14,25 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $directory; ?>modules">Modules</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $directory; ?>cookies">Cookies Policy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $directory; ?>privacy">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $directory; ?>terms">Terms of Service</a>
+          </li>
+          <div>
+            <?php
+             if (!isLogin()) {
+               echo '<div class="mt-2 mb-2">
+               <a type="button" class="btn btn-primary shadow px-4" href="' . $directory . 'login">Log in</a>
+               <a type="button" class="btn btn-outline-primary px-4" href="' . $directory . 'signup">Sign up</a></div>
+               ';
+            }
+            ?>
+          </div>
         </ul>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -76,10 +95,16 @@
       <i class="fa-brands fa-instagram"></i>
     </a>
     <a href="#" class="px-1" target="_blank">
-      <i class="fa-brands fa-twitter"></i>
+      <i class="fa-brands fa-x-twitter"></i>
     </a>
     <a href="#" class="px-1" target="_blank">
       <i class="fa-brands fa-youtube"></i>
+    </a>
+    <a href="#" class="px-1" target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="#" class="px-1" target="_blank">
+      <i class="fa-brands fa-linkedin"></i>
     </a>
     <br>
     <?php

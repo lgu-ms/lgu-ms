@@ -64,46 +64,60 @@ include("../../include/header.php");
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login_temp_email = $_SESSION["login_temp_email"];
-    $login_temp_password = $_SESSION["login_temp_password"];
-    $login_temp_id = $_SESSION["login_temp_otp"];
-    $login_user_id = $_SESSION["login_user_id"];
-    $otp = hash("sha512", $_POST["otp"]);
+    require_once '../vendor/autoload.php';
+    $client = new GuzzleHttp\Client();
+    $token = $_POST["g-recaptcha-response"];
+    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+        'form_params' => [
+            'secret' => $captcha_secret_key,
+            'response' => $token
+        ]
+    ]);
+    $result = json_decode($response->getBody());
+    if ($result->success) {
+        $login_temp_session_id = $_SESSION["login_temp_session_id"];
+        $login_temp_id = $_SESSION["login_temp_otp"];
+        $login_temp_user_id = $_SESSION["login_temp_user_id"];
+        $otp = hash("sha512", $_POST["otp"]);
 
-    $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$login_temp_id'");
-    if (mysqli_num_rows($getOtpFromDB) > 0) {
-        while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
-            if ($otp == hash("sha512", $row["code"])) {
-                if (time() - $row["created_time"] > 15 * 60) {
-                    echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
-                    session_destroy();
-                } else {
-                    session_destroy();
-                    // initiate a new season after the previous one being destroyed
-                    if (is_session_started() === FALSE) session_start();
-                    $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
-                    $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
-                    $today = date("Y-m-d H:i:s");
-                    $sql .= "('$device_id', '$today', 'active', $login_user_id, '$today')";
-                    if ($conn->query($sql) === TRUE) {
-                        $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $login_user_id");
+        $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$login_temp_id'");
+        if (mysqli_num_rows($getOtpFromDB) > 0) {
+            while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
+                if ($otp == hash("sha512", $row["code"])) {
+                    if (time() - $row["created_time"] > 15 * 60) {
+                        echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
+                        session_destroy();
+                    } else {
+                        session_destroy();
+                        // initiate a new season after the previous one being destroyed
+                        if (is_session_started() === FALSE)
+                            session_start();
+                        $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
+                        $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+                        $today = date("Y-m-d H:i:s");
+                        $sql .= "('$device_id', '$today', 'active', $login_temp_user_id, '$today')";
+                        if ($conn->query($sql) === TRUE) {
+                            $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $login_user_id");
 
-                        if (mysqli_num_rows($getSessionID) > 0) {
-                            while ($row1 = mysqli_fetch_assoc($getSessionID)) {
-                                $_SESSION['user_login'] = true;
-                                $_SESSION["session_id"] = $row1["_sid"];
-                                $_SESSION["user_id"] = $login_user_id;
+                            if (mysqli_num_rows($getSessionID) > 0) {
+                                while ($row1 = mysqli_fetch_assoc($getSessionID)) {
+                                    $_SESSION['user_login'] = true;
+                                    $_SESSION["session_id"] = $login_temp_session_id;
+                                    $_SESSION["user_id"] = $login_temp_user_id;
 
-                                echo '<script>window.location.href = "../../"</script>';
-                                die();
+                                    echo '<script>window.location.href = "../../"</script>';
+                                    die();
+                                }
                             }
                         }
                     }
+                } else {
+                    echo '<script>showErr("Invalid One Time Password!")</script>';
                 }
-            } else {
-                echo '<script>showErr("Invalid One Time Password!")</script>';
             }
         }
+    } else {
+        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 ?>

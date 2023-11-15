@@ -125,12 +125,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 if (mysqli_num_rows($getSessionID) > 0) {
                                     while ($row1 = mysqli_fetch_assoc($getSessionID)) {
-                                        $_SESSION['user_login'] = true;
-                                        $_SESSION["session_id"] = $row1["_sid"];
-                                        $_SESSION["user_id"] = $user_id;
-
-                                        echo '<script>window.location.href = "../"</script>';
-                                        die();
+                                        $_SESSION["login_temp"] = true;
+                                        $_SESSION["login_temp_session_id"] = $row1["_sid"];
+                                        $_SESSION["login_temp_user_id"] = $user_id;
+                                        $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+                                        $temp_id = hash("sha512", $otp);
+                                        $_SESSION["login_temp_otp"] = $temp_id;
+                                        $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
+                                        $timeGenerated = strtotime("now");
+                                        $sqlOtp .= "($otp, $timeGenerated, 'LOGIN', '$temp_id')";
+                                        if ($conn->query($sqlOtp) === TRUE) {
+                                            require_once "../include/mail.php";
+                                            $mail = initMail($email, $fullname, "OTP Verification", '
+                                    <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                        <div style="margin:50px auto;width:70%;padding:20px 0">
+                                            <div style="border-bottom:1px solid #eee">
+                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                            </div>
+                                            <p style="font-size:1.1em">Hi ' . $fullname .  ',</p>
+                                            <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Login procedures. OTP is valid for 15 minutes only</p>
+                                            <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . $otp . '</h2>
+                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
+                                            <hr style="border:none;border-top:1px solid #eee" />
+                                            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                                <p>3W2+H2Q, Mayaman</p>
+                                                <p>Diliman</p>
+                                                <p>Lungsod Quezon</p>
+                                                <p>Kalakhang Maynila</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ');
+                                            if (sendMail($mail)) {
+                                                echo '<script>window.location.href = "verification?utm_source=login"</script>';
+                                                die();
+                                            } else {
+                                                echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';
+                                            }
+                                        }
                                     }
                                 }
                             }

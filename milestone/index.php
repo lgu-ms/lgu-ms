@@ -25,7 +25,6 @@ include("../include/header.php");
         <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
           <div class="text-center">
             <h4 style="color: #4285f4;">Our Milestone</h4>
-            <p class="fw-bold">Nunc quis neque id libero bibendum posuere a ut nunc.</p>
           </div>
         </div>
         <div class="col-12 col-lg-10 mx-auto">
