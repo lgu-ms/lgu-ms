@@ -1,4 +1,4 @@
-const cacheName = 'lgu';
+const cacheName = 'digitalbarangay';
 const domain = "https://digitalbarangay.com";
 
 self.addEventListener('activate', event => {
