@@ -5,8 +5,10 @@ on:
 
 jobs:
   autoapprove:
-    name: Auto Approve a PR by dependabot 
+    name: Auto Approve
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v2.0.0
