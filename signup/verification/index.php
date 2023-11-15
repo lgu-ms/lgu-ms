@@ -86,7 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
                 if ($otp == hash("sha512", $row["code"])) {
                     if (time() - $row["created_time"] > 15 * 60) {
-                        echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
+                        echo '<script>
+                            showErr("Invalid One Time Password! Please sign up again.");
+                            function goBack() {
+                                window.location.href = "../?utm_source=fail_verification&utm_source=expired_otp&utm_medium=signup"
+                            }
+                            setTimeout(goBack, 5000);
+                        </script>
+                            </script>';
                         session_destroy();
                     } else {
                         session_destroy();
