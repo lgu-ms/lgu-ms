@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v2.0.0
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
           github-token: ${{ secrets.API_TOKEN_GITHUB }}
   automerge:
@@ -20,7 +19,6 @@ jobs:
     steps:
       - name: Auto merge
         uses: pascalgn/automerge-action@135f0bdb927d9807b5446f7ca9ecc2c51de03c4a
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
           MERGE_LABELS: Update
