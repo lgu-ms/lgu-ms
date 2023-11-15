@@ -85,10 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             while ($row = mysqli_fetch_assoc($getOtpFromDB)) {
                 if ($otp == hash("sha512", $row["code"])) {
                     if (time() - $row["created_time"] > 15 * 60) {
-                        echo '<script>showErr("Invalid One Time Password! Please Login again.")</script>';
-                        session_destroy();
+                        echo '<script>
+                            showErr("Invalid One Time Password! Please Login again.");
+                            function goBack() {
+                                window.location.href = "../?utm_source=fail_verification&utm_source=expired_otp&utm_medium=signup"
+                            }
+                            setTimeout(goBack, 5000);
+                        </script>';
+                        nullifySession();
                     } else {
-                        session_destroy();
+                        nullifySession();
                         $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                         $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
                         $today = date("Y-m-d H:i:s");
@@ -110,5 +116,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
     }
+}
+
+function nullifySession()
+{
+    $_SESSION["login_temp"] = false;
+    $_SESSION["login_temp_session_id"] = null;
+    $_SESSION["login_temp_otp"] = null;
+    $_SESSION["login_temp_user_id"] = null;
 }
 ?>
