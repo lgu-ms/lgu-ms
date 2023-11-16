@@ -113,37 +113,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->success) {
         $email = $fullname = $password = $cpassword = "";
         if (empty($_POST["email"])) {
-            echo '<script>showErr("Email is required!")</script>';
+            echo '<script>showToast("Email is required!")</script>';
         } else {
             $email = $_POST["email"];
             if (empty($_POST["fullname"])) {
-                echo '<script>showErr("Fullname is required!")</script>';
+                echo '<script>showToast("Fullname is required!")</script>';
             } else {
                 $fullname = $_POST["fullname"];
                 if (empty($_POST["password"])) {
-                    echo '<script>showErr("Password is required!")</script>';
+                    echo '<script>showToast("Password is required!")</script>';
                 } else {
                     $password = $_POST["password"];
                     if (strlen($_POST["password"]) <= '8') {
-                        echo '<script>showErr("Your Password Must Contain At Least 8 Characters!")</script>';
+                        echo '<script>showToast("Your Password Must Contain At Least 8 Characters!")</script>';
                     } else if (!preg_match("#[0-9]+#", $password)) {
-                        echo '<script>showErr("Your Password Must Contain At Least 1 Number!")</script>';
+                        echo '<script>showToast("Your Password Must Contain At Least 1 Number!")</script>';
                     } else if (!preg_match("#[A-Z]+#", $password)) {
-                        echo '<script>showErr("Your Password Must Contain At Least 1 Uppercase Letter!")</script>';
+                        echo '<script>showToast("Your Password Must Contain At Least 1 Uppercase Letter!")</script>';
                     } else if (!preg_match("#[a-z]+#", $password)) {
-                        echo '<script>showErr("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
+                        echo '<script>showToast("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
                     } else if (!preg_match("@[^\w]@", $password)) {
-                        echo '<script>showErr("Your Password Must Contain At Least 1 Special Characters!")</script>';
+                        echo '<script>showToast("Your Password Must Contain At Least 1 Special Characters!")</script>';
                     } else if (empty($_POST["cpassword"])) {
-                        echo '<script>showErr("You need to retype your password again!")</script>';
+                        echo '<script>showToast("You need to retype your password again!")</script>';
                     } else {
                         $cpassword = $_POST["cpassword"];
                         if ($password != $cpassword) {
-                            echo '<script>showErr("Password did not match!")</script>';
+                            echo '<script>showToast("Password did not match!")</script>';
                         } else {
                             $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email= '$email'");
                             if (mysqli_num_rows($isRegister) > 0) {
-                                echo '<script>showErr("Email is already registered!")</script>';
+                                echo '<script>showToast("Email is already registered!")</script>';
                             } else {
                                 $_SESSION["signup_temp"] = true;
                                 $_SESSION["signup_temp_email"] = $email;
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION["signup_temp_otp"] = $temp_id;
                                 $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
                                 $timeGenerated = strtotime("now");
-                                $sqlOtp .= "($otp, $timeGenerated, 'ACCOUNT_CREATION', '$temp_id')";
+                                $sqlOtp .= "('$otp', $timeGenerated, 'ACCOUNT_CREATION', '$temp_id')";
                                 if ($conn->query($sqlOtp) === TRUE) {
                                     require_once "../include/mail.php";
                                     $mail = initMail($email, $fullname, "OTP Verification", '
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         echo '<script>window.location.href = "verification?ref=signup"</script>';
                                         die();
                                     } else {
-                                        echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';
+                                        echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
                                     }
                                 }
                             }
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
+        echo '<script>showToast("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 ?>

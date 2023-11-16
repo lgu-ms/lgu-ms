@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($otp == hash("sha512", $row["code"])) {
                     if (time() - $row["created_time"] > 15 * 60) {
                         echo '<script>
-                            showErr("Invalid One Time Password! Please sign up again.");
+                            showToast("Invalid One Time Password! Please sign up again.");
                             function goBack() {
                                 window.location.href = "../?ref=signup_v&res=time_out"
                             }
@@ -102,19 +102,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $default_username = explode("@", $signup_temp_email);
                         $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
                         if ($conn->query($sql) === TRUE) {
+                            $welcomeMail = initMail($signup_temp_email, $signup_temp_fullname, "Welcome aboard!", '
+                                    <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                        <div style="margin:50px auto;width:70%;padding:20px 0">
+                                            <div style="border-bottom:1px solid #eee">
+                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                            </div>
+                                            <p style="font-size:1.1em">Hi ' . $signup_temp_fullname .  ',</p>
+                                            <p>Thank you for choosing Digital Barangay you are in the right place. We are trilled you to welcome aboard! If you need further assistance don\'t hesitate to reach us.</p>
+                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay Team</p>
+                                            <hr style="border:none;border-top:1px solid #eee" />
+                                            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                                <p>3W2+H2Q, Mayaman</p>
+                                                <p>Diliman</p>
+                                                <p>Lungsod Quezon</p>
+                                                <p>Kalakhang Maynila</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ');
+                            sendMail($welcomeMail);
                             echo '<script>window.location.href = "../../login?ref=signup&email=' . $signup_temp_email . '";</script>';
                             die();
                         } else {
-                            echo '<script>showErr("An error occured please try again later!")</script>';
+                            echo '<script>showToast("An error occured please try again later!")</script>';
                         }
                     }
                 } else {
-                    echo '<script>showErr("Invalid One Time Password!")</script>';
+                    echo '<script>showToast("Invalid One Time Password!")</script>';
                 }
             }
         }
     } else {
-        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
+        echo '<script>showToast("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 ?>

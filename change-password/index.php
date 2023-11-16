@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->success) {
         $ppassword = $password = $cpassword = "";
         if (empty($_POST["ppassword"])) {
-            echo '<script>showErr("You need to type your previous password!")</script>';
+            echo '<script>showToast("You need to type your previous password!")</script>';
         } else {
             $ppassword = hash("sha512", $_POST["ppassword"]);
             $user_id = $_SESSION["user_id"];
@@ -116,11 +116,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $db_password = $row["user_password"];
 
                     if (empty($_POST["password"])) {
-                        echo '<script>showErr("You need to enter your new password!")</script>';
+                        echo '<script>showToast("You need to enter your new password!")</script>';
                     } else {
                         $password = hash("sha512", $_POST["password"]);
                         if (empty($_POST["cpassword"])) {
-                            echo '<script>showErr("You need to retype your password again!")</script>';
+                            echo '<script>showToast("You need to retype your password again!")</script>';
                         } else {
                             $cpassword = hash("sha512", $_POST["cpassword"]);
                             if (strcasecmp($password, $cpassword) == 0) {
@@ -135,10 +135,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         }
                                     }
                                 } else {
-                                    echo '<script>showErr("Please type again your password!")</script>';
+                                    echo '<script>showToast("Please type again your password!")</script>';
                                 }
                             } else {
-                                echo '<script>showErr("Please type again your new password!")</script>';
+                                echo '<script>showToast("Please type again your new password!")</script>';
                             }
                         }
                     }
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        echo '<script>showErr("Seems like you failed in I am not a robot test.")</script>';
+        echo '<script>showToast("Seems like you failed in I am not a robot test.")</script>';
     }
 }
 ?>

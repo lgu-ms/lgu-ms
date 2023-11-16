@@ -22,7 +22,7 @@ $page_canonical = "https://digitalbarangay.com/forgot-password/";
 $page_url = $page_canonical;
 $directory = "../";
 $directory_img = $directory;
-$isForm = true;
+$hideLoginButton = true;
 
 include("../include/header.php");
 
@@ -52,7 +52,7 @@ $page = '
 
                         <div class="form-group mt-2">
                             <button id="executeCaptcha" class="btn btn-primary shadow px-5"
-                                type="forgot">Forgot</button>
+                                type="forgot" name="forgot">Forgot</button>
                             <a type="button" class="btn btn-outline-primary px-4"
                                 href="../login?ref=forgot-password">Login</a>
                             <br><br>
@@ -84,12 +84,13 @@ $page = '
 
         if (isset($_GET["r"])) {
             $otl = $_GET["r"];
-            $getOtlFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE code= '$otl'");
+            $fp_temp_user_email = $_SESSION["fp_temp_user_email"];
+            $getOtlFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE code= '$otl' AND temp_id= '$fp_temp_user_email'");
             if (mysqli_num_rows($getOtlFromDB) > 0) {
                 while ($row = mysqli_fetch_assoc($getOtlFromDB)) {
                     if (time() - $row["created_time"] > 15 * 60) {
                         echo $page;
-                        echo '<script>showErr("Invalid One Time URL!")</script>';
+                        echo '<script>showToast("Invalid One Time URL!")</script>';
                     } else {
                         echo '
                           <div class="card mb-3">
@@ -145,7 +146,7 @@ $page = '
                 }
             } else {
                 echo $page;
-                echo '<script>showErr("Invalid One Time URL!")</script>';
+                echo '<script>showToast("Invalid One Time URL!")</script>';
             }
         } else {
             echo $page;
@@ -175,27 +176,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST["forgot"])) {
             $email = "";
             if (empty($_POST["email"])) {
-                echo '<script>showErr("Email is required!")</script>';
+                echo '<script>showToast("Email is required!")</script>';
             } else {
+                $email = $_POST["email"];
                 $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
                 if (mysqli_num_rows($isRegister) > 0) {
-                    while ($row = mysqli_fetch_assoc($getSessionID)) {
+                    while ($row = mysqli_fetch_assoc($isRegister)) {
+                        $_SESSION["fp_temp_user_email"] = $email;
                         $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
                         $temp_id = hash("sha512", $otp);
-                        $sqlOtp = "INSERT INTO otp (code, created_time, action_type) VALUES ";
+                        $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
                         $timeGenerated = strtotime("now");
-                        $sqlOtp .= "($temp_id, $timeGenerated, 'FORGOT-PASSWORD')";
+                        $sqlOtp .= "('$temp_id', $timeGenerated, 'FORGOT-PASSWORD', '$email')";
                         if ($conn->query($sqlOtp) === TRUE) {
                             require_once "../include/mail.php";
-                            $mail = initMail($email, $row["fullname"], "Password Reset", '
+                            $mail = initMail($email, $row["user_fullname"], "Password Reset", '
         <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
             <div style="margin:50px auto;width:70%;padding:20px 0">
                 <div style="border-bottom:1px solid #eee">
                     <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
                 </div>
-                <p style="font-size:1.1em">Hi ' . $row["fullname"] . ',</p>
-                <p>Thank you for trusting Digital Barangay. Use the following LINK to complete your Update your password. LINK is valid for 15 minutes only</p>
-                <a style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;" href="https://digitalbarangay.com/forgot-password?r=' . $temp_id . '">https://digitalbarangay.com/forgot-password' . $temp_id . '</a>
+                <p style="font-size:1.1em">Hi ' . $row["user_fullname"] . ',</p>
+                <p>Thank you for trusting Digital Barangay. Use the following LINK to complete your password reset. The LINK is valid for 15 minutes only</p>
+                <a style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;" href="https://digitalbarangay.com/forgot-password?r=' . $temp_id . '">https://digitalbarangay.com/forgot-password?r=' . $temp_id . '</a>
                 <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
                 <hr style="border:none;border-top:1px solid #eee" />
                 <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
@@ -208,21 +211,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         ');
                             if (sendMail($mail)) {
-                                echo '<script>showErr("Please check your email for reset url.")</script>';
+                                echo '<script>showToast("Please check your email for the reset url.")</script>';
                             } else {
-                                echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';
+                                echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
                             }
                         }
                     }
                 } else {
-                    echo '<script>showErr("No account registered with that email.")</script>';
+                    echo '<script>showToast("No account registered with that email.")</script>';
                 }
             }
-        } else {
-            // change password logic here
         }
     } else {
-        echo '<script>showErr("Seems like you failed in I am not a robot test.")</script>';
+        echo '<script>showToast("Seems like you failed in I am not a robot test.")</script>';
     }
 }
 ?>
