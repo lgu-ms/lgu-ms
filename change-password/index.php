@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $today = date("Y-m-d H:i:s");
                                         $setChangePassword .= "('$today', $session_id, $user_id, 'change-password')";
                                         if ($conn->query($setChangePassword) === TRUE) {
-                                            echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '")</script>';
+                                            echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '", "Go Home")</script>';
                                         }
                                     }
                                 } else {

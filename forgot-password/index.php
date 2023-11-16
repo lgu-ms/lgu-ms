@@ -82,7 +82,7 @@ $page = '
     <main>
         <?php
 
-        if (isset($_GET["r"])) {
+        if (isset($_GET["r"]) && isset($_SESSION["fp_temp_user_email"])) {
             $otl = $_GET["r"];
             $fp_temp_user_email = $_SESSION["fp_temp_user_email"];
             $getOtlFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE code= '$otl' AND temp_id= '$fp_temp_user_email'");
@@ -219,6 +219,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } else {
                     echo '<script>showToast("No account registered with that email.")</script>';
+                }
+            }
+        } else {
+            $password = $cpassword = "";
+            if (empty($_POST["password"])) {
+                echo '<script>showToast("Password is required!")</script>';
+            } else {
+                $password = $_POST["password"];
+                if (strlen($password) <= '8') {
+                    echo '<script>showToast("Your Password Must Contain At Least 8 Characters!")</script>';
+                } else if (!preg_match("#[0-9]+#", $password)) {
+                    echo '<script>showToast("Your Password Must Contain At Least 1 Number!")</script>';
+                } else if (!preg_match("#[A-Z]+#", $password)) {
+                    echo '<script>showToast("Your Password Must Contain At Least 1 Uppercase Letter!")</script>';
+                } else if (!preg_match("#[a-z]+#", $password)) {
+                    echo '<script>showToast("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
+                } else if (!preg_match("@[^\w]@", $password)) {
+                    echo '<script>showToast("Your Password Must Contain At Least 1 Special Characters!")</script>';
+                } else if (empty($_POST["cpassword"])) {
+                    echo '<script>showToast("You need to retype your password again!")</script>';
+                } else {
+                    $cpassword = $_POST["cpassword"];
+                    if ($password != $cpassword) {
+                        echo '<script>showToast("Password did not match!")</script>';
+                    } else {
+                        $hashpassword = hash("sha512", $password);
+                        $fp_temp_user_email = $_SESSION["fp_temp_user_email"];
+                        $setPassword = "UPDATE account SET user_password = '$hashpassword' WHERE user_email = $fp_temp_user_email";
+                        if ($conn->query($setPassword)) {
+                            $setChangePassword = "INSERT INTO passwordchanged (date_accessed, event_type, user_email) VALUES ";
+                            $today = date("Y-m-d H:i:s");
+                            $setChangePassword .= "('$today', 'forgot-password', '$fp_temp_user_email')";
+                            if ($conn->query($setChangePassword) === TRUE) {
+                                echo '<script>showPopup("Change Password", "Successfully changed your password", "../login?ref=forgot_password&status=success", "Log in")</script>';
+                                $notifyPasswordChange = initMail($fp_temp_user_email, $fp_temp_user_email, "Your account password has been reset.", '
+                                    <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                        <div style="margin:50px auto;width:70%;padding:20px 0">
+                                            <div style="border-bottom:1px solid #eee">
+                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                            </div>
+                                            <p style="font-size:1.1em">Hi ' . $fp_temp_user_email .  ',</p>
+                                            <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
+                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
+                                            <hr style="border:none;border-top:1px solid #eee" />
+                                            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                                <p>3W2+H2Q, Mayaman</p>
+                                                <p>Diliman</p>
+                                                <p>Lungsod Quezon</p>
+                                                <p>Kalakhang Maynila</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ');
+                            sendMail($notifyPasswordChange);
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -97,11 +97,12 @@ showAnnoucement = (annc, url) => {
         document.getElementById("toastcontainer").append(toast);
 };
 
-showPopup = (title, content, action) => {
+showPopup = (title, content, action, actionName) => {
     let bsModal = new bootstrap.Modal(document.getElementById("popupModal"));
     bsModal.show();
     document.getElementById("popupModalLabel").innerText = title;
     document.getElementById("popupModalContent").innerText = content;
+    document.getElementById("popupModalActionName").innerText = actionName;
     $("#popupModal").on("hidden.bs.modal", function () {
         window.location.href = action;
     });
