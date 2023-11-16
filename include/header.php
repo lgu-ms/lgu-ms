@@ -51,6 +51,9 @@
   <link rel="apple-touch-icon" href="<?php echo $directory; ?>favicon.png">
   <link rel="manifest" href="<?php echo $directory; ?>site.webmanifest">
 
+  <link rel="license" href="https://digitalbarangay.com/LICENSE">
+  <link rel="sitemap" type="application/xml" title="Digital Barangay » Sitemap" href="<?php echo $directory; ?>sitemap.xml">
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="<?php echo $page_title; ?>">
   <meta property="og:url" content="<?php echo $page_url; ?>">
