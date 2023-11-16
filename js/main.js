@@ -28,7 +28,7 @@ insertParam = (key, value) => {
     window.history.pushState({ path: url.href }, "", url.href);
 };
 
-showErr = (err) => {
+showToast = (err) => {
     let toast = document.createElement("div");
     toast.setAttribute("data-bs-autohide", true);
     toast.setAttribute("class", "toast");
