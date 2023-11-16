@@ -37,7 +37,7 @@ $page = '
     </div>
     <div class="col-md-7">
         <div class="container">
-            <form action="<?php htmlspecialchars(\'php_self\'); ?>" method="post" id="form">
+            <form action method="post" id="form">
                 <div class="row">
                     <div class="col-md-6">
                         <h1>Forgot Password</h1>
@@ -102,7 +102,7 @@ $page = '
                 </div>
                 <div class="col-md-7">
                     <div class="container">
-                        <form action="<?php htmlspecialchars(\'php_self\'); ?>" method="post" id="form">
+                        <form action method="post" id="form">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h1>Update your password</h1>

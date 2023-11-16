@@ -44,7 +44,13 @@ include("../include/header.php");
                                     <h1>Login to continue</h1>
                                     <br>
                                     <div class="input-group2">
-                                        <input id="email" type="email" placeholder="Email" name="email" required>
+                                        <?php
+                                            if (isset($_GET["email"])) {
+                                                echo '<input id="email" type="email" placeholder="Email" name="email" value="' . $_GET["email"] . '" required>';
+                                            } else {
+                                                echo '<input id="email" type="email" placeholder="Email" name="email" required>';
+                                            }
+                                        ?>
                                         <i class="fa fa-user"></i>
                                     </div>
 
