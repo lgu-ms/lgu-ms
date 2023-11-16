@@ -4,3 +4,5 @@ Disallow: /?
 Disallow: /index.php?
 Allow: /?hl=
 Crawl-delay: 60
+
+Sitemap: https://digitalbarangay.com/sitemap.xml

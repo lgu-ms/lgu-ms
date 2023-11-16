@@ -183,6 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (mysqli_num_rows($isRegister) > 0) {
                     while ($row = mysqli_fetch_assoc($isRegister)) {
                         $_SESSION["fp_temp_user_email"] = $email;
+                        $_SESSION["fp_temp_user_fullname"] = $row["user_fullname"];
                         $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
                         $temp_id = hash("sha512", $otp);
                         $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
@@ -246,33 +247,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else {
                         $hashpassword = hash("sha512", $password);
                         $fp_temp_user_email = $_SESSION["fp_temp_user_email"];
-                        $setPassword = "UPDATE account SET user_password = '$hashpassword' WHERE user_email = $fp_temp_user_email";
+                        $fp_temp_user_fullname = $_SESSION["fp_temp_user_fullname"];
+                        $setPassword = "UPDATE account SET user_password = '$hashpassword' WHERE user_email = '$fp_temp_user_email'";
                         if ($conn->query($setPassword)) {
                             $setChangePassword = "INSERT INTO passwordchanged (date_accessed, event_type, user_email) VALUES ";
                             $today = date("Y-m-d H:i:s");
                             $setChangePassword .= "('$today', 'forgot-password', '$fp_temp_user_email')";
                             if ($conn->query($setChangePassword) === TRUE) {
-                                echo '<script>showPopup("Change Password", "Successfully changed your password", "../login?ref=forgot_password&status=success", "Log in")</script>';
-                                $notifyPasswordChange = initMail($fp_temp_user_email, $fp_temp_user_email, "Your account password has been reset.", '
-                                    <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-                                        <div style="margin:50px auto;width:70%;padding:20px 0">
-                                            <div style="border-bottom:1px solid #eee">
-                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
-                                            </div>
-                                            <p style="font-size:1.1em">Hi ' . $fp_temp_user_email .  ',</p>
-                                            <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
-                                            <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
-                                            <hr style="border:none;border-top:1px solid #eee" />
-                                            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-                                                <p>3W2+H2Q, Mayaman</p>
-                                                <p>Diliman</p>
-                                                <p>Lungsod Quezon</p>
-                                                <p>Kalakhang Maynila</p>
-                                            </div>
+                                $_SESSION["fp_temp_user_email"] = null;
+                                $_SESSION["fp_temp_user_fullname"] = null;
+                                $notifyPasswordChange = initMail($fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
+                                <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                    <div style="margin:50px auto;width:70%;padding:20px 0">
+                                        <div style="border-bottom:1px solid #eee">
+                                            <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                        </div>
+                                        <p style="font-size:1.1em">Hi ' . $fp_temp_user_fullname .  ',</p>
+                                        <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
+                                        <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
+                                        <hr style="border:none;border-top:1px solid #eee" />
+                                        <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                            <p>3W2+H2Q, Mayaman</p>
+                                            <p>Diliman</p>
+                                            <p>Lungsod Quezon</p>
+                                            <p>Kalakhang Maynila</p>
                                         </div>
                                     </div>
-                                    ');
-                            sendMail($notifyPasswordChange);
+                                </div>
+                                ');
+                        sendMail($notifyPasswordChange);
+                                echo '<script>showPopup("Change Password", "Successfully changed your password", "../login?ref=forgot_password&status=success", "Log in")</script>';
                             }
                         }
                     }
