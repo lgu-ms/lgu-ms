@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="css/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url>
+  <loc>https://digitalbarangay.com/</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/login</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/signup</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/forgot-password</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/terms</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/privacy</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/cookies</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/contact</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/milestone</loc>
+</url>
+<url>
+  <loc>https://digitalbarangay.com/modules</loc>
+</url>
+</urlset>
