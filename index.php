@@ -49,11 +49,13 @@ include("include/header.php");
                                 <h1 class="card-title"><strong class="default-light">Digital Barangay</strong></h1>
                                 <p class="card-text sub-title default-light">
                                     A comprehensive software solution designed to streamline and enhance the efficiency
-                                    of LGU operations. <small class="txt-more default-light">This system integrates digital tools to
+                                    of LGU operations. <small class="txt-more default-light">This system integrates
+                                        digital tools to
                                         fostering a more responsive and connected governance structure.</small></p>
                                 <br>
                                 <a type="button" class="btn btn-primary shadow px-4" href="learnmore">Learn more</a>
-                                <a type="button" class="btn btn-outline-primary px-4 default-light" href="milestone">Milestone <i class="fa-solid fa-chevron-right"></i></a>
+                                <a type="button" class="btn btn-outline-primary px-4 default-light"
+                                    href="milestone">Milestone <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
                             <div class="col-md-4" id="desktop">
                                 <img class="mx-auto d-block img-fluid" src="images/cover.png" width="320"
