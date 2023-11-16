@@ -2,6 +2,26 @@
  * FUNCTIONS
  */
 
+let validator = {
+    set: function(obj, prop, val) {
+      if (prop === 'href') {
+        if(typeof val != 'string'){
+          throw new TypeError('href must be string.');
+        }
+        if (!val.startsWith("https://digitalbarangay.com/")) {
+          throw new Error('XSS');
+        }
+      }
+     obj[prop] = val;
+     return true;
+    },
+    get: function(obj, prop){
+     return prop in obj?
+         obj[prop] :
+         null;
+    }
+ };
+
 insertParam = (key, value) => {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
@@ -157,11 +177,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 if (typeof executeCaptcha !== "undefined") {
-    const user_email = urlParams.get("email");
-    if (typeof email !== "undefined") {
-        email.value = user_email;
-    }
- 
     grecaptcha.ready(function() {
         grecaptcha.execute(captcha_site_key, {action: 'validate_captcha'}).then(function(token) {
             document.getElementById('g-recaptcha-response').value = token;
