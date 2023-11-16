@@ -4,7 +4,7 @@ include("../include/session.php");
 $code = $_GET["code"];
 
 if (!isset($code) || is_numeric($code) != 1 || (is_numeric($code) == 1 && ($code != 400 && $code != 401 && $code != 403 && $code != 404 && $code != 500))) {
-    echo "<script>window.location.href = '/?utm_source=eeeeeeeeeeeeerrr';</script>";
+    echo "<script>window.location.href = '/?ref=eeeeeeeeeeeeerrr';</script>";
     die();
 }
 

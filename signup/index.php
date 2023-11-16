@@ -73,9 +73,9 @@ include("../include/header.php");
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
                                             name="submit">Signup</button>
                                         <a type="button" class="btn btn-outline-primary px-4"
-                                            href="../login?utm_source=signup">Login</a>
+                                            href="../login?ref=signup">Login</a>
                                         <br><br>
-                                        <a class="fpass" href="../forgot-password?utm_source=signup">Forgot
+                                        <a class="fpass" href="../forgot-password?ref=signup">Forgot
                                             password?</a>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     ');
                                     if (sendMail($mail)) {
-                                        echo '<script>window.location.href = "verification?utm_source=signup"</script>';
+                                        echo '<script>window.location.href = "verification?ref=signup"</script>';
                                         die();
                                     } else {
                                         echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';

@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo '<script>
                             showErr("Invalid One Time Password! Please sign up again.");
                             function goBack() {
-                                window.location.href = "../?utm_source=fail_verification&utm_source=expired_otp&utm_medium=signup"
+                                window.location.href = "../?ref=signup_v&res=time_out"
                             }
                             setTimeout(goBack, 5000);
                         </script>
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $default_username = explode("@", $signup_temp_email);
                         $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
                         if ($conn->query($sql) === TRUE) {
-                            echo '<script>window.location.href = "../../login?utm_source=account_created&email=' . $signup_temp_email . '";</script>';
+                            echo '<script>window.location.href = "../../login?ref=signup&email=' . $signup_temp_email . '";</script>';
                             die();
                         } else {
                             echo '<script>showErr("An error occured please try again later!")</script>';
