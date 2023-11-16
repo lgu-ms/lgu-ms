@@ -1,7 +1,7 @@
 {
   "name": "Digital Barangay - LGU Management System",
   "short_name": "Digital Barangay",
-  "description": "",
+  "description": "A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.",
   "dir": "ltr",
   "lang": "en-US",
   "icons": [
@@ -19,7 +19,7 @@
   "theme_color": "#4285f4",
   "background_color": "#ffffff",
   "display": "standalone",
-  "start_url": "/?utm_source=webmanifest",
+  "start_url": "/?ref=webmanifest",
   "scope": "/",
   "prefer_related_applications": false
 }

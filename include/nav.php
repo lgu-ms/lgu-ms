@@ -11,26 +11,21 @@
 
         <a class="navbar-brand " href="<?php echo $directory; ?>">
             <img src="<?php echo $directory; ?>favicon.ico" alt="Icon" height="20" class="navbar-brand-icon">
-            <span class="navbar-brand-name"> Digital Barangay </span>
+            <span class="navbar-brand-name default-light"> Digital Barangay </span>
         </a>
 
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $directory; ?>">
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>">
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Search
-                    </a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $directory; ?>contact">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $directory; ?>modules">Modules</a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>modules">Modules</a>
                 </li>
 
                 <?php
@@ -44,7 +39,7 @@
                             $ff = '
                             <li class="nav-item prim">
                             <a class="nav-link" href="' . $directory . 'profile">
-                           @' . $row["user_name"] . '
+                            <i class="fa-solid fa-circle-user"></i>' . $row["user_name"] . '
                             </a>
                         </li>
                             ';
@@ -55,7 +50,7 @@
                     if (!isset($hideLoginButton)) {
                         $ff = '
                     <li class="nav-item prim">
-                    <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
+                    <a class="nav-link default-light" href="' . $directory . 'login?ref=login_button">
                         Login
                     </a>
                 </li>
@@ -94,7 +89,7 @@
                     if (!isset($hideLoginButton)) {
                         $ff = '
                     <li class="nav-item seco">
-                    <a class="nav-link" href="' . $directory . 'login?utm_source=login_button">
+                    <a class="nav-link default-light" href="' . $directory . 'login?ref=login_button">
                     <span class="text sec px-2">Log in</span>
                     <i class="fa-solid fa-user"></i>
                     </a>

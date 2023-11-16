@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo '<script>
                             showErr("Invalid One Time Password! Please Login again.");
                             function goBack() {
-                                window.location.href = "../?utm_source=fail_verification&utm_source=expired_otp&utm_medium=signup"
+                                window.location.href = "../?ref=login_v&res=time_out"
                             }
                             setTimeout(goBack, 5000);
                         </script>';

@@ -60,9 +60,9 @@ include("../include/header.php");
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
                                             name="submit">Login</button>
                                         <a type="button" class="btn btn-outline-primary px-4"
-                                            href="../signup?utm_source=login">Signup</a>
+                                            href="../signup?ref=login">Signup</a>
                                         <br><br>
-                                        <a class="fpass" href="../forgot-password?utm_source=login">Forgot password?</a>
+                                        <a class="fpass" href="../forgot-password?ref=login">Forgot password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     ');
                                             if (sendMail($mail)) {
-                                                echo '<script>window.location.href = "verification?utm_source=login"</script>';
+                                                echo '<script>window.location.href = "verification?ref=login"</script>';
                                                 die();
                                             } else {
                                                 echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';

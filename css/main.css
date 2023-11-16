@@ -404,7 +404,7 @@ input:-webkit-autofill:active {
     display: block;
 }
 
-#desktop {
+#desktop, .txt-more {
     display: none;
 }
 
@@ -414,7 +414,7 @@ input:-webkit-autofill:active {
         display: none;
     }
 
-    #desktop {
+    #desktop, .txt-more {
         display: block;
     }
 }
@@ -456,7 +456,7 @@ textarea:focus {
 }
 
 .sub-title {
-    font-size: 1.3em !important;
+    font-size: 1.1em !important;
 }
 
 @media (min-width:770px) {
@@ -466,7 +466,7 @@ textarea:focus {
     }
 
     .sub-title {
-        font-size: 1.8em !important;
+        font-size: 1.6em !important;
     }
 }
 

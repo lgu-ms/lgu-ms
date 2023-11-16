@@ -56,7 +56,7 @@ include("../include/header.php");
                             </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start"
-                            onclick="window.location.href='public-market-and-vendors-management-module?utm_source=module_list'">
+                            onclick="window.location.href='public-market-and-vendors-management-module?ref=module_list'">
                             <i class="fa-solid fa-shop"></i>
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">Module 5</div>

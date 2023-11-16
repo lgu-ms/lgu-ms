@@ -156,14 +156,6 @@ window.addEventListener("DOMContentLoaded", () => {
     showAnnoucement("QC Alam mo ba? Real Property Tax", "https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/")
 });
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const rdr = urlParams.get("rdr");
-
-if (rdr != null) {
-    window.location.href = rdr + "?utm_source=" + btoa(window.location);
-}
-
 if (typeof executeCaptcha !== "undefined") {
     const user_email = urlParams.get("email");
     if (typeof email !== "undefined") {
