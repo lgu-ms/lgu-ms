@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($otp == hash("sha512", $row["code"])) {
                     if (time() - $row["created_time"] > 15 * 60) {
                         echo '<script>
-                            showErr("Invalid One Time Password! Please Login again.");
+                            showToast("Invalid One Time Password! Please Login again.");
                             function goBack() {
                                 window.location.href = "../?ref=login_v&res=time_out"
                             }
@@ -109,12 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
                 } else {
-                    echo '<script>showErr("Invalid One Time Password!")</script>';
+                    echo '<script>showToast("Invalid One Time Password!")</script>';
                 }
             }
         }
     } else {
-        echo '<script>showErr("Seems like you failed the `I am not a robot test`.")</script>';
+        echo '<script>showToast("Seems like you failed the `I am not a robot test`.")</script>';
     }
 }
 

@@ -106,11 +106,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->success) {
         $email = $password = "";
         if (empty($_POST["email"])) {
-            echo '<script>showErr("Email is required!")</script>';
+            echo '<script>showToast("Email is required!")</script>';
         } else {
             $email = $_POST["email"];
             if (empty($_POST["password"])) {
-                echo '<script>showErr("Password is required!")</script>';
+                echo '<script>showToast("Password is required!")</script>';
             } else {
                 $password = hash("sha512", $_POST["password"]);
                 $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $_SESSION["login_temp_otp"] = $temp_id;
                                         $sqlOtp = "INSERT INTO otp (code, created_time, action_type, temp_id) VALUES ";
                                         $timeGenerated = strtotime("now");
-                                        $sqlOtp .= "($otp, $timeGenerated, 'LOGIN', '$temp_id')";
+                                        $sqlOtp .= "('$otp', $timeGenerated, 'LOGIN', '$temp_id')";
                                         if ($conn->query($sqlOtp) === TRUE) {
                                             require_once "../include/mail.php";
                                             $mail = initMail($email, $fullname, "OTP Verification", '
@@ -166,23 +166,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 echo '<script>window.location.href = "verification?ref=login"</script>';
                                                 die();
                                             } else {
-                                                echo '<script>showErr("An error occured while sending you an email. Please try it again later!")</script>';
+                                                echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
                                             }
                                         }
                                     }
                                 }
                             }
                         } else {
-                            echo '<script>showErr("Email or Password incorrect!")</script>';
+                            echo '<script>showToast("Email or Password incorrect!")</script>';
                         }
                     }
                 } else {
-                    echo '<script>showErr("Email or Password incorrect!")</script>';
+                    echo '<script>showToast("Email or Password incorrect!")</script>';
                 }
             }
         }
     } else {
-        echo '<script>showErr("Seems like you failed in I am not a robot test.")</script>';
+        echo '<script>showToast("Seems like you failed in I am not a robot test.")</script>';
     }
 }
 ?>
