@@ -18,7 +18,7 @@
             <div class="modal-body" id="popupModalContent">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal" id="popupModalActionName"></button>
             </div>
         </div>
     </div>

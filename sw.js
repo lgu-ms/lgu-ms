@@ -21,9 +21,10 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('fetch', async (event) => {
   if (event.request.method !== "GET") return;
-  if ((event.request.destination === 'image' || event.request.url.includes("/assets/") && event.request.url.includes(domain))) {
+  if ((event.request.destination === 'image' || event.request.url.includes("/vendor/") && event.request.url.includes(domain))) {
     event.respondWith(caches.open(cacheName).then((cache) => {
       return cache.match(event.request).then((cachedResponse) => {
+        console.log(event.request.url)
         return cachedResponse || fetch(event.request.url).then((fetchedResponse) => {
           cache.put(event.request, fetchedResponse.clone());
           return fetchedResponse;

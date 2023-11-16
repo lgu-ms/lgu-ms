@@ -18,6 +18,13 @@ if (!empty($_SESSION['user_login'])) {
     }
 }
 
+/*
+* TODO:
+* Check if the session is `active`, `inactive` or `end`
+* if inactive means the user open the session a week or so since he use it
+* deny it!
+*/
+
 $_GET = (filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 $_POST = (filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
