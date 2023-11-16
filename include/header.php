@@ -9,11 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <meta name="theme-color" content="#ffffff">
-  <link rel="preload" href="<?php echo $directory; ?>assets/SourceCodePro-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="<?php echo $directory; ?>assets/MavenPro.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="<?php echo $directory; ?>fonts/SourceCodePro-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="<?php echo $directory; ?>fonts/MavenPro.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="preload" href="<?php echo $directory; ?>images/hamburger-light.svg" as="image" type="image/svg+xml" crossorigin>
-  <link rel="preload" href="<?php echo $directory; ?>images/hamburger-dark.svg" as="image" type="image/svg+xml" crossorigin>
+  <link rel="preload" href="<?php echo $directory; ?>images/hamburger-light.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="<?php echo $directory; ?>images/hamburger-dark.svg" as="image" type="image/svg+xml">
 
   <style>
     @font-face {
