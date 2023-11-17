@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $default_username = explode("@", $signup_temp_email);
                         $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', $today, $today)";
                         if ($conn->query($sql) === TRUE) {
-                            require_once "../include/mail.php";
+                            require_once "../../include/mail.php";
                             $welcomeMail = initMail($signup_temp_email, $signup_temp_fullname, "Welcome aboard!", '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                         <div style="margin:50px auto;width:70%;padding:20px 0">
