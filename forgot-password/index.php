@@ -120,6 +120,11 @@ $page = '
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
 
+                                    <input class="form-check-input" type="checkbox" value="" id="showPassword">
+                                    <label class="form-check-label" for="showPassword">
+                                        Show password
+                                    </label>
+
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                     <input type="hidden" name="action" value="validate_captcha">
 

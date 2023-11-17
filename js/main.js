@@ -3,30 +3,33 @@
  */
 
 let validator = {
-    set: function(obj, prop, val) {
-      if (prop === 'href') {
-        if(typeof val != 'string'){
-          throw new TypeError('href must be string.');
+    set: function (obj, prop, val) {
+        if (prop === "href") {
+            if (typeof val != "string") {
+                throw new TypeError("href must be string.");
+            }
+            if (!val.startsWith("https://digitalbarangay.com/")) {
+                throw new Error("XSS");
+            }
         }
-        if (!val.startsWith("https://digitalbarangay.com/")) {
-          throw new Error('XSS');
-        }
-      }
-     obj[prop] = val;
-     return true;
+        obj[prop] = val;
+        return true;
     },
-    get: function(obj, prop){
-     return prop in obj?
-         obj[prop] :
-         null;
-    }
- };
+    get: function (obj, prop) {
+        return prop in obj ? obj[prop] : null;
+    },
+};
 
 insertParam = (key, value) => {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
     window.history.pushState({ path: url.href }, "", url.href);
 };
+
+openProfile = () => {
+    let bsModal = new bootstrap.Modal(document.getElementById("popupProfileModal"));
+    bsModal.show();
+}
 
 showToast = (err) => {
     let toast = document.createElement("div");
@@ -36,8 +39,8 @@ showToast = (err) => {
     toastheader.setAttribute("class", "toast-header");
     let strong = document.createElement("strong");
     strong.setAttribute("class", "me-auto");
-  
-    strong.innerHTML = "<i class=\"fa-solid fa-circle-exclamation\"></i> Houston!";
+
+    strong.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Houston!';
     toastheader.append(strong);
     let actionbutton = document.createElement("button");
     actionbutton.setAttribute("type", "button");
@@ -61,40 +64,40 @@ showToast = (err) => {
 };
 
 showAnnoucement = (annc, url) => {
-        let toast = document.createElement("div");
-        toast.setAttribute("data-bs-autohide", true);
-        toast.setAttribute("class", "toast");
-        let toastheader = document.createElement("div");
-        toastheader.setAttribute("class", "toast-header");
-        let strong = document.createElement("strong");
-        strong.setAttribute("class", "me-auto");
-      
-        strong.innerHTML = "<i class=\"fa-solid fa-bell\"></i> Announcement!";
-        toastheader.append(strong);
-        let actionbutton = document.createElement("button");
-        actionbutton.setAttribute("type", "button");
-        actionbutton.setAttribute("class", "btn-close");
-        actionbutton.setAttribute("data-bs-dismiss", "toast");
-        actionbutton.setAttribute("aria-label", "Close");
-        toastheader.append(actionbutton);
-    
-        let toastbody = document.createElement("div");
-        toastbody.setAttribute("class", "toast-body");
-        let announcement = document.createElement("p");
-        announcement.innerHTML = annc;
-        announcement.setAttribute("href", annc);
-        let announcementurl = document.createElement("a");
-        announcementurl.setAttribute("class", "text-muted mb-0");
-        announcementurl.innerHTML = url;
-        toastbody.append(announcement);
-        toastbody.append(announcementurl);
-        toast.append(toastheader);
-        toast.append(toastbody);
-    
-        let alert = new bootstrap.Toast(toast);
-        alert.show();
-    
-        document.getElementById("toastcontainer").append(toast);
+    let toast = document.createElement("div");
+    toast.setAttribute("data-bs-autohide", true);
+    toast.setAttribute("class", "toast");
+    let toastheader = document.createElement("div");
+    toastheader.setAttribute("class", "toast-header");
+    let strong = document.createElement("strong");
+    strong.setAttribute("class", "me-auto");
+
+    strong.innerHTML = '<i class="fa-solid fa-bell"></i> Announcement!';
+    toastheader.append(strong);
+    let actionbutton = document.createElement("button");
+    actionbutton.setAttribute("type", "button");
+    actionbutton.setAttribute("class", "btn-close");
+    actionbutton.setAttribute("data-bs-dismiss", "toast");
+    actionbutton.setAttribute("aria-label", "Close");
+    toastheader.append(actionbutton);
+
+    let toastbody = document.createElement("div");
+    toastbody.setAttribute("class", "toast-body");
+    let announcement = document.createElement("p");
+    announcement.innerHTML = annc;
+    announcement.setAttribute("href", annc);
+    let announcementurl = document.createElement("a");
+    announcementurl.setAttribute("class", "text-muted mb-0");
+    announcementurl.innerHTML = url;
+    toastbody.append(announcement);
+    toastbody.append(announcementurl);
+    toast.append(toastheader);
+    toast.append(toastbody);
+
+    let alert = new bootstrap.Toast(toast);
+    alert.show();
+
+    document.getElementById("toastcontainer").append(toast);
 };
 
 showPopup = (title, content, action, actionName) => {
@@ -174,13 +177,39 @@ window.addEventListener("DOMContentLoaded", () => {
             last_scroll_top = scroll_top;
         });
     }
-    showAnnoucement("QC Alam mo ba? Real Property Tax", "https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/")
+    showAnnoucement("QC Alam mo ba? Real Property Tax", "https://quezoncity.gov.ph/qc-alam-mo-ba-real-property-tax/");
 });
 
 if (typeof executeCaptcha !== "undefined") {
-    grecaptcha.ready(function() {
-        grecaptcha.execute(captcha_site_key, {action: 'validate_captcha'}).then(function(token) {
-            document.getElementById('g-recaptcha-response').value = token;
+    if (typeof showPassword !== "undefined") {
+        showPassword.onclick = function () {
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+            // sign up
+            if (typeof cpassword !== "undefined") {
+                if (cpassword.type === "password") {
+                    cpassword.type = "text";
+                } else {
+                    cpassword.type = "password";
+                }
+            }
+            // change password
+            if (typeof ppassword !== "undefined") {
+                if (ppassword.type === "password") {
+                    ppassword.type = "text";
+                } else {
+                    ppassword.type = "password";
+                }
+            }
+        };
+    }
+
+    grecaptcha.ready(function () {
+        grecaptcha.execute(captcha_site_key, { action: "validate_captcha" }).then(function (token) {
+            document.getElementById("g-recaptcha-response").value = token;
         });
     });
 }
@@ -230,32 +259,32 @@ input.addEventListener("click", function () {
 
 function scrollProgressBar() {
     var getMax = function () {
-      return $(document).height() - $(window).height();
+        return $(document).height() - $(window).height();
     };
-  
+
     var getValue = function () {
-      return $(window).scrollTop();
+        return $(window).scrollTop();
     };
-  
+
     var progressBar = $(".progress-bar"),
-      max = getMax(),
-      value,
-      width;
-  
+        max = getMax(),
+        value,
+        width;
+
     var getWidth = function () {
-      value = getValue();
-      width = (value / max) * 100;
-      width = width + "%";
-      return width;
+        value = getValue();
+        width = (value / max) * 100;
+        width = width + "%";
+        return width;
     };
-  
+
     var setWidth = function () {
-      progressBar.css({ width: getWidth() });
+        progressBar.css({ width: getWidth() });
     };
-  
+
     $(document).on("scroll", setWidth);
     $(window).on("resize", function () {
-      max = getMax();
-      setWidth();
+        max = getMax();
+        setWidth();
     });
 }
