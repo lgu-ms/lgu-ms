@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usertype = $_POST["type"];
 
     $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
-    $today = date("Y-m-d H:i:s");
+    $today = strtotime("now");
     $default_username = explode("@", $email);
-    $sql .= "('$default_username[0]', '$fullname', '$email', '$password', '$usertype', '$today', '$today')";
+    $sql .= "('$default_username[0]', '$fullname', '$email', '$password', '$usertype', $today, $today)";
     if ($conn->query($sql) === TRUE) {
         echo 'Done';
     } else {

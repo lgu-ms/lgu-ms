@@ -98,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else {
                         session_destroy();
                         $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";
-                        $today = date("Y-m-d H:i:s");
+                        $today = strtotime("now");
                         $default_username = explode("@", $signup_temp_email);
-                        $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', '$today', '$today')";
+                        $sql .= "('$default_username[0]', '$signup_temp_fullname', '$signup_temp_email', '$signup_temp_password', 'User', $today, $today)";
                         if ($conn->query($sql) === TRUE) {
                             $welcomeMail = initMail($signup_temp_email, $signup_temp_fullname, "Welcome aboard!", '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
