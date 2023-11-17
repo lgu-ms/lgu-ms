@@ -21,7 +21,6 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", async (event) => {
     if (event.request.method !== "GET") return;
-    console.log(event.request.url + " " + event.request.destination);
     if (event.request.destination === "image" || event.request.url.includes("/vendor/") || event.request.url.includes("/fonts/")) {
         event.respondWith(
             caches.open(cacheName).then((cache) => {
