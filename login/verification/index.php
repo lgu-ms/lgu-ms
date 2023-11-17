@@ -103,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $login_temp_session_id;
                             $_SESSION["user_id"] = $login_temp_user_id;
+
                             // TODO: Check if the device_id is new or not according to the past 
                             // sessions if new notify the user about the new device accessing his account
                             echo '<script>window.location.href = "../../"</script>';
