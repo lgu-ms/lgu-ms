@@ -45,20 +45,26 @@ include("../include/header.php");
                                     <br>
                                     <div class="input-group2">
                                         <input type="password" placeholder="Previous Password" name="ppassword"
-                                            required>
+                                            id="ppassword" required>
                                         <i class="fa fa-backward"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="New Password" name="password" required>
+                                        <input type="password" placeholder="New Password" name="password" id="password"
+                                            required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
                                     <div class="input-group2">
                                         <input type="password" placeholder="Confirm New Password" name="cpassword"
-                                            required>
+                                            id="cpassword" required>
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
+
+                                    <input class="form-check-input" type="checkbox" value="" id="showPassword">
+                                    <label class="form-check-label" for="showPassword">
+                                        Show password
+                                    </label>
 
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                     <input type="hidden" name="action" value="validate_captcha">

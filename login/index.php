@@ -45,24 +45,29 @@ include("../include/header.php");
                                     <br>
                                     <div class="input-group2">
                                         <?php
-                                            if (isset($_GET["email"])) {
-                                                echo '<input id="email" type="email" placeholder="Email" name="email" value="' . $_GET["email"] . '" required>';
-                                            } else {
-                                                echo '<input id="email" type="email" placeholder="Email" name="email" required>';
-                                            }
+                                        if (isset($_GET["email"])) {
+                                            echo '<input id="email" type="email" placeholder="Email" name="email" value="' . $_GET["email"] . '" required>';
+                                        } else {
+                                            echo '<input id="email" type="email" placeholder="Email" name="email" required>';
+                                        }
                                         ?>
                                         <i class="fa fa-user"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Password" name="password" required>
+                                        <input type="password" placeholder="Password" name="password" id="password" required>
                                         <i class="fa fa-key"></i>
                                     </div>
+
+                                    <input class="form-check-input" type="checkbox" value="" id="showPassword">
+                                    <label class="form-check-label" for="showPassword">
+                                        Show password
+                                    </label>
 
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                     <input type="hidden" name="action" value="validate_captcha">
 
-                                    <div class="mt-2">
+                                    <div class="mt-4">
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
                                             name="submit">Login</button>
                                         <a type="button" class="btn btn-outline-primary px-4"
@@ -119,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $db_password = $row["user_password"];
                         $user_id = $row["_id"];
+                        $fullname = $row["user_fullname"];
 
                         if (strcasecmp($db_password, $password) == 0) {
 
@@ -148,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <div style="border-bottom:1px solid #eee">
                                                 <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
                                             </div>
-                                            <p style="font-size:1.1em">Hi ' . $fullname .  ',</p>
+                                            <p style="font-size:1.1em">Hi ' . $fullname . ',</p>
                                             <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Login procedures. OTP is valid for 15 minutes only</p>
                                             <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . $otp . '</h2>
                                             <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>

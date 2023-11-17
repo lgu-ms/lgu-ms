@@ -54,14 +54,19 @@ include("../include/header.php");
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Password" name="password" required>
+                                        <input type="password" placeholder="Password" name="password" id="password" required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Confirm Password" name="cpassword" required>
+                                        <input type="password" placeholder="Confirm Password" name="cpassword" id="cpassword" required>
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
+
+                                    <input class="form-check-input" type="checkbox" value="" id="showPassword">
+                                    <label class="form-check-label" for="showPassword">
+                                        Show password
+                                    </label><br>
 
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                     <input type="hidden" name="action" value="validate_captcha">
@@ -69,7 +74,7 @@ include("../include/header.php");
                                     <small>By clicking Signup, you agree to our <u><a href="/terms">Terms</a></u>, <u><a
                                                 href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie
                                                 Policy</a></u>.</small>
-                                    <div class="mt-2">
+                                    <div class="mt-4">
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
                                             name="submit">Signup</button>
                                         <a type="button" class="btn btn-outline-primary px-4"
