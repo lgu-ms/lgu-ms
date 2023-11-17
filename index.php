@@ -2,7 +2,7 @@
 include("include/session.php");
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
-$page_modified_time = "2023-10-08T13:37:36+00:00";
+$page_modified_time = "2023-11-17T13:37:36+00:00";
 $page_title = "Digital Barangay - A LGU Management System";
 $page_description = "A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.";
 $page_keywords = "digital barangay, lgu, lgu management system";

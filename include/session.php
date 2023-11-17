@@ -11,7 +11,7 @@ if ($debug) {
 }
 
 $sessionTime = 365 * 24 * 60 * 60;
-$sessionName = "PHPSNAME";
+$sessionName = "_ms";
 session_set_cookie_params($sessionTime);
 session_name($sessionName);
 
