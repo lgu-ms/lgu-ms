@@ -2,7 +2,7 @@
 include("../include/session.php");
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
-$page_modified_time = "2023-10-08T13:37:36+00:00";
+$page_modified_time = "2023-11-17T13:37:36+00:00";
 $page_title = "About - Digital Barangay";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
