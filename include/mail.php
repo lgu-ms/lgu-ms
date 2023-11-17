@@ -1,9 +1,9 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 
-function initMail($mailrecepient, $mailrecepientname, $mailsubject, $mailbody) {
+function initMail($directory, $mailrecepient, $mailrecepientname, $mailsubject, $mailbody) {
     include("config.php");
-    require_once '../vendor/autoload.php';
+    require_once $directory . 'vendor/autoload.php';
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->Host = $mailhost;

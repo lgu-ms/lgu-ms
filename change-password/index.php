@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $setChangePassword .= "($today, $session_id, $user_id, 'change-password')";
                                         if ($conn->query($setChangePassword) === TRUE) {
                                             require_once "../include/mail.php";
-                                            $notifyPasswordChange = initMail($db_user_email, $db_user_fullname, "Your account password has been reset.", '
+                                            $notifyPasswordChange = initMail('../', $db_user_email, $db_user_fullname, "Your account password has been reset.", '
                                             <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                                 <div style="margin:50px auto;width:70%;padding:20px 0">
                                                     <div style="border-bottom:1px solid #eee">

@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $sqlOtp .= "('$temp_id', $timeGenerated, 'FORGOT-PASSWORD', '$email')";
                         if ($conn->query($sqlOtp) === TRUE) {
                             require_once "../include/mail.php";
-                            $mail = initMail($email, $row["user_fullname"], "Password Reset", '
+                            $mail = initMail('../', $email, $row["user_fullname"], "Password Reset", '
         <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
             <div style="margin:50px auto;width:70%;padding:20px 0">
                 <div style="border-bottom:1px solid #eee">
