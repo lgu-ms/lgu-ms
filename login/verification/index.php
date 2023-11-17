@@ -97,8 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         nullifySession();
                         $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                         $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
-                        $today = date("Y-m-d H:i:s");
-                        $sql .= "('$device_id', '$today', 'active', $login_temp_user_id, '$today')";
+                        $today = strtotime("now");
+                        $sql .= "('$device_id', $today, 'active', $login_temp_user_id, $today)";
                         if ($conn->query($sql) === TRUE) {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $login_temp_session_id;

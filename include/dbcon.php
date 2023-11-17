@@ -11,9 +11,9 @@ if ($conn->connect_error) {
 if (!empty($_SESSION['user_login'])) {
     $num123 = (int) date("i");
     if ($num123 % 3 == 0) {
-        $today = date("Y-m-d H:i:s");
+        $today = strtotime("now");
         $session_id = $_SESSION["session_id"];
-        $updateLastAccessed = "UPDATE account_session SET last_accessed = '$today' WHERE _sid = $session_id";
+        $updateLastAccessed = "UPDATE account_session SET last_accessed = $today WHERE _sid = $session_id";
         $conn->query($updateLastAccessed);
     }
 }

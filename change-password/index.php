@@ -134,8 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     $setPassword = "UPDATE account SET user_password = '$password' WHERE _id = $user_id";
                                     if ($conn->query($setPassword)) {
                                         $setChangePassword = "INSERT INTO passwordchanged (date_accessed, session_id, user_id, event_type) VALUES ";
-                                        $today = date("Y-m-d H:i:s");
-                                        $setChangePassword .= "('$today', $session_id, $user_id, 'change-password')";
+                                        $today = strtotime("now");
+                                        $setChangePassword .= "($today, $session_id, $user_id, 'change-password')";
                                         if ($conn->query($setChangePassword) === TRUE) {
                                             echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '", "Go Home")</script>';
                                         }

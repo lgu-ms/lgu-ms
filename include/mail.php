@@ -8,11 +8,7 @@ function initMail($mailrecepient, $mailrecepientname, $mailsubject, $mailbody) {
     $mail->isSMTP();
     $mail->Host = $mailhost;
     $mail->Port = $mailport;
-    if ($debug) {
-        $mail->SMTPDebug = 2;
-    } else {
-        $mail->SMTPDebug = 0;
-    }
+    $mail->SMTPDebug = 0;
     $mail->SMTPAuth = true;
     $mail->Username = 'support@digitalbarangay.com';
     $mail->Password = $mailpassword;
