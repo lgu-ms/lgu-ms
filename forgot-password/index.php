@@ -115,7 +115,7 @@ $page = '
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Confirm New Password" name="cpassword"
+                                        <input type="password" placeholder="Confirm New Password" name="cpassword" id="cpassword"
                                             required>
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
@@ -256,8 +256,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $setPassword = "UPDATE account SET user_password = '$hashpassword' WHERE user_email = '$fp_temp_user_email'";
                         if ($conn->query($setPassword)) {
                             $setChangePassword = "INSERT INTO passwordchanged (date_accessed, event_type, user_email) VALUES ";
-                            $today = date("Y-m-d H:i:s");
-                            $setChangePassword .= "('$today', 'forgot-password', '$fp_temp_user_email')";
+                            $today = strtotime("now");
+                            $setChangePassword .= "($today, 'forgot-password', '$fp_temp_user_email')";
                             if ($conn->query($setChangePassword) === TRUE) {
                                 $_SESSION["fp_temp_user_email"] = null;
                                 $_SESSION["fp_temp_user_fullname"] = null;

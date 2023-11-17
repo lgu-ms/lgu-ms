@@ -54,12 +54,14 @@ include("../include/header.php");
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Password" name="password" id="password" required>
+                                        <input type="password" placeholder="Password" name="password" id="password"
+                                            required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Confirm Password" name="cpassword" id="cpassword" required>
+                                        <input type="password" placeholder="Confirm Password" name="cpassword"
+                                            id="cpassword" required>
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
 
@@ -168,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <div style="border-bottom:1px solid #eee">
                                                 <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
                                             </div>
-                                            <p style="font-size:1.1em">Hi ' . $fullname .  ',</p>
+                                            <p style="font-size:1.1em">Hi ' . $fullname . ',</p>
                                             <p>Thank you for choosing Digital Barangay. Use the following OTP to complete your Sign Up procedures. OTP is valid for 15 minutes only.</p>
                                             <h2 style="background: #2e475d;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">' . $otp . '</h2>
                                             <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>

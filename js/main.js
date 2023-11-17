@@ -230,7 +230,7 @@ label.setAttribute("id", "themelabel");
 themeswitch.append(label);
 
 const currentTheme = localStorage.getItem("theme");
-if (currentTheme == "dark" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+if (currentTheme == "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.classList.toggle("dark-mode");
     label.innerHTML = "Dark";
     input.setAttribute("checked", null);

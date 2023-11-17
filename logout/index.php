@@ -8,9 +8,9 @@ if (!isLogin()) {
 
 $user_id = $_SESSION["user_id"];
 $session_id = $_SESSION["session_id"];
-$today = date("Y-m-d H:i:s");
+$today = strtotime("now");
 
-$updateSession = "UPDATE account_session SET session_ended = '$today', session_status = 'end' WHERE user_id = $user_id AND _sid = $session_id";
+$updateSession = "UPDATE account_session SET session_ended = $today, session_status = 'end' WHERE user_id = $user_id AND _sid = $session_id";
 
 if ($conn->query($updateSession) === TRUE) {
 

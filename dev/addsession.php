@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            
                 $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                 $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
-                $today = date("Y-m-d H:i:s");
-                $sql .= "('$device_id', '$today', 'active', $user_id, '$today')";
+                $today = strtotime("now");
+                $sql .= "('$device_id', $today, 'active', $user_id, $today)";
                 if ($conn->query($sql) === TRUE) {
-                    $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = '$today' AND user_id = $user_id");
+                    $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = $today AND user_id = $user_id");
 
                     if (mysqli_num_rows($getSessionID) > 0) {
                         while ($row1 = mysqli_fetch_assoc($getSessionID)) {

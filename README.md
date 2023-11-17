@@ -24,8 +24,21 @@ composer install --prefer-dist --no-progress
 npm install
 ```
 
-## Note
-Please avoid doing the following
-- renaming the project folder to other name other than `lgu-ms`
-- moving the project to other folder other than `htdocs` in xampp.
-- do not add & commit without formating the document in VSCode Format Document is `Ctrl+Shift+I`
+Open your [PHPMyAdmin](http://localhost/phpmyadmin) and create a database named `lgu-ms` and then import the `lgu-ms.sql` file.
+
+## Contributions
+Everyone is welcome to contribute on this public repository.
+
+## License
+License under MIT 
+Copyright (c) 2023 Melvin Jones Repol & Its Contributors
+```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```

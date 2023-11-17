@@ -113,8 +113,8 @@ if (isLogin()) {
     $insertError .= ", session_id, user_id";
 }
 
-$today = date("Y-m-d H:i:s");
-$insertError .= ") VALUES ($errorCode, '$errorName', '$today'";
+$today = strtotime("now");
+$insertError .= ") VALUES ($errorCode, '$errorName', $today";
 
 if (isLogin()) {
     $insertError .= ", " . $_SESSION["session_id"];
