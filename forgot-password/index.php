@@ -110,7 +110,7 @@ $page = '
                                     <br>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="New Password" name="password" required>
+                                        <input type="password" placeholder="New Password" name="password" id="password" required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
@@ -261,13 +261,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             if ($conn->query($setChangePassword) === TRUE) {
                                 $_SESSION["fp_temp_user_email"] = null;
                                 $_SESSION["fp_temp_user_fullname"] = null;
+                                require_once "../include/mail.php";
                                 $notifyPasswordChange = initMail($fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
                                 <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                     <div style="margin:50px auto;width:70%;padding:20px 0">
                                         <div style="border-bottom:1px solid #eee">
                                             <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
                                         </div>
-                                        <p style="font-size:1.1em">Hi ' . $fp_temp_user_fullname .  ',</p>
+                                        <p style="font-size:1.1em">Hi ' . $fp_temp_user_fullname . ',</p>
                                         <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
                                         <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
                                         <hr style="border:none;border-top:1px solid #eee" />
@@ -280,7 +281,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
                                 ');
-                        sendMail($notifyPasswordChange);
+                                sendMail($notifyPasswordChange);
                                 echo '<script>showPopup("Change Password", "Successfully changed your password", "../login?ref=forgot_password&status=success", "Log in")</script>';
                             }
                         }
