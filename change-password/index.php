@@ -120,6 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 while ($row = mysqli_fetch_assoc($checkID)) {
 
                     $db_password = $row["user_password"];
+                    $db_user_email = $row["user_email"];
+                    $db_user_fullname = $row["user_fullname"];
 
                     if (empty($_POST["password"])) {
                         echo '<script>showToast("You need to enter your new password!")</script>';
@@ -137,6 +139,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $today = strtotime("now");
                                         $setChangePassword .= "($today, $session_id, $user_id, 'change-password')";
                                         if ($conn->query($setChangePassword) === TRUE) {
+                                            require_once "../include/mail.php";
+                                            $notifyPasswordChange = initMail($db_user_email, $db_user_fullname, "Your account password has been reset.", '
+                                            <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+                                                <div style="margin:50px auto;width:70%;padding:20px 0">
+                                                    <div style="border-bottom:1px solid #eee">
+                                                        <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                                    </div>
+                                                    <p style="font-size:1.1em">Hi ' . $db_user_fullname . ',</p>
+                                                    <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
+                                                    <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
+                                                    <hr style="border:none;border-top:1px solid #eee" />
+                                                    <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                                                        <p>3W2+H2Q, Mayaman</p>
+                                                        <p>Diliman</p>
+                                                        <p>Lungsod Quezon</p>
+                                                        <p>Kalakhang Maynila</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            ');
+                                            sendMail($notifyPasswordChange);
                                             echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '", "Go Home")</script>';
                                         }
                                     }
