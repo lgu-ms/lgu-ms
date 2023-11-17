@@ -65,7 +65,7 @@ foreach ($err as $error) {
           <div class="col-md-8">
             <h1 class="display-1"><strong>Error ' . $error->code . '</strong></h1>
             <h1 class="display-6">' . $error->name . '</h1>
-            <p>' . $error->description . '</p>
+            <p>' . $error->description . '</p>  
             <button class="btn btn-primary shadow px-5" onclick="window.location.href=\'/\'">HOMEPAGE</button>
           </div>
         </div>
@@ -79,7 +79,7 @@ foreach ($err as $error) {
 }
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
-$page_modified_time = "2023-10-08T13:37:36+00:00";
+$page_modified_time = "2023-11-17T13:37:36+00:00";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";

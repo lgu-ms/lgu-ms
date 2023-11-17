@@ -2,24 +2,6 @@
  * FUNCTIONS
  */
 
-let validator = {
-    set: function (obj, prop, val) {
-        if (prop === "href") {
-            if (typeof val != "string") {
-                throw new TypeError("href must be string.");
-            }
-            if (!val.startsWith("https://digitalbarangay.com/")) {
-                throw new Error("XSS");
-            }
-        }
-        obj[prop] = val;
-        return true;
-    },
-    get: function (obj, prop) {
-        return prop in obj ? obj[prop] : null;
-    },
-};
-
 insertParam = (key, value) => {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
@@ -29,7 +11,7 @@ insertParam = (key, value) => {
 openProfile = () => {
     let bsModal = new bootstrap.Modal(document.getElementById("popupProfileModal"));
     bsModal.show();
-}
+};
 
 showToast = (err) => {
     let toast = document.createElement("div");
@@ -152,6 +134,22 @@ window.onerror = function a(msm, url, num) {
 /*
  * NAVIGATION CONTROL
  */
+
+if (typeof modulesList !== "undefined") {
+    let listGroupItem = document.querySelectorAll(".list-group-item");
+    for (const item in listGroupItem) {
+        listGroupItem[item].onclick = function () {
+            let getModuleName = document.querySelectorAll(".module-742");
+            for (module in getModuleName) {
+                if (item == module) {
+                    let title = getModuleName[module].innerText;
+                    let url = title.split("\n")[1].replaceAll(" ", "-") + "-module";
+                    window.location.href = url.toLowerCase();
+                }
+            }
+        };
+    }
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     scrollProgressBar();
