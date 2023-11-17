@@ -935,3 +935,8 @@ video {
 .toast-body {
     color: var(--text-color);
 }
+
+.form-check-input {
+    background-color: var(--background-color);
+    border-color: var(--text-color);
+}

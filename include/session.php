@@ -10,7 +10,16 @@ if ($debug) {
     error_reporting(0);
 }
 
+$sessionTime = 365 * 24 * 60 * 60;
+$sessionName = "PHPSNAME";
+session_set_cookie_params($sessionTime);
+session_name($sessionName);
+
 if (is_session_started() === FALSE) session_start();
+
+if (isset($_COOKIE[$sessionName])) {
+    setcookie($sessionName, $_COOKIE[$sessionName], time() + $sessionTime, "/");
+}
 
 function isLogin()
 {

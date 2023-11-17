@@ -23,3 +23,8 @@
         </div>
     </div>
 </div>
+<?php 
+   if (isLogin()) {
+       include("profile.php");
+   }
+?>

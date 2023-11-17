@@ -1,3 +1,8 @@
+<?php
+$dec_user_name = null;
+
+?>
+
 <div class="progress-container fixed-top">
     <span class="progress-bar"></span>
 </div>
@@ -36,10 +41,11 @@
 
                     if (mysqli_num_rows($getUserName) > 0) {
                         while ($row = mysqli_fetch_assoc($getUserName)) {
+                            $dec_user_name = $row["user_name"];
                             $ff = '
-                            <li class="nav-item prim">
-                            <a class="nav-link" href="' . $directory . 'profile">
-                            <i class="fa-solid fa-circle-user"></i>' . $row["user_name"] . '
+                            <li class="nav-item prim" onclick="openProfile()">
+                            <a class="nav-link  default-light" href="#' . $dec_user_name . '">
+                            <i class="fa-solid fa-circle-user  default-light"></i> &nbsp;' . $row["user_name"] . '
                             </a>
                         </li>
                             ';
@@ -68,21 +74,14 @@
                 <?php
                 $ff = null;
                 if (isLogin()) {
-                    $user_id = $_SESSION["user_id"];
-                    $getUserName = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
-
-                    if (mysqli_num_rows($getUserName) > 0) {
-                        while ($row = mysqli_fetch_assoc($getUserName)) {
-                            $ff = '
-                            <li class="nav-item seco">
-                            <a class="nav-link" href="' . $directory . 'profile">
-                            <span class="text sec px-2">@' . $row["user_name"] . '</span>
+                    $ff = '
+                            <li class="nav-item seco" onclick="openProfile()">
+                            <a class="nav-link" href="#' . $dec_user_name . '">
+                            <span class="text sec px-2">' . $dec_user_name . '</span>
                                 <i class="fa-solid fa-user"></i>
                             </a>
                         </li>
                             ';
-                        }
-                    }
 
                 } else {
 
