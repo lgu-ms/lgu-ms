@@ -65,6 +65,15 @@ CREATE TABLE `profilepic` (
   `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+CREATE TABLE `contactus` (
+  `_cid` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `user_name` text NOT NULL,
+  `user_email` text NOT NULL,
+  `message` text NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `session_id` int(10) UNSIGNED DEFAULT NULL,
+  `date_send` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 ALTER TABLE `account`
   ADD PRIMARY KEY (`_id`);
@@ -92,6 +101,9 @@ ALTER TABLE `profilepic`
   ADD PRIMARY KEY (`_pid`),
   ADD KEY `account_profile_id` (`user_id`);
 
+ALTER TABLE `contactus`
+  ADD PRIMARY KEY (`_cid`);
+
 
 ALTER TABLE `account`
   MODIFY `_id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2023000000;
@@ -111,6 +123,8 @@ ALTER TABLE `passwordchanged`
 ALTER TABLE `profilepic`
   MODIFY `_pid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
 
+ALTER TABLE `profilepic`
+  MODIFY `_pid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
 
 ALTER TABLE `account_session`
   ADD CONSTRAINT `account_session_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
@@ -129,6 +143,11 @@ ALTER TABLE `passwordchanged`
 
 ALTER TABLE `profilepic`
   ADD CONSTRAINT `account_profile_id` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
+COMMIT;
+
+ALTER TABLE `contactus`
+  ADD CONSTRAINT `contact_session_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`),
+  ADD CONSTRAINT `contact_user_id` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
