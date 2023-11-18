@@ -4,12 +4,13 @@ const CleanCSS = require('clean-css');
 const minify = require('html-minifier').minify;
 
 findHtmlCssFiles("../");
+const allowedFolders = ["js", "css"];
 
 function findHtmlCssFiles(location) {
     fs.readdir(location, function (err, files) {
         if (err) return console.error(err);
         for (let i = 0; i < files.length; i++) {
-            if (files[i] != "obfuscate" && files[i] != "fonts" && files[i] != "node_modules") {
+            if (allowedFolders.includes(files[i])) {
                 const file = location + "/" + files[i];
                 fs.stat(file, async (err, stats) => {
                     if (err) {

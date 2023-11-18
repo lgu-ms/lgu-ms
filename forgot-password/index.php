@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION["fp_temp_user_email"] = null;
                                 $_SESSION["fp_temp_user_fullname"] = null;
                                 require_once "../include/mail.php";
-                                $notifyPasswordChange = initMail($fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
+                                $notifyPasswordChange = initMail("../", $fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
                                 <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                     <div style="margin:50px auto;width:70%;padding:20px 0">
                                         <div style="border-bottom:1px solid #eee">
