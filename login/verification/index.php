@@ -95,10 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         nullifySession();
                     } else {
                         nullifySession();
-                        $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
+                        $ray_id = $_SERVER['HTTP_CF_RAY'];
+                        $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed";
+                        if (isset($ray_id)) {
+                            $sql .= ", ray_id";
+                        }
+                        $sql .= ") VALUES ";
                         $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
                         $today = strtotime("now");
-                        $sql .= "('$device_id', $today, 'active', $login_temp_user_id, $today)";
+                        $sql .= "('$device_id', $today, 'active', $login_temp_user_id, $today";
+                        if (isset($ray_id)) {
+                            $sql .= $ray_id;
+                        }
+                        $sql .= ")";
                         if ($conn->query($sql) === TRUE) {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $login_temp_session_id;
