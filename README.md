@@ -1,8 +1,13 @@
 # lgu-ms
 
+[![Build Deployment](https://github.com/lgu-ms/lgu-ms/actions/workflows/deployment.yml/badge.svg)](https://github.com/lgu-ms/lgu-ms/actions/workflows/deployment.yml)
+[![CodeQL](https://github.com/lgu-ms/lgu-ms/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/lgu-ms/lgu-ms/actions/workflows/github-code-scanning/codeql)
+[![PHP Composer](https://github.com/lgu-ms/lgu-ms/actions/workflows/php.yml/badge.svg)](https://github.com/lgu-ms/lgu-ms/actions/workflows/php.yml)
+
 A comprehensive software solution designed to streamline and enhance the efficiency of LGU operations. This system integrates digital tools to facilitate transparent communication, automate administrative processes, and manage community resources, fostering a more responsive and connected governance structure.
 
-https://digitalbarangay.com
+- Link: https://digitalbarangay.com
+- Uptime: https://stats.uptimerobot.com/n0EyAslx3A
 
 <img src="animated-roped-off-construction-barracades.gif">
 
