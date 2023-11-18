@@ -2,6 +2,23 @@
  * FUNCTIONS
  */
 
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+    "/": "&#x2F;",
+    "`": "&#x60;",
+    "=": "&#x3D;",
+};
+
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
 insertParam = (key, value) => {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
@@ -144,7 +161,7 @@ if (typeof modulesList !== "undefined") {
                 if (item == module) {
                     let title = getModuleName[module].innerText;
                     let url = title.split("\n")[1].replaceAll(" ", "-") + "-module";
-                    window.location.href = url.toLowerCase();
+                    window.location.href = escapeHtml(url.toLowerCase());
                 }
             }
         };
