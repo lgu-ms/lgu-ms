@@ -23,6 +23,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo $directory; ?>terms">Terms of Service</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://stats.uptimerobot.com/n0EyAslx3A" target="_blank">Uptime Status</a>
+          </li>
           <div>
             <?php
              if (!isLogin()) {
