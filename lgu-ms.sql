@@ -55,8 +55,8 @@ CREATE TABLE `otp` (
 CREATE TABLE `passwordchanged` (
   `_pid` int(10) UNSIGNED ZEROFILL NOT NULL,
   `date_accessed` int(11) NOT NULL,
-  `session_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
+  `session_id` int(10) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
   `event_type` varchar(20) NOT NULL,
 `user_email` TEXT UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
