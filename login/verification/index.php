@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $today = strtotime("now");
                         $sql .= "('$device_id', $today, 'active', $login_temp_user_id, $today";
                         if (isset($ray_id)) {
-                            $sql .= $ray_id;
+                            $sql .= "'$ray_id'";
                         }
                         $sql .= ")";
                         if ($conn->query($sql) === TRUE) {
