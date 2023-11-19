@@ -85,7 +85,14 @@ $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
 $page_canonical = "https://digitalbarangay.com/";
 $page_url = $page_canonical;
-$directory = "../";
+$directory = "";
+
+if (isset($_GET["d5345n5k3j3bh4b3hb4b3"])) {
+    $directory = "";
+} else {
+    $directory = "../";
+}
+
 $directory_img = $directory;
 
 include("../include/header.php");
