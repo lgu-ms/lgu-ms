@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->success) {
         if (isset($_POST["forgot"])) {
             $email = "";
-            if (empty($_POST["email"])) {
+            if (isset($_POST["email"])) {
                 echo '<script>showToast("Email is required!")</script>';
             } else {
                 $email = $_POST["email"];
@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             $password = $cpassword = "";
-            if (empty($_POST["password"])) {
+            if (isset($_POST["password"])) {
                 echo '<script>showToast("Password is required!")</script>';
             } else {
                 $password = $_POST["password"];
@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo '<script>showToast("Your Password Must Contain At Least 1 Lowercase Letter!")</script>';
                 } else if (!preg_match("@[^\w]@", $password)) {
                     echo '<script>showToast("Your Password Must Contain At Least 1 Special Characters!")</script>';
-                } else if (empty($_POST["cpassword"])) {
+                } else if (isset($_POST["cpassword"])) {
                     echo '<script>showToast("You need to retype your password again!")</script>';
                 } else {
                     $cpassword = $_POST["cpassword"];

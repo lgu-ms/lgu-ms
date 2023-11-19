@@ -110,11 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = json_decode($response->getBody());
     if ($result->success) {
         $email = $password = "";
-        if (empty($_POST["email"])) {
+        if (isset($_POST["email"])) {
             echo '<script>showToast("Email is required!")</script>';
         } else {
             $email = $_POST["email"];
-            if (empty($_POST["password"])) {
+            if (isset($_POST["password"])) {
                 echo '<script>showToast("Password is required!")</script>';
             } else {
                 $password = hash("sha512", $_POST["password"]);
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if (strcasecmp($db_password, $password) == 0) {
 
                             $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
-                            $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+                            $device_id = $_SERVER['HTTP_USER_AGENT'];
                             $today = strtotime("now");
                             $sql .= "('$device_id', $today, 'active', $user_id, $today)";
                             if ($conn->query($sql) === TRUE) {

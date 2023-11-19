@@ -7,24 +7,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// 0 - 60
-if (!empty($_SESSION['user_login'])) {
-    $num123 = (int) date("i");
-    if ($num123 % 3 == 0) {
-        $today = strtotime("now");
-        $session_id = $_SESSION["session_id"];
-        $updateLastAccessed = "UPDATE account_session SET last_accessed = $today WHERE _sid = $session_id";
-        $conn->query($updateLastAccessed);
-    }
-}
-
-/*
-* TODO:
-* Check if the session is `active`, `inactive` or `end`
-* if inactive means the user open the session a week or so since he use it
-* deny it!
-*/
-
 $_GET = (filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 $_POST = (filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
