@@ -1,5 +1,5 @@
 <?php
-include("../include/dbcon.php");
+include("../include/session.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"];
