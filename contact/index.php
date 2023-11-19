@@ -83,15 +83,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = json_decode($response->getBody());
     if ($result->success) {
         $name = $email = $message = "";
-        if (isset($_POST["name"])) {
+        if (!isset($_POST["name"])) {
             echo '<script>showToast("Name is required!")</script>';
         } else {
             $name = $_POST["name"];
-            if (isset($_POST["email"])) {
+            if (!isset($_POST["email"])) {
                 echo '<script>showToast("Email is required!")</script>';
             } else {
                 $email = $_POST["email"];
-                if (isset($_POST["message"])) {
+                if (!isset($_POST["message"])) {
                     echo '<script>showToast("Message is required!")</script>';
                 } else {
                     $message = $_POST["message"];
