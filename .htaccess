@@ -1,5 +1,5 @@
-ErrorDocument 400 http://localhost/lgu-ms/http-error/?code=400
-ErrorDocument 401 http://localhost/lgu-ms/http-error/?code=401
-ErrorDocument 403 http://localhost/lgu-ms/http-error/?code=403
-ErrorDocument 404 http://localhost/lgu-ms/http-error/?code=404
-ErrorDocument 500 http://localhost/lgu-ms/http-error/?code=500
+ErrorDocument 400 /lgu-ms/http-error/index.php?code=400&d5345n5k3j3bh4b3hb4b3=true
+ErrorDocument 401 /lgu-ms/http-error/index.php?code=401&d5345n5k3j3bh4b3hb4b3=true
+ErrorDocument 403 /lgu-ms/http-error/index.php?code=403&d5345n5k3j3bh4b3hb4b3=true
+ErrorDocument 404 /lgu-ms/http-error/index.php?code=404&d5345n5k3j3bh4b3hb4b3=true
+ErrorDocument 500 /lgu-ms/http-error/index.php?code=500&d5345n5k3j3bh4b3hb4b3=true
