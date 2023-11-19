@@ -110,11 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = json_decode($response->getBody());
     if ($result->success) {
         $email = $password = "";
-        if (isset($_POST["email"])) {
+        if (!isset($_POST["email"])) {
             echo '<script>showToast("Email is required!")</script>';
         } else {
             $email = $_POST["email"];
-            if (isset($_POST["password"])) {
+            if (!isset($_POST["password"])) {
                 echo '<script>showToast("Password is required!")</script>';
             } else {
                 $password = hash("sha512", $_POST["password"]);
