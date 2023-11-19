@@ -29,7 +29,7 @@ CREATE TABLE `account_session` (
   `session_ended` int(11) DEFAULT NULL,
   `session_status` varchar(10) NOT NULL COMMENT 'active = means the account is currently loggedin, end = means the user logout the account',
   `user_id` int(10) UNSIGNED NOT NULL,
-  `last_accessed` text NOT NULL,
+  `last_accessed` int(11) NOT NULL,
   `ray_id` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -58,7 +58,7 @@ CREATE TABLE `passwordchanged` (
   `session_id` int(10) UNSIGNED DEFAULT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `event_type` varchar(20) NOT NULL,
-`user_email` TEXT UNSIGNED DEFAULT NULL
+  `user_email` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 CREATE TABLE `profilepic` (

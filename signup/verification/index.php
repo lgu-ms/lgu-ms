@@ -37,11 +37,12 @@ include("../../include/header.php");
                         <div class="card mb-3 shadow ">
                             <div class="card-body">
                                 <h3>Enter OTP</h3>
+                                <p>Please check your email for the 6 digit one time password.</p>
 
-                                <div class="input-group2 mt-5">
+                                <div class="input-group2">
                                     <input type="number" placeholder="One Time Password" name="otp" required>
                                 </div>
-
+                                
                                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                 <input type="hidden" name="action" value="validate_captcha">
 

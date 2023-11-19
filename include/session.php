@@ -15,7 +15,8 @@ $sessionName = "_ms";
 session_set_cookie_params($sessionTime);
 session_name($sessionName);
 
-if (is_session_started() === FALSE) session_start();
+if (is_session_started() === FALSE)
+    session_start();
 
 if (isset($_COOKIE[$sessionName])) {
     setcookie($sessionName, $_COOKIE[$sessionName], time() + $sessionTime, "/");
@@ -23,7 +24,7 @@ if (isset($_COOKIE[$sessionName])) {
 
 function isLogin()
 {
-    return !empty($_SESSION['user_login']);
+    return isset($_SESSION['user_login']);
 }
 
 function is_session_started()
@@ -36,4 +37,24 @@ function is_session_started()
         }
     }
     return FALSE;
+}
+
+if (isset($_SESSION['user_login'])) {
+    $today = strtotime("now");
+    $session_id = $_SESSION["session_id"];
+    $updateLastAccessed = "UPDATE account_session SET last_accessed = $today WHERE _sid = $session_id";
+    $conn->query($updateLastAccessed);
+}
+
+if (isLogin()) {
+    $getLastAccessed = mysqli_query($conn, "SELECT * FROM account_session WHERE _sid= $session_id");
+    if (mysqli_num_rows($getLastAccessed) > 0) {
+        while ($row = mysqli_fetch_assoc($getLastAccessed)) {
+            if ($row["session_status"] != "active") {
+                session_destroy();
+                header('Location: ' . $directory . 'login?r=tm');
+                die();
+            }
+        }
+    }
 }

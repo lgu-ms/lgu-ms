@@ -3,19 +3,17 @@ include("../include/session.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"];
-    $password = hash("sha512", $_POST["password"]);
 
     $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
     if (mysqli_num_rows($isRegister) > 0) {
         while ($row = mysqli_fetch_assoc($isRegister)) {
 
-            $db_password = $row["user_password"];
             $user_id = $row["_id"];
             $fullname = $row["user_fullname"];
 
-           
+
                 $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
-                $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+                $device_id = $_SERVER['HTTP_USER_AGENT'];
                 $today = strtotime("now");
                 $sql .= "('$device_id', $today, 'active', $user_id, $today)";
                 if ($conn->query($sql) === TRUE) {
@@ -27,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $row1["_sid"];
                             $_SESSION["user_id"] = $user_id;
-echo "Login done";
+                            echo '<script>window.location.href = "../"</script>';
+                            die();
                         }
                     }
                 }
@@ -40,6 +39,5 @@ echo "Login done";
 
 <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
     <input id="email" type="email" placeholder="Email" name="email" required>
-    <input type="password" placeholder="Password" name="password" required>
     <input type="submit" name="submit" required>
 </form>

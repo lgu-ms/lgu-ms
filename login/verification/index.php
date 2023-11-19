@@ -37,6 +37,7 @@ include("../../include/header.php");
                         <div class="card mb-3 shadow ">
                             <div class="card-body">
                                 <h3>Enter OTP</h3>
+                                <p>Please check your email for the 6 digit one time password.</p>
 
                                 <div class="input-group2 mt-5">
                                     <input type="number" placeholder="One Time Password" name="otp" required>
@@ -101,11 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $sql .= ", ray_id";
                         }
                         $sql .= ") VALUES ";
-                        $device_id = hash("sha512", $_SERVER['HTTP_USER_AGENT']);
+                        $device_id = $_SERVER['HTTP_USER_AGENT'];
                         $today = strtotime("now");
                         $sql .= "('$device_id', $today, 'active', $login_temp_user_id, $today";
                         if (isset($ray_id)) {
-                            $sql .= "'$ray_id'";
+                            $sql .= ", '$ray_id'";
                         }
                         $sql .= ")";
                         if ($conn->query($sql) === TRUE) {

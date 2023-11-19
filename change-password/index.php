@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = json_decode($response->getBody());
     if ($result->success) {
         $ppassword = $password = $cpassword = "";
-        if (empty($_POST["ppassword"])) {
+        if (isset($_POST["ppassword"])) {
             echo '<script>showToast("You need to type your previous password!")</script>';
         } else {
             $ppassword = hash("sha512", $_POST["ppassword"]);
@@ -123,11 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $db_user_email = $row["user_email"];
                     $db_user_fullname = $row["user_fullname"];
 
-                    if (empty($_POST["password"])) {
+                    if (isset($_POST["password"])) {
                         echo '<script>showToast("You need to enter your new password!")</script>';
                     } else {
                         $password = hash("sha512", $_POST["password"]);
-                        if (empty($_POST["cpassword"])) {
+                        if (isset($_POST["cpassword"])) {
                             echo '<script>showToast("You need to retype your password again!")</script>';
                         } else {
                             $cpassword = hash("sha512", $_POST["cpassword"]);
