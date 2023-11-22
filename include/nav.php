@@ -28,7 +28,7 @@ $dec_user_name = null;
                 if (!isset($hideSearchBar)) {
                     echo '
                 <li class="nav-item">
-                    <form action="<?php echo $directory; ?>search" method="get">
+                    <form action="' . $directory. 'search" method="get">
                         <div class="search-container">
                             <input id="search" placeholder="What are you looking for?" type="text" name="q">
                             <i class="fa-solid fa-magnifying-glass" id="but"></i>
