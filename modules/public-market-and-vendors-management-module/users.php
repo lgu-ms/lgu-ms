@@ -2,7 +2,7 @@
 include("../../include/session.php");
 
 $page_publisher = "https://github.com/reyes-9";
-$page_modified_time = "2023-11-17T13:37:36+00:00";
+$page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Digital Barangay - A LGU Management System";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";

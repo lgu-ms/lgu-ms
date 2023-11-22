@@ -1,5 +1,5 @@
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THF33NQG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THF33NQG" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
 
 <?php
 $dec_user_name = null;
@@ -24,6 +24,21 @@ $dec_user_name = null;
 
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <?php
+                if (!isset($hideSearchBar)) {
+                    echo '
+                <li class="nav-item">
+                    <form action="<?php echo $directory; ?>search" method="get">
+                        <div class="search-container">
+                            <input id="search" placeholder="What are you looking for?" type="text" name="q">
+                            <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                        </div>
+                    </form>
+                </li>
+                ';
+                }
+                ?>
+
                 <li class="nav-item">
                     <a class="nav-link default-light" href="<?php echo $directory; ?>">
                         Home
