@@ -79,7 +79,7 @@ foreach ($err as $error) {
 }
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
-$page_modified_time = "2023-11-17T13:37:36+00:00";
+$page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";

@@ -940,3 +940,29 @@ video {
     background-color: var(--background-color);
     border-color: var(--text-color);
 }
+
+#search {
+    border-width: 0px;
+    width: 100%;
+    color: var(--text-color);
+    padding-left: 20px;
+    padding-right: 5px;
+    height: 20px;
+    background-color: transparent;
+    outline: none;
+}
+
+.search-container {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    background: var(--toast-background-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-container>#but {
+    padding-right: 15px;
+    align-self: center;
+    color: #212121;
+}
