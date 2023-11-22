@@ -26,16 +26,6 @@
           <li class="nav-item">
             <a class="nav-link" href="https://stats.uptimerobot.com/n0EyAslx3A" target="_blank">Uptime Status</a>
           </li>
-          <div>
-            <?php
-             if (!isLogin()) {
-               echo '<div class="mt-2 mb-2">
-               <a type="button" class="btn btn-primary shadow px-4" href="' . $directory . 'login">Log in</a>
-               <a type="button" class="btn btn-outline-primary px-4" href="' . $directory . 'signup">Sign up</a></div>
-               ';
-            }
-            ?>
-          </div>
         </ul>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -88,6 +78,18 @@
       <h5>Toggle Theme</h5>
         <div class="form-check form-switch" id="themeswitch">
         </div>
+ 
+            <?php
+             if (!isLogin()) {
+               echo '<div class="mt-5 mb-2">
+               <h5 class="mt-2">Account</h5>
+               <a type="button" class="btn btn-primary shadow px-4" href="' . $directory . 'login">Log in</a>
+               <a type="button" class="btn btn-outline-primary px-4" href="' . $directory . 'signup">Sign up</a></div>
+              
+               <a href="' . $directory . 'forgotpassword">Forgot password?</a></div>
+               ';
+            }
+            ?>
       </div>
     </div>
     <br>
