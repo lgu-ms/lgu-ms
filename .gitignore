@@ -2,4 +2,4 @@
 /vendor
 /node_modules
 /uploads/*
-!uploads/.htaccess
+!uploads/.gitkeep
