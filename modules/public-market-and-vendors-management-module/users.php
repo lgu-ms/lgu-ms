@@ -13,6 +13,22 @@ $page_url = $page_canonical;
 $directory = "../../";
 $directory_img = "../";
 
+if (isLogin()) {
+    $user_id = $_SESSION["user_id"];
+    $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
+    if (mysqli_num_rows($isNotUser) > 0) {
+        while ($row = mysqli_fetch_assoc($isNotUser)) {
+            if ($row["user_type"] == "User") {
+                http_response_code(403);
+                die();
+            }
+        }
+    }
+} else {
+    http_response_code(403);
+    die();
+}
+
 include("../../include/header.php");
 echo '<link rel="stylesheet" href="../css/public-market-module.css">';
 ?>

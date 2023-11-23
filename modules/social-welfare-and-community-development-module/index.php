@@ -13,21 +13,19 @@ $page_url = $page_canonical;
 $directory = "../../";
 $directory_img = "../";
 
-if (!$debug) {
-  if (isLogin()) {
+if (isLogin()) {
     $user_id = $_SESSION["user_id"];
     $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
     if (mysqli_num_rows($isNotUser) > 0) {
-      while ($row = mysqli_fetch_assoc($isNotUser)) {
-        if ($row["user_type"] == "User") {
-          http_response_code(403);
-          die();
+        while ($row = mysqli_fetch_assoc($isNotUser)) {
+            if ($row["user_type"] == "User") {
+                http_response_code(403);
+                die();
+            }
         }
-      }
     }
-  } else {
+} else {
     http_response_code(403);
     die();
-  }
 }
 ?>
