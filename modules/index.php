@@ -16,7 +16,7 @@ $directory_img = $directory;
 include("../include/header.php");
 
 $modules = array("Citezen Services and Engagement", "Real Property Tax Managemet", "Business Permit and Licensing", "Land Use and Zoning", "Public Market and Vendors Management", "Financial Management and Budgeting", "Human Resources and Payroll", "Election and Voter Management", "Emergency Response and Disaster Management", "Solid Waste Management", "Infrastracture and Public Works", "Social Welfare and Community Development", "Health Services and Sanitation", "Document Management and Records", "GIS and Mapping", "Community Engagement and Communication", "Accessibility and Inclusion", "Analytics and Reporting", "Integration and Data Sharing");
-$modulesIcon = array("fa-people-group", "fa-building-user", "fa-id-card", "fa-mountain-sun", "fa-shop", "fa-money-bill-wave", "fa-file-invoice", "fa-square-poll-vertical", "fa-truck-medical", "fa-dumpster", "fa-road", "fa-user", "fa-hand-holding-droplet", "fa-record-vinyl", "fa-map", "fa-people-roof", "fa-accessible-icon", "fa-chart-pie", "fa-database");
+$modulesIcon = array("fa-people-group", "fa-building-user", "fa-id-card", "fa-mountain-sun", "fa-shop", "fa-money-bill-wave", "fa-file-invoice", "fa-square-poll-vertical", "fa-truck-medical", "fa-dumpster", "fa-road", "fa-user", "fa-hand-holding-droplet", "fa-record-vinyl", "fa-map", "fa-people-roof", "fa-brands fa-accessible-icon", "fa-chart-pie", "fa-database");
 $page = '
 <div class="container pt-4 pt-xl-5" id="modulesList">
             <h1 class="border-bottom">Modules</h1>

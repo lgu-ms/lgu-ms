@@ -22,7 +22,7 @@ $page_canonical = "https://digitalbarangay.com/forgot-password/";
 $page_url = $page_canonical;
 $directory = "../";
 $directory_img = $directory;
-$hideLoginButton = true;
+$recaptcha = true;
 
 include("../include/header.php");
 

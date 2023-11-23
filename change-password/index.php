@@ -17,7 +17,7 @@ $page_canonical = "https://digitalbarangay.com/";
 $page_url = "https://digitalbarangay.com/change-pasword";
 $directory = "../";
 $directory_img = $directory;
-$hideLoginButton = true;
+$recaptcha = true;
 
 include("../include/header.php");
 

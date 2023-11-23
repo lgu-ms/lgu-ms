@@ -92,6 +92,9 @@ if (isset($_GET["d5345n5k3j3bh4b3hb4b3"])) {
 } else {
     $directory = "../";
 }
+if ($errorCode == 403) {
+    $directory = "../";
+}
 
 $directory_img = $directory;
 

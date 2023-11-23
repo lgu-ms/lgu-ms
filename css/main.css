@@ -404,7 +404,8 @@ input:-webkit-autofill:active {
     display: block;
 }
 
-#desktop, .txt-more {
+#desktop,
+.txt-more {
     display: none;
 }
 
@@ -414,7 +415,8 @@ input:-webkit-autofill:active {
         display: none;
     }
 
-    #desktop, .txt-more {
+    #desktop,
+    .txt-more {
         display: block;
     }
 }
@@ -629,6 +631,16 @@ textarea {
     padding: 12px 40px;
     margin: 8px 0;
     display: inline-block;
+}
+
+.form-control[type=file] {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+}
+
+input[type=file]::file-selector-button {
+    background-color: var(--text-color);
+    color: #fff;
 }
 
 .progress-container {

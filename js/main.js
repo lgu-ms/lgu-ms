@@ -30,10 +30,25 @@ openProfile = () => {
     bsModal.show();
 };
 
+generateRandomId = (length) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+};
+
+
 showToast = (err) => {
+    let id = generateRandomId(10);
     let toast = document.createElement("div");
     toast.setAttribute("data-bs-autohide", true);
     toast.setAttribute("class", "toast");
+    toast.setAttribute("id", id);
     let toastheader = document.createElement("div");
     toastheader.setAttribute("class", "toast-header");
     let strong = document.createElement("strong");
@@ -60,12 +75,18 @@ showToast = (err) => {
     alert.show();
 
     document.getElementById("toastcontainer").append(toast);
+
+    $("#" + id).on('hide.bs.toast', function(){
+        toast.remove();
+    });
 };
 
 showAnnoucement = (annc, url) => {
+    let id = generateRandomId(10);
     let toast = document.createElement("div");
     toast.setAttribute("data-bs-autohide", true);
     toast.setAttribute("class", "toast");
+    toast.setAttribute("id", id);
     let toastheader = document.createElement("div");
     toastheader.setAttribute("class", "toast-header");
     let strong = document.createElement("strong");
@@ -97,16 +118,73 @@ showAnnoucement = (annc, url) => {
     alert.show();
 
     document.getElementById("toastcontainer").append(toast);
+
+    $("#" + id).on('hide.bs.toast', function(){
+        toast.remove();
+    });
 };
 
 showPopup = (title, content, action, actionName) => {
-    let bsModal = new bootstrap.Modal(document.getElementById("popupModal"));
-    bsModal.show();
-    document.getElementById("popupModalLabel").innerText = title;
-    document.getElementById("popupModalContent").innerText = content;
-    document.getElementById("popupModalActionName").innerText = actionName;
-    $("#popupModal").on("hidden.bs.modal", function () {
+    let id = generateRandomId(10);
+
+    let mainModal = document.getElementById("mainModal");
+
+    let modal = document.createElement("div");
+    modal.setAttribute("class", "modal face");
+    modal.setAttribute("tabindex", "-1");
+    modal.setAttribute("aria-hidden", "true");
+    modal.setAttribute("id", id);
+
+    let modalDialog = document.createElement("div");
+    modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+    let modalContent = document.createElement("div");
+    modalContent.setAttribute("class", "modal-content");
+
+    let modalHeader = document.createElement("div");
+    modalHeader.setAttribute("class", "modal-header");
+
+    let h1 = document.createElement("h1");
+    h1.setAttribute("class", "modal-title fs-5");
+    h1.innerText = title;
+
+    let closeButton = document.createElement("button");
+    closeButton.setAttribute("class", "btn-close");
+    closeButton.setAttribute("type", "button");
+    closeButton.setAttribute("data-bs-dismiss", "modal");
+    closeButton.setAttribute("aria-label", "close");
+
+    modalHeader.append(h1);
+    modalHeader.append(closeButton);
+
+    let modalBody = document.createElement("div");
+    modalBody.setAttribute("class", "modal-body");
+    modalBody.innerText = content;
+
+    let modalFooter = document.createElement("div");
+    modalFooter.setAttribute("class", "modal-footer");
+    let actionButton = document.createElement("button");
+    actionButton.setAttribute("type", "button");
+    actionButton.setAttribute("class", "btn btn-primary px-4");
+    actionButton.setAttribute("data-bs-dismiss", "modal");
+    actionButton.innerText = actionName;
+    actionButton.onclick = function () {
         window.location.href = action;
+    };
+    modalFooter.append(actionButton);
+
+    modalContent.append(modalHeader);
+    modalContent.append(modalBody);
+    modalContent.append(modalFooter);
+
+    modalDialog.append(modalContent);
+    modal.append(modalDialog);
+    mainModal.append(modal);
+
+    let bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+
+    $("#" + id).on('hide.bs.modal', function(){
+        modal.remove();
     });
 };
 
@@ -247,11 +325,18 @@ label.setAttribute("id", "themelabel");
 themeswitch.append(label);
 
 const currentTheme = localStorage.getItem("theme");
-if (currentTheme == "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
+if (currentTheme == "dark") {
     document.body.classList.toggle("dark-mode");
     label.innerHTML = "Dark";
-    input.setAttribute("checked", null);
+    input.click();
 } else if (currentTheme == "light") {
+    document.body.classList.toggle("light-mode");
+    label.innerHTML = "Light";
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.body.classList.toggle("dark-mode");
+    label.innerHTML = "Dark";
+    input.click();
+} else {
     document.body.classList.toggle("light-mode");
     label.innerHTML = "Light";
 }
