@@ -13,7 +13,6 @@ $page_url = $page_canonical;
 $directory = "../../";
 $directory_img = "../";
 
-if (!$debug) {
   if (isLogin()) {
     $user_id = $_SESSION["user_id"];
     $isNotUser = mysqli_query($conn, "SELECT * FROM account WHERE _id = $user_id");
@@ -29,5 +28,4 @@ if (!$debug) {
     http_response_code(403);
     die();
   }
-}
 ?>

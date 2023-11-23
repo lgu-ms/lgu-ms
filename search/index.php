@@ -31,7 +31,7 @@ include("../include/header.php");
                     <form action="<?php echo $directory; ?>search" method="get">
                         <div class="search-container">
                             <?php
-                            if (isset($_GET["q"])) {
+                            if (isset($_GET["q"]) && !empty($_GET["q"])) {
                                 echo '<input id="search" placeholder="What are you looking for?" type="text" name="q" value="' . $_GET["q"] . '">';
                             } else {
                                 echo '<input id="search" placeholder="What are you looking for?" type="text" name="q">';
@@ -42,7 +42,7 @@ include("../include/header.php");
                         </div>
                     </form>
                     <?php
-                    if (isset($_GET["q"])) {
+                    if (isset($_GET["q"]) && !empty($_GET["q"])) {
                         echo '<h2 class="mt-4">No results found!</h2><p><a href="https://google.com/search?q=' . $_GET["q"] . '%20site:digitalbarangay.com">search to google instead?</a></p>';
                     }
                     ?>

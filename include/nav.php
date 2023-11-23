@@ -28,7 +28,7 @@ $dec_user_name = null;
                 if (!isset($hideSearchBar)) {
                     echo '
                 <li class="nav-item">
-                    <form action="' . $directory. 'search" method="get">
+                    <form action="' . $directory . 'search" method="get">
                         <div class="search-container">
                             <input id="search" placeholder="What are you looking for?" type="text" name="q">
                             <i class="fa-solid fa-magnifying-glass" id="but"></i>
@@ -45,10 +45,19 @@ $dec_user_name = null;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact">Contact Us</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link default-light" href="<?php echo $directory; ?>modules">Modules</a>
+                </li>
+                <?php
+                  if (!isset($home)) {
+                     echo '
+                     <li class="nav-item">
+                    <a class="nav-link default-light" href="' . $directory . 'milestone">Milestone</a>
+                </li>
+                     ';
+                  }
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact">Contact Us</a>
                 </li>
 
                 <?php
@@ -73,11 +82,16 @@ $dec_user_name = null;
 
                     if (!isset($hideLoginButton)) {
                         $ff = '
-                    <li class="nav-item prim">
-                    <a class="nav-link default-light" href="' . $directory . 'login?ref=login_button">
-                        Login
-                    </a>
-                </li>
+                <li class="nav-item prim">
+                <a class="nav-link default-light" href="' . $directory . 'sigup?ref=signup_button">
+                   Signup
+                </a>
+            </li>
+            <li class="nav-item prim">
+            <a class="nav-link  btn btn-primary px-4" href="' . $directory . 'login?ref=login_button">
+                Login
+            </a>
+        </li>
                     ';
                     }
                 }
