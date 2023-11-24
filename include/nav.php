@@ -110,7 +110,7 @@ $dec_user_name = null;
                             <li class="nav-item seco" onclick="openProfile()">
                             <a class="nav-link" href="#' . $dec_user_name . '">
                             <span class="text sec px-2">' . $dec_user_name . '</span>
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-circle-user"></i>
                             </a>
                         </li>
                             ';

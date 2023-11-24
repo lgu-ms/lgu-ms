@@ -31,17 +31,16 @@ openProfile = () => {
 };
 
 generateRandomId = (length) => {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     const charactersLength = characters.length;
     let counter = 0;
     while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
     }
     return result;
 };
-
 
 showToast = (err) => {
     let id = generateRandomId(10);
@@ -76,7 +75,7 @@ showToast = (err) => {
 
     document.getElementById("toastcontainer").append(toast);
 
-    $("#" + id).on('hide.bs.toast', function(){
+    $("#" + id).on("hide.bs.toast", function () {
         toast.remove();
     });
 };
@@ -119,7 +118,7 @@ showAnnoucement = (annc, url) => {
 
     document.getElementById("toastcontainer").append(toast);
 
-    $("#" + id).on('hide.bs.toast', function(){
+    $("#" + id).on("hide.bs.toast", function () {
         toast.remove();
     });
 };
@@ -130,7 +129,7 @@ showPopup = (title, content, action, actionName) => {
     let mainModal = document.getElementById("mainModal");
 
     let modal = document.createElement("div");
-    modal.setAttribute("class", "modal face");
+    modal.setAttribute("class", "modal fade");
     modal.setAttribute("tabindex", "-1");
     modal.setAttribute("aria-hidden", "true");
     modal.setAttribute("id", id);
@@ -183,7 +182,7 @@ showPopup = (title, content, action, actionName) => {
     let bsModal = new bootstrap.Modal(modal);
     bsModal.show();
 
-    $("#" + id).on('hide.bs.modal', function(){
+    $("#" + id).on("hide.bs.modal", function () {
         modal.remove();
     });
 };
@@ -219,6 +218,79 @@ getCookies = (cname) => {
     return "";
 };
 
+function autocomplete(inp, arr) {
+    var currentFocus;
+    inp.addEventListener("input", function (e) {
+        var a,
+            b,
+            i,
+            val = this.value;
+        closeAllLists();
+        if (!val) {
+            return false;
+        }
+        currentFocus = -1;
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        this.parentNode.appendChild(a);
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                b = document.createElement("DIV");
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                b.addEventListener("click", function (e) {
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
+        }
+    });
+
+    inp.addEventListener("keydown", function (e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            currentFocus++;
+            addActive(x);
+        } else if (e.keyCode == 38) {
+            currentFocus--;
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            e.preventDefault();
+            if (currentFocus > -1) {
+                if (x) x[currentFocus].click();
+            }
+        }
+    });
+    function addActive(x) {
+        if (!x) return false;
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = x.length - 1;
+        x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    }
+    function closeAllLists(elmnt) {
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+}
+
 /*
 window.onerror = function a(msm, url, num) {
     alert(msm + "\n\n" + url);
@@ -244,6 +316,117 @@ if (typeof modulesList !== "undefined") {
             }
         };
     }
+}
+
+if (typeof changePhoto !== "undefined") {
+    changePhoto.onclick = function() {
+        $('#popupProfileModal').modal('hide');
+        let mainModal = document.getElementById("mainModal");
+
+        let id = generateRandomId(10);
+    
+        let modal = document.createElement("div");
+        modal.setAttribute("class", "modal fade");
+        modal.setAttribute("tabindex", "-1");
+        modal.setAttribute("id", id);
+        modal.setAttribute("aria-hidden", "true");
+    
+        let modalDialog = document.createElement("div");
+        modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+        let modalContent = document.createElement("div");
+        modalContent.setAttribute("class", "modal-content");
+    
+        let modalHeader = document.createElement("div");
+        modalHeader.setAttribute("class", "modal-header");
+    
+        let h1 = document.createElement("h1");
+        h1.setAttribute("class", "modal-title fs-5");
+        h1.innerText = "Upload Photo";
+    
+        let closeButton = document.createElement("button");
+        closeButton.setAttribute("class", "btn-close");
+        closeButton.setAttribute("type", "button");
+        closeButton.setAttribute("data-bs-dismiss", "modal");
+        closeButton.setAttribute("aria-label", "close");
+    
+        modalHeader.append(h1);
+        modalHeader.append(closeButton);
+    
+        let modalBody = document.createElement("div");
+        modalBody.setAttribute("class", "modal-body");
+    
+        let form = document.createElement("form");
+        form.setAttribute("action", "");
+        form.setAttribute("method", "post");
+        form.setAttribute("enctype", "multipart/form-data");
+
+        let input = document.createElement("input");
+        input.setAttribute("name", "fileToUpload");
+        input.setAttribute("id", "fileToUpload");
+        input.setAttribute("require", "required");
+        input.setAttribute("type", "file");
+        input.setAttribute("class", "form-control mb-5");
+
+        /*
+         <form action="<?php htmlspecialchars('php_self'); ?>" method="post"
+                            enctype="multipart/form-data">
+                            <label for="fileToUpload" class="form-label">Upload File</label>
+                            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
+                            <button type="submit" name="upload" id="executeCaptcha"
+                                class="btn btn-primary px-5 mt-2">Upload</button>
+                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                            <input type="hidden" name="action" value="validate_captcha">
+                        </form>
+                        */
+    
+        let hiddenInputResponse = document.createElement("input");
+        hiddenInputResponse.setAttribute("type", "hidden");
+        hiddenInputResponse.setAttribute("id", "g-recaptcha-response");
+        hiddenInputResponse.setAttribute("name", "g-recaptcha-response");
+        let hiddenInputAction = document.createElement("input");
+        hiddenInputAction.setAttribute("type", "hidden");
+        hiddenInputAction.setAttribute("name", "action");
+        hiddenInputAction.setAttribute("value", "validate_captcha");
+    
+        let dFlex = document.createElement("div");
+        dFlex.setAttribute("class", "d-flex");
+        let msAuto = document.createElement("div");
+        msAuto.setAttribute("class", "ms-auto");
+    
+        let actionButton = document.createElement("button");
+        actionButton.setAttribute("type", "submit");
+        actionButton.setAttribute("name", "changePhoto");
+        actionButton.setAttribute("class", "btn btn-primary px-4");
+    
+        actionButton.innerText = "Yes";
+    
+        msAuto.append(actionButton);
+        dFlex.append(msAuto);
+        form.append(input);
+        form.append(hiddenInputResponse);
+        form.append(hiddenInputAction);
+        form.append(dFlex);
+    
+        grecaptcha.ready(function () {
+            grecaptcha.execute(captcha_site_key, { action: "validate_captcha" }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+            });
+        });
+    
+        modalBody.append(form);
+        modalContent.append(modalHeader);
+        modalContent.append(modalBody);
+    
+        modalDialog.append(modalContent);
+        modal.append(modalDialog);
+        mainModal.append(modal);
+    
+        let bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+        $("#" + id).on("hide.bs.modal", function () {
+            modal.remove();
+        });
+    };
 }
 
 window.addEventListener("DOMContentLoaded", () => {

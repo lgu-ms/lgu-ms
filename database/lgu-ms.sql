@@ -63,8 +63,9 @@ CREATE TABLE `passwordchanged` (
 
 CREATE TABLE `profilepic` (
   `_pid` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `profilepic` text NOT NULL COMMENT 'base64 format of user profile picture',
-  `user_id` int(10) UNSIGNED NOT NULL
+  `profilepic` text NOT NULL COMMENT 'the hash value that link to the photo location',
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `last_accessed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 CREATE TABLE `contactus` (

@@ -627,6 +627,8 @@ div label {
 input[type=text],
 input[type=email],
 input[type=password],
+input[type=number],
+input[type=date],
 textarea {
     padding: 12px 40px;
     margin: 8px 0;
@@ -912,7 +914,7 @@ video {
     transition: all 0.3s ease;
 }
 
-.list-group-item:hover {
+.module-item:hover {
     color: var(--hover);
     transition: all 0.5s ease;
     padding-left: 1px;
@@ -977,4 +979,57 @@ video {
     padding-right: 15px;
     align-self: center;
     color: #212121;
+}
+
+.profilepic {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #111;
+}
+
+.profilepic:hover .profilepic-content {
+    opacity: 1;
+}
+
+.profilepic:hover .profilepic-image {
+    opacity: .5;
+}
+
+.profilepic-image {
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+
+.profilepic-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+.profilepic-icon {
+    color: white;
+    padding-bottom: 8px;
+}
+
+.fas {
+    font-size: 20px;
+}
+
+.profilepic-text {
+    font-size: 16px;
+    width: 50%;
+    text-align: center;
 }

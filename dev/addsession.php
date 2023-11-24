@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $user_id = $row["_id"];
             $fullname = $row["user_fullname"];
-
+            $user_type = $row["user_type"];
 
                 $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                 $device_id = $_SERVER['HTTP_USER_AGENT'];
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $row1["_sid"];
                             $_SESSION["user_id"] = $user_id;
+                            $_SESSION["user_type"] = $user_type;
                             echo '<script>window.location.href = "../"</script>';
                             die();
                         }

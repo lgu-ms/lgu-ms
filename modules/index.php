@@ -29,7 +29,7 @@ $count = 1;
 foreach ($modules as $module) {
 
     $page .= '
-    <li class="list-group-item d-flex justify-content-between align-items-start">
+    <li class="list-group-item d-flex justify-content-between align-items-start module-item">
     <i class="fa-solid ' . $modulesIcon[$count - 1] . '"></i>
     <div class="ms-2 me-auto module-742">
         <div class="fw-bold">Module ' . $count . '</div>

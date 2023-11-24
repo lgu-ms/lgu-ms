@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="password" placeholder="Password" name="password" required>
     <input list="usertype" name="type" required>
     <datalist id="usertype">
-        <option value="User">
-        <option value="Admin">
-        <option value="Super Admin">
-        <option value="Staff">
+        <option value="user">
+        <option value="admin">
+        <option value="super_admin">
+        <option value="staff">
     </datalist>
     <input type="submit" name="submit" required>
 </form>

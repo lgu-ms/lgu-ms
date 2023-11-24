@@ -126,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $db_password = $row["user_password"];
                         $user_id = $row["_id"];
                         $fullname = $row["user_fullname"];
+                        $user_type = $row["user_type"];
 
                         if (strcasecmp($db_password, $password) == 0) {
 
@@ -141,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $_SESSION["login_temp"] = true;
                                         $_SESSION["login_temp_session_id"] = $row1["_sid"];
                                         $_SESSION["login_temp_user_id"] = $user_id;
+                                        $_SESSION["login_temp_user_type"] = $user_type;
                                         $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
                                         $temp_id = hash("sha512", $otp);
                                         $_SESSION["login_temp_otp"] = $temp_id;

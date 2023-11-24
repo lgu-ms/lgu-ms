@@ -8,6 +8,8 @@ A comprehensive software solution designed to streamline and enhance the efficie
 
 - Link: https://digitalbarangay.com
 - Uptime: https://stats.uptimerobot.com/n0EyAslx3A
+- Project Table: https://github.com/orgs/lgu-ms/projects/2/views/1
+- Project Module Table: https://github.com/orgs/lgu-ms/projects/1/views/1
 
 <img src="animated-roped-off-construction-barracades.gif">
 
@@ -29,14 +31,16 @@ composer install --prefer-dist --no-progress
 npm install
 ```
 
-Open your [PHPMyAdmin](http://localhost/phpmyadmin) and create a database named `lgu-ms` and then import the `lgu-ms.sql` file.
+Open your [PHPMyAdmin](http://localhost/phpmyadmin) and create a database name `lgu-ms` and then import the `database/lgu-ms.sql` file followed by the importation of the rest of table files in the `database/` folder.
+
+## PHP variables
+
+- declare `masonry` to enable masonry script on the page
+- declare `recaptcha` to enable reCAPTCHA script on the page
+- declared `loadCustomJS` followed by the html script tage to be included after the `main.js`
 
 ## Contributions
 Everyone is welcome to contribute on this public repository.
-
-## Module Status
-
-
 
 ## License
 License under MIT 
