@@ -1,5 +1,6 @@
 <?php
 include("../../include/session.php");
+include("../../include/time_elapse_str.php");
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
@@ -147,8 +148,9 @@ if (mysqli_num_rows($getDmR) > 0) {
             }
             $page .= '
                             <div class="d-flex">
+                            <div class="ml-auto"><small class="text-muted">' . time_elapsed_string('@'. $row["file_added_date"]) . '</small></div>
                             <div class="ms-auto">
-                              <i class="fa-regular fa-pen-to-square edit"  data-id="' . $row["_did"] . '"></i> &nbsp; <i class="fa-solid fa-trash delete" data-id="' . $row["_did"] . '"></i>
+                            <i class="fa-solid fa-download" onclick="download(\'' . hash("sha1", $row["file_name"]) . '.' . $row["file_type"] . '\', \'' . $row["file_name"] . '\')"></i> &nbsp; <i class="fa-regular fa-pen-to-square edit"  data-id="' . $row["_did"] . '"></i> &nbsp; <i class="fa-solid fa-trash delete" data-id="' . $row["_did"] . '"></i>
                             </div>
                             </div>
                         </div>
