@@ -5,7 +5,6 @@ updates:
     schedule:
       interval: "daily"
     target-branch: "master"
-    timezone: "Asia/Manila"
     labels:
       - "composer dependencies"
     versioning-strategy: increase-if-necessary
@@ -14,7 +13,6 @@ updates:
     schedule:
       interval: "daily"
     target-branch: "master"
-    timezone: "Asia/Manila"
     labels:
       - "composer dependencies"
     versioning-strategy: increase-if-necessary
