@@ -8,15 +8,13 @@ $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "http://localhost/lgu-ms/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
-$page_canonical = "http://localhost/lgu-ms/public-market-and-vendors-management-module/";
+$page_canonical = "http://localhost/lgu-ms/modules/land-use-and-zoning-module/";
 $page_url = $page_canonical;
-$directory = "../";
-$directory_img = "../";
+$directory = "../../";
+$directory_img = "../../";
 $isForm = false;
 
-include("../include/header.php");
-echo '<link rel="stylesheet" href="../css/public-market-module.css">';
-
+include("../../include/header.php");
 ?>
 
 <body class="d-flex flex-column min-vh-100 ">
@@ -39,12 +37,12 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
         <div class="container">
             <div class="row align-items-center g-lg-5 py-5">
                 <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="display-4 fw-bold lh-1 mb-3">Register for Market</h1>
-                    <p class="col-lg-10 fs-5">A Public Market and Vendor Module streamlines market operations, enhances vendor-customer interactions, boosts sales, and provides valuable data for market administrators. It can be tailored to fit the specific needs of different markets, whether physical or online, promoting local businesses and fostering community engagement.</p>
+                    <h1 class="display-4 fw-bold lh-1 mb-3">Register for Land Use and Zoning</h1>
+                    <p class="col-lg-10 fs-5">Zoning districts are often created based on comprehensive community planning efforts. These plans take into account factors such as transportation needs, environmental conservation, housing requirements, and economic development goals.</p>
                 </div>
                 <div class="col-md-10 mx-auto col-lg-5">
                     <form class="p-4 p-md-5 bg-body-auto" id="register1">
-                        <h3>Vendor</h3>
+                        <h3>Prperty Owner</h3>
                         <div class="input-group2">
                             <input id="fname" type="text" placeholder="First Name" name="fname" required>
                             <i class="fa fa-user"></i>
@@ -67,34 +65,21 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
             </div>
         </div>
     </main>
+
     <!-- FORM -->
     <div class="col-md-10 mx-auto col-lg-10" id="form">
         <div class="row">
-            <div class="center">
-                <h4>Note: You can have multiple stalls and product.</h4>
-            </div>
             <div class="col-md-6">
                 <!-- Content for the first column goes here -->
                 <form class="p-4 p-md-5 bg-body-auto" id="reg-stall">
-                    <h3>Stall</h3>
+                    <h3>Land Parcel</h3>
                     <div class="input-group2">
-                        <input id="stall-name" type="text" placeholder="Stall Name" name="stall-name" required>
-                        <i class="fa fa-user"></i>
+                        <input id="parcel-address" type="text" placeholder="Parcel Address" name="parcel-address" required>
+                        <i class="fa fa-map"></i>
                     </div>
                     <div class="input-group2">
-                        <input id="location" type="text" placeholder="Location" name="location" required>
-                        <i class="fa fa-location-dot"></i>
-                    </div>
-                    <div class="input-group2">
-                        <input id="stall-desc" type="text" placeholder="Description" name="stall-desc" required>
-                        <i class="fa fa-file-lines"></i>
-                    </div>
-                    <div class="input-group2">
-                        <input id="stall-cat" type="text" placeholder="Category" name="stall-cat" required>
-                        <i class="fa fa-store"></i>
-                    </div>
-                    <div class="center">
-                        <button id="add-stall" class="btn btn-primary px-5 shadow">Add Stall</button>
+                        <input id="land-use" type="text" placeholder="Land Use" name="land-use" required>
+                        <i class="fa fa-building"></i>
                     </div>
                 </form>
             </div>
@@ -102,29 +87,24 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
             <div class="col-md-6">
                 <!-- Content for the second column goes here -->
                 <form class="p-4 p-md-5 bg-body-auto" id="regProd">
-                    <h3>Product</h3>
+                    <h3>Zoning District</h3>
                     <div class="input-group2">
-                        <input id="product-name" type="text" placeholder="Product Name" name="product-name" required>
+                        <input id="district-name" type="text" placeholder="District Name" name="district-name" required>
                         <i class="fa fa-user"></i>
                     </div>
-                    <div class="input-group2">
-                        <input id="product-desc" type="text" placeholder="Description" name="product-desc" required>
-                        <i class="fa fa-file-lines"></i>
-                    </div>
-                    <div class="input-group2">
-                        <input id="price" type="text" placeholder="Price" name="Price" required>
-                        <i class="fa fa-dollar-sign"></i>
-                    </div>
-                    <div class="input-group2">
-                        <input id="product-cat" type="text" placeholder="Category" name="product-cat" required>
-                        <i class="fa fa-store"></i>
-                    </div>
-                    <div class="center">
-                        <button id="add-product" class="btn btn-primary px-5 shadow">Add Product</button>
-                    </div>
-
                 </form>
             </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Content for the first column goes here -->
+            <form class="p-4 p-md-5 bg-body-auto" id="reg-stall">
+                <h3>Land Use Permit</h3>
+                <div class="input-group2">
+                    <input id="permit-type" type="text" placeholder="Permit Type" name="permit-type" required>
+                    <i class="fa fa-tag"></i>
+                </div>
+            </form>
         </div>
         <div class="center">
             <button id="register" class="btn btn-primary px-5 shadow mx-auto my-auto">Register</button>
@@ -137,7 +117,6 @@ echo '<link rel="stylesheet" href="../css/public-market-module.css">';
         <a href="index.php" class="active text-center">Return to main page.</a>
     </div>
     <?php include("../../include/footer.php"); ?>
-
 </body>
 
 </html>
