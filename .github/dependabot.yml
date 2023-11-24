@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    timezone: "Asia/Manila"
+    labels:
+      - "composer dependencies"
+    versioning-strategy: increase-if-necessary
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    timezone: "Asia/Manila"
+    labels:
+      - "composer dependencies"
+    versioning-strategy: increase-if-necessary
