@@ -34,6 +34,10 @@ Open your [PHPMyAdmin](http://localhost/phpmyadmin) and create a database named 
 ## Contributions
 Everyone is welcome to contribute on this public repository.
 
+## Module Status
+
+
+
 ## License
 License under MIT 
 Copyright (c) 2023 Melvin Jones Repol & Its Contributors

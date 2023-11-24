@@ -1,3 +1,13 @@
+
+download = (url, name) => { 
+    var evt = document.createEvent("MouseEvents");
+    evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = "../../uploads/" + url;
+    link.dispatchEvent(evt);
+};
+
 deleteData = (title, a, type) => {
     let mainModal = document.getElementById("mainModal");
 
