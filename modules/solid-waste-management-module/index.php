@@ -1,5 +1,6 @@
 <?php
 include("../../include/session.php");
+include("../../include/time_elapse_str.php");
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
@@ -16,6 +17,166 @@ $recaptcha = true;
 
 include("../../include/header.php");
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isAdmin()) {
+
+    if (isset($_POST["delete"])) {
+        require_once '../../vendor/autoload.php';
+        $client = new GuzzleHttp\Client();
+        $token = $_POST["g-recaptcha-response"];
+        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+            'form_params' => [
+                'secret' => $captcha_secret_key,
+                'response' => $token
+            ]
+        ]);
+        $result = json_decode($response->getBody());
+        if ($result->success) {
+            if (isLogin()) {
+                $item_id = $_POST["id"];
+                $item_name = $_POST["name"];
+                $deleteData = "DELETE FROM swm WHERE _sid = $item_id";
+                $conn->query($deleteData);
+                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The data ' . $item_name . ' has been deleted!"); });</script>';
+            } else {
+                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("You need to login before deleting a data!."); });</script>';
+            }
+        } else {
+            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Seems like you failed in I am not a robot test."); });</script>';
+        }
+    }
+
+    if (isset($_POST["add"]) || isset($_POST["edit"])) {
+        $actionType = isset($_POST["add"]) ? true : (isset($_POST["edit"]) ? false : false);
+        require_once '../../vendor/autoload.php';
+        $client = new GuzzleHttp\Client();
+        $token = $_POST["g-recaptcha-response"];
+        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+            'form_params' => [
+                'secret' => $captcha_secret_key,
+                'response' => $token
+            ]
+        ]);
+        $result = json_decode($response->getBody());
+        if ($result->success) {
+            $collection_area = $no_trucks = $solid_waste_weight = $collection_date = $transport_to = $solid_waste_processing_type = $solid_waste_type = "";
+            if (isLogin()) {
+                if (!isset($_POST["collection_area"])) {
+                    echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Collection area is required!"); });</script>';
+                } else {
+                    $collection_area = $_POST["collection_area"];
+                    if (!isset($_POST["no_trucks"])) {
+                        echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("No of trucks is required!"); });</script>';
+                    } else {
+                        $no_trucks = $_POST["no_trucks"];
+                        if (!isset($_POST["solid_waste_weight"])) {
+                            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Solid waste weight is required!"); });</script>';
+                        } else {
+                            $solid_waste_weight = $_POST["solid_waste_weight"];
+                            if (!isset($_POST["collection_date"])) {
+                                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Collection date is required!"); });</script>';
+                            } else {
+                                $collection_date = $_POST["collection_date"];
+                                if (!isset($_POST["transport_to"])) {
+                                    echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Transport to is required!"); });</script>';
+                                } else {
+                                    $transport_to = $_POST["transport_to"];
+                                    if (!isset($_POST["waste_processing_type"])) {
+                                        echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Solid waste processing type is required!"); });</script>';
+                                    } else {
+                                        $solid_waste_processing_type = $_POST["waste_processing_type"];
+                                        if (!isset($_POST["waste_type"])) {
+                                            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Solid waste type is required!"); });</script>';
+                                        } else {
+                                            $solid_waste_type = $_POST["waste_type"];
+                                            if ($actionType) {
+                                                $sql = "INSERT INTO swm (collection_area, no_trucks, solid_waste_weight, collection_date, transport_to, waste_processing_type, waste_type, created_on, updated_on, created_by, updated_by) VALUES ";
+                                                $today = strtotime("now");
+                                                $session_id = $_SESSION["session_id"];
+                                                $sql .= "('$collection_area', $no_trucks, '$solid_waste_weight', '$collection_date', '$transport_to', '$solid_waste_processing_type', '$solid_waste_type', $today, $today, $session_id, $session_id)";
+                                                if ($conn->query($sql) === TRUE) {
+                                                    echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Data has been added."); });</script>';
+                                                }
+                                            } else {
+                                                $today = strtotime("now");
+                                                $sid = $_POST["id"];
+                                                $session_id = $_SESSION["session_id"];
+                                                $updateItemData = "UPDATE swm SET collection_area = '$collection_area', no_trucks = $no_trucks, solid_waste_weight = $solid_waste_weight, collection_date = '$collection_date', transport_to = '$transport_to', waste_processing_type = '$solid_waste_processing_type', waste_type = '$solid_waste_type', updated_on = $today, updated_by = $session_id WHERE _sid = $sid";
+                                                if ($conn->query($updateItemData) === TRUE) {
+                                                    echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Data has been updated."); });</script>';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            } else {
+                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("You need to login before adding a data!."); });</script>';
+            }
+        } else {
+            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Seems like you failed in I am not a robot test."); });</script>';
+        }
+    }
+}
+
+$page = null;
+$query = "SELECT * FROM swm";
+if (isset($_GET["q"]) && !empty($_GET["q"])) {
+    $query .= " WHERE collection_area LIKE '%" . $_GET["q"] . "%' OR collection_date LIKE '%" . $_GET["q"] . "%' OR transport_to LIKE '%" . $_GET["q"] . "%' OR waste_processing_type LIKE '%" . $_GET["q"] . "%' OR waste_type LIKE '%" . $_GET["q"] . "%'";
+}
+$getSwm = mysqli_query($conn, $query);
+if (mysqli_num_rows($getSwm) > 0) {
+    $page .= '<div class="row row-cols-1 row-cols-md-3 g-2" data-masonry="{&quot;percentPosition&quot;: true }">';
+    while ($row = mysqli_fetch_assoc($getSwm)) {
+        $base64F = base64_encode('{"collection_area": "' . $row["collection_area"] . '", "no_trucks": ' . $row["no_trucks"] . ', "solid_waste_weight": ' . $row["solid_waste_weight"] . ', "collection_date": "' . $row["collection_date"] . '", "transport_to": "' . $row["transport_to"] . '", "waste_processing_type": "' . $row["waste_processing_type"] . '", "waste_type": "' . $row["waste_type"] . '"}');
+        $page .= '
+        <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                        <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 swm-title">' . $row["collection_area"] . '</h5>
+                                <small>' . time_elapsed_string('@' . $row["created_on"]) . '</small>
+                            </div>
+                        <ul class="mb-1">
+                            <li>No. truck(s): ' . $row["no_trucks"] . '</li>
+                            <li>Solid Waste Weight (Tons): ' . $row["solid_waste_weight"] . '</li>
+                            <li>Collection Date: ' . $row["collection_date"] . '</li>
+                            <li>Transport to: ' . $row["transport_to"] . '</li>
+                            <li>Solid Waste Processing Type: ' . $row["waste_processing_type"] . '</li>
+                            <li>Solid Waste Type: ' . $row["waste_type"] . '</li>
+                        </ul>
+                            <div class="d-flex">';
+
+        if ($row["created_on"] != $row["updated_on"]) {
+            $page .= '<div class="ml-auto"><small class="text-muted">edited ' . time_elapsed_string('@' . $row["updated_on"]) . '</small></div>';
+        }
+        if (isAdmin()) {
+            $page .= '<div class="ms-auto">
+                               <i class="fa-regular fa-pen-to-square edit" data-res="' . $base64F . '"  data-id="' . $row["_sid"] . '"></i> 
+                               &nbsp; 
+                               <i class="fa-solid fa-trash delete" data-id="' . $row["_sid"] . '"></i>
+                            </div>';
+        }
+        $page .= '
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        ';
+    }
+    $page .= '</div>';
+} else {
+    if (isset($_GET["q"]) && !empty($_GET["q"])) {
+        $page = '<h1>No data found for query <u>' . $_GET["q"] . '</u>.';
+    } else {
+        $page = '<h1>No data available.</h1>';
+    }
+}
+
 ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -24,14 +185,24 @@ include("../../include/header.php");
 
     <main>
         <div class="container pt-4 pt-xl-5 mb-5">
+            <h1>Solid Waste Management</h1>
+            <p class="h5 mb-5">Optimize and streamline the management of solid waste. Waste collection scheduling, <br>
+                tracking, and reporting, ultimately enhancing efficiency and transparency in waste management processes.
+            </p>
             <div class="row g-0">
-            <div class="col-md-4 p-3">
-                <button class="btn btn-primary px-5 mt-5">Add Data</button>
+                <?php
+                if (isAdmin()) {
+                    echo '
+                    <div class="col-md-4 p-3">
+                    <button class="btn btn-primary px-5" id="addData">Add Data</button>
                 </div>
+                    ';
+                }
+                ?>
                 <div class="col-md-8 p-3">
-                    
+
                     <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
-                        <div class="search-container mt-5">
+                        <div class="search-container">
                             <?php
                             if (isset($_GET["q"]) && !empty($_GET["q"])) {
                                 echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
@@ -44,74 +215,18 @@ include("../../include/header.php");
                         </div>
                     </form>
                 </div>
-            </div> 
-            <table class="table table-striped table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Waste Generation Area</th>
-      <th scope="col">No. Trucks</th>
-      <th scope="col">Estimate Waste Collected</th>
-      <th scope="col">Collection Date</th>
-      <th scope="col">Transport to</th>
-      <th scope="col">Processing</th>
-      <th scope="col">Update on</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Payatas</td>
-      <td>2</td>
-      <td>2 tons</td>
-      <td>8-23-2023</td>
-      <td>Bulacan</td>
-      <td>Anaerobic Digester</td>
-      <td>2 minutes ago</td>
-      <td><i class="fa-solid fa-pen-to-square"></i> &nbsp; <i class="fa-solid fa-trash"></i></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Novaliches</td>
-      <td>2</td>
-      <td>2 tons</td>
-      <td>9-23-2023</td>
-      <td>Payatas</td>
-      <td>Compost</td>
-      <td>2 minutes ago</td>
-      <td><i class="fa-solid fa-pen-to-square"></i> &nbsp; <i class="fa-solid fa-trash"></i></td>
-    
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Tandang Sora</td>
-      <td>2</td>
-      <td>2 tons</td>
-      <td>10-23-2023</td>
-      <td>Payatas</td>
-      <td>Incineration</td>
-      <td>2 minutes ago</td>
-      <td><i class="fa-solid fa-pen-to-square"></i> &nbsp; <i class="fa-solid fa-trash"></i></td>
-    
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>North Fairview</td>
-      <td>2</td>
-      <td>2 tons</td>
-      <td>11-23-2023</td>
-      <td>Payatas</td>
-      <td>Sanitary Landfill</td>
-      <td>2 minutes ago</td>
-      <td><i class="fa-solid fa-pen-to-square"></i> &nbsp; <i class="fa-solid fa-trash"></i></td>
-    
-    </tr>
-  </tbody>
-</table>
+            </div>
+
+            <?php
+            echo $page;
+            ?>
         </div>
     </main>
-    <?php include("../../include/footer.php"); ?>
+
+    <?php
+    $loadCustomJS = '<script src="../../js/swm.js"></script>';
+    include("../../include/footer.php");
+    ?>
 </body>
 
 </html>

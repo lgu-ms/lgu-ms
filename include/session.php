@@ -27,6 +27,14 @@ function isLogin()
     return isset($_SESSION['user_login']);
 }
 
+function isAdmin() {
+    if (isLogin()) {
+        $user_type = $_SESSION["user_type"];
+        return $user_type != "user" && $user_type != "staff";
+    }
+    return false;
+}
+
 function is_session_started()
 {
     if (php_sapi_name() !== 'cli') {

@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $login_temp_session_id = $_SESSION["login_temp_session_id"];
         $login_temp_id = $_SESSION["login_temp_otp"];
         $login_temp_user_id = $_SESSION["login_temp_user_id"];
+        $login_temp_user_type = $_SESSION["login_temp_user_type"];
         $otp = hash("sha512", $_POST["otp"]);
 
         $getOtpFromDB = mysqli_query($conn, "SELECT * FROM otp WHERE temp_id= '$login_temp_id'");
@@ -114,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION['user_login'] = true;
                             $_SESSION["session_id"] = $login_temp_session_id;
                             $_SESSION["user_id"] = $login_temp_user_id;
+                            $_SESSION["user_type"] = $login_temp_user_type;
 
                             // TODO: Check if the device_id is new or not according to the past 
                             // sessions if new notify the user about the new device accessing his account

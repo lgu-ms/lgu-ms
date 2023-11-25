@@ -85,18 +85,23 @@ $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
 $page_canonical = "https://digitalbarangay.com/";
 $page_url = $page_canonical;
-$directory = "";
 
+$url = $_SERVER['REQUEST_URI'];
+$parts = explode('/',$url);
+$dir = $_SERVER['SERVER_NAME'];
+for ($i = 0; $i < count($parts) - 2; $i++) {
+ $dir .= $parts[$i] . "/";
+}
+
+$directory = '';
+$directory_img = '';
 if (isset($_GET["d5345n5k3j3bh4b3hb4b3"])) {
-    $directory = "";
+    $directory = str_replace("localhost/", "", $dir);
+    $directory_img = str_replace("localhost/", "../", $dir);
 } else {
-    $directory = "../";
+    $directory = str_replace("digitalbarangay.com/", "", $dir);
+    $directory_img = str_replace("digitalbarangay.com/", "../", $dir);
 }
-if ($errorCode == 403) {
-    $directory = "../";
-}
-
-$directory_img = $directory;
 
 include("../include/header.php");
 
