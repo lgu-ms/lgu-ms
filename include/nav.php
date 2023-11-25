@@ -48,13 +48,13 @@ $dec_user_name = null;
                     <a class="nav-link default-light" href="<?php echo $directory; ?>modules">Modules</a>
                 </li>
                 <?php
-                  if (!isset($home)) {
-                     echo '
+                if (!isset($home)) {
+                    echo '
                      <li class="nav-item">
                     <a class="nav-link default-light" href="' . $directory . 'milestone">Milestone</a>
                 </li>
                      ';
-                  }
+                }
                 ?>
                 <li class="nav-item">
                     <a class="nav-link default-light" href="<?php echo $directory; ?>contact">Contact Us</a>
@@ -71,8 +71,17 @@ $dec_user_name = null;
                             $dec_user_name = $row["user_name"];
                             $ff = '
                             <li class="nav-item prim" onclick="openProfile()">
-                            <a class="nav-link  default-light" href="#' . $dec_user_name . '">
-                            <i class="fa-solid fa-circle-user  default-light"></i> &nbsp;' . $row["user_name"] . '
+                            <a class="nav-link  default-light" href="#' . $dec_user_name . '">';
+
+                            $filename = $directory . "avatar/" . $_SESSION["user_id"] . '.png';
+                            if (file_exists($filename)) {
+                                $ff .= ' <img class="rounded" src="' . $filename . '"
+                                width="20" height="20" alt="User Avatar" />';
+                            } else {
+                                $ff .= ' <i class="fa-solid fa-circle-user  default-light"></i>';
+                            }
+
+                            $ff .= ' &nbsp;' . $row["user_name"] . '
                             </a>
                         </li>
                             ';
@@ -109,9 +118,18 @@ $dec_user_name = null;
                     $ff = '
                             <li class="nav-item seco" onclick="openProfile()">
                             <a class="nav-link" href="#' . $dec_user_name . '">
-                            <span class="text sec px-2">' . $dec_user_name . '</span>
-                                <i class="fa-solid fa-circle-user"></i>
-                            </a>
+                            <span class="text sec px-2">' . $dec_user_name . '</span>';
+
+
+                    $filename = $directory . "avatar/" . $_SESSION["user_id"] . '.png';
+                    if (file_exists($filename)) {
+                        $ff .= ' <img class="rounded" src="' . $filename . '"
+                                width="20" height="20" alt="User Avatar" />';
+                    } else {
+                        $ff .= ' <i class="fa-solid fa-circle-user  default-light"></i>';
+                    }
+
+                    $ff .= '  </a>
                         </li>
                             ';
 

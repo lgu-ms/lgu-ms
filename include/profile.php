@@ -8,12 +8,20 @@
             <div class="card" style="background: none; border: none;">
                 <div class="card-body">
                     <div class="profilepic" id="changePhoto">
-                        <img class="profilepic-image"
-                            src="<?php echo $directory; ?>images/defaultprofile.png"
-                            width="125" height="125" alt="Default Profile Image" />
+                        <?php
+                        $filename = $directory . "avatar/" . $_SESSION["user_id"] . '.png';
+                        if (file_exists($filename)) {
+                            echo ' <img class="profilepic-image" src="' . $filename . '"
+                            width="125" height="125" alt="User Avatar" />';
+                        } else {
+                            echo ' <img class="profilepic-image" src="' . $directory . 'images/defaultprofile.png"
+                            width="125" height="125" alt="Default Profile Image" />';
+                        }
+                        ?>
+                       
                         <div class="profilepic-content">
                             <span class="profilepic-icon"><i class="fas fa-camera"></i></span>
-                            <span class="profilepic-text" >Change Photo</span>
+                            <span class="profilepic-text">Change Photo</span>
                         </div>
                     </div>
 

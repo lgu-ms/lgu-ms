@@ -319,113 +319,74 @@ if (typeof modulesList !== "undefined") {
 }
 
 if (typeof changePhoto !== "undefined") {
-    changePhoto.onclick = function() {
-        $('#popupProfileModal').modal('hide');
+    changePhoto.onclick = function () {
+        $("#popupProfileModal").modal("hide");
         let mainModal = document.getElementById("mainModal");
 
         let id = generateRandomId(10);
-    
+
         let modal = document.createElement("div");
         modal.setAttribute("class", "modal fade");
         modal.setAttribute("tabindex", "-1");
         modal.setAttribute("id", id);
         modal.setAttribute("aria-hidden", "true");
-    
+
         let modalDialog = document.createElement("div");
         modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
         let modalContent = document.createElement("div");
         modalContent.setAttribute("class", "modal-content");
-    
+
         let modalHeader = document.createElement("div");
         modalHeader.setAttribute("class", "modal-header");
-    
+
         let h1 = document.createElement("h1");
         h1.setAttribute("class", "modal-title fs-5");
         h1.innerText = "Upload Photo";
-    
+
         let closeButton = document.createElement("button");
         closeButton.setAttribute("class", "btn-close");
         closeButton.setAttribute("type", "button");
         closeButton.setAttribute("data-bs-dismiss", "modal");
         closeButton.setAttribute("aria-label", "close");
-    
+
         modalHeader.append(h1);
         modalHeader.append(closeButton);
-    
+
         let modalBody = document.createElement("div");
         modalBody.setAttribute("class", "modal-body");
-    
+
         let form = document.createElement("form");
         form.setAttribute("action", "");
         form.setAttribute("method", "post");
         form.setAttribute("enctype", "multipart/form-data");
 
         let input = document.createElement("input");
-        input.setAttribute("name", "fileToUpload");
-        input.setAttribute("id", "fileToUpload");
+        input.setAttribute("name", "changePhoto");
+        input.setAttribute("id", "changePhoto");
         input.setAttribute("require", "required");
         input.setAttribute("type", "file");
         input.setAttribute("class", "form-control mb-5");
+        input.setAttribute("accept", "image/*");
 
-        /*
-         <form action="<?php htmlspecialchars('php_self'); ?>" method="post"
-                            enctype="multipart/form-data">
-                            <label for="fileToUpload" class="form-label">Upload File</label>
-                            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
-                            <button type="submit" name="upload" id="executeCaptcha"
-                                class="btn btn-primary px-5 mt-2">Upload</button>
-                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                            <input type="hidden" name="action" value="validate_captcha">
-                        </form>
-                        */
-    
-        let hiddenInputResponse = document.createElement("input");
-        hiddenInputResponse.setAttribute("type", "hidden");
-        hiddenInputResponse.setAttribute("id", "g-recaptcha-response");
-        hiddenInputResponse.setAttribute("name", "g-recaptcha-response");
-        let hiddenInputAction = document.createElement("input");
-        hiddenInputAction.setAttribute("type", "hidden");
-        hiddenInputAction.setAttribute("name", "action");
-        hiddenInputAction.setAttribute("value", "validate_captcha");
-    
-        let dFlex = document.createElement("div");
-        dFlex.setAttribute("class", "d-flex");
-        let msAuto = document.createElement("div");
-        msAuto.setAttribute("class", "ms-auto");
-    
-        let actionButton = document.createElement("button");
-        actionButton.setAttribute("type", "submit");
-        actionButton.setAttribute("name", "changePhoto");
-        actionButton.setAttribute("class", "btn btn-primary px-4");
-    
-        actionButton.innerText = "Yes";
-    
-        msAuto.append(actionButton);
-        dFlex.append(msAuto);
         form.append(input);
-        form.append(hiddenInputResponse);
-        form.append(hiddenInputAction);
-        form.append(dFlex);
-    
-        grecaptcha.ready(function () {
-            grecaptcha.execute(captcha_site_key, { action: "validate_captcha" }).then(function (token) {
-                document.getElementById("g-recaptcha-response").value = token;
-            });
-        });
-    
+
         modalBody.append(form);
         modalContent.append(modalHeader);
         modalContent.append(modalBody);
-    
+
         modalDialog.append(modalContent);
         modal.append(modalDialog);
         mainModal.append(modal);
-    
+
         let bsModal = new bootstrap.Modal(modal);
         bsModal.show();
         $("#" + id).on("hide.bs.modal", function () {
             modal.remove();
         });
+
+        input.onchange = function() {
+            form.submit();
+        };
     };
 }
 
