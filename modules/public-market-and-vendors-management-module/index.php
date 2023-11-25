@@ -7,7 +7,7 @@ $page_title = "Public Market And Vendors Management Module";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/cover.png";
-$page_author = "Enzo Reyes";
+$page_author = "Enzo Reyes, Melvin Jones Repol";
 $page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/";
 $page_url = $page_canonical;
 $directory = "../../";
@@ -128,3 +128,9 @@ echo '<link rel="stylesheet" href="../../css/public-market-module.css">';
 <?php include("../../include/footer.php"); ?>
 
 </html>
+<?php
+if (!isLogin()) {
+    echo '<script> alert("Please login to continue...");</script>';
+    echo '<script>window.location.href = "../../login"</script>';
+  }
+?>
