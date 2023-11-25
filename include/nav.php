@@ -120,7 +120,6 @@ $dec_user_name = null;
                             <a class="nav-link" href="#' . $dec_user_name . '">
                             <span class="text sec px-2">' . $dec_user_name . '</span>';
 
-
                     $filename = $directory . "avatar/" . $_SESSION["user_id"] . '.png';
                     if (file_exists($filename)) {
                         $ff .= ' <img class="rounded" src="' . $filename . '"

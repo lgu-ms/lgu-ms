@@ -1,4 +1,6 @@
-
+/*
+* Solid Waste Management
+*/
 
 showMultiPurposeInput = (title, label, actionName, action, item_id, collectionArea, noTrucksID, solidWasteWeightID, collectionDateID,
     transportToID, wasteProcessingType, wasteType)  => {

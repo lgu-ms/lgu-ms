@@ -19,7 +19,8 @@ $modules = array("Citezen Services and Engagement", "Real Property Tax Managemet
 $modulesIcon = array("fa-people-group", "fa-building-user", "fa-id-card", "fa-mountain-sun", "fa-shop", "fa-money-bill-wave", "fa-file-invoice", "fa-square-poll-vertical", "fa-truck-medical", "fa-dumpster", "fa-road", "fa-user", "fa-hand-holding-droplet", "fa-record-vinyl", "fa-map", "fa-people-roof", "fa-brands fa-accessible-icon", "fa-chart-pie", "fa-database");
 $page = '
 <div class="container pt-4 pt-xl-5" id="modulesList">
-            <h1 class="border-bottom">Modules</h1>
+            <h1>Modules</h1>
+            <p class="mb-4 h5">Integrate Digital Tools fostering a more responsive, connected and transparent governance structure.</p>
             <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <ul class="list-group mt-2 mb-2">
