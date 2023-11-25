@@ -7,11 +7,12 @@ $page_title = "Digital Barangay - A LGU Management System";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/ogimage.png";
-$page_author = "Enzo Reyes";
-$page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/users.php";
+$page_author = "Enzo Reyes, Melvin Jones Repol";
+$page_canonical = "https://digitalbarangay.com/modules/public-market-and-vendors-management-module/";
 $page_url = $page_canonical;
 $directory = "../../";
-$directory_img = "../";
+$directory_img = "../../";
+$isForm = false;
 
 if (isLogin()) {
     $user_id = $_SESSION["user_id"];
