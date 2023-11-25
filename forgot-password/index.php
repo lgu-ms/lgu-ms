@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
     $result = json_decode($response->getBody());
     if ($result->success) {
-        if (!isset($_POST["forgot"])) {
+        if (isset($_POST["forgot"])) {
             $email = "";
             if (!isset($_POST["email"])) {
                 echo '<script>showToast("Email is required!")</script>';
