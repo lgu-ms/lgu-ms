@@ -83,4 +83,8 @@
     <title>
         <?php echo $page_title; ?>
     </title>
+
+    <?php
+    include("update_profile.php");
+    ?>
 </head>

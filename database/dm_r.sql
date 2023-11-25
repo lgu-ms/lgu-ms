@@ -17,20 +17,24 @@ CREATE TABLE `dm_r` (
   `file_added_date` int(11) NOT NULL,
   `file_status` varchar(20) NOT NULL COMMENT 'EXIST & DELETED',
   `file_deleted_date` int(11) DEFAULT NULL,
-  `session_id` int(11) UNSIGNED NOT NULL
+  `created_by` int(11) UNSIGNED NOT NULL,
+  `updated_by` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Document Management and Records';
 
 
 ALTER TABLE `dm_r`
   ADD PRIMARY KEY (`_did`),
-  ADD KEY `dm_r_session_id` (`session_id`);
+  ADD KEY `dm_r_created_by` (`created_by`),
+  ADD KEY `dm_r_updated_by` (`updated_by`);
 
 
 ALTER TABLE `dm_r`
   MODIFY `_did` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
 
+
 ALTER TABLE `dm_r`
-  ADD CONSTRAINT `dm_r_session_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`);
+  ADD CONSTRAINT `dm_r_created_by` FOREIGN KEY (`created_by`) REFERENCES `account_session` (`_sid`),
+  ADD CONSTRAINT `dm_r_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `account_session` (`_sid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

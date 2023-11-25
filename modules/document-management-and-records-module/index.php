@@ -2,6 +2,11 @@
 include("../../include/session.php");
 include("../../include/time_elapse_str.php");
 
+if (!isAdmin()) {
+    http_response_code(403);
+    die();
+}
+
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Document Management and Records";
@@ -14,12 +19,12 @@ $page_url = $page_canonical;
 $directory = "../../";
 $directory_img = "../";
 $recaptcha = true;
+$masonry = true;
 
 include("../../include/header.php");
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     if (isset($_POST["edit"])) {
         require_once '../../vendor/autoload.php';
         $client = new GuzzleHttp\Client();
@@ -32,13 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
         $result = json_decode($response->getBody());
         if ($result->success) {
-            $item_id = $_POST["id"];
-            $item_name = $_POST["name"];
-            $item_description = $_POST["description"];
-            $updateFile = "UPDATE dm_r SET file_description = '$item_description' WHERE _did = $item_id";
-            $conn->query($updateFile);
-            $split_name = explode(".", $item_name);
-            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file ' . $item_name . ' has been updated!"); });</script>';
+            if (!isset($_POST["description"])) {
+                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Description is required!"); });</script>';
+            } else {
+                $item_id = $_POST["id"];
+                $item_name = $_POST["name"];
+                $item_description = $_POST["description"];
+                $session_id = $_SESSION["session_id"];
+                $updateFile = "UPDATE dm_r SET file_description = '$item_description', updated_by = $session_id  WHERE _did = $item_id";
+                $conn->query($updateFile);
+                $split_name = explode(".", $item_name);
+                echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file ' . $item_name . ' has been updated!"); });</script>';
+            }
         } else {
             echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Seems like you failed in I am not a robot test."); });</script>';
         }
@@ -58,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->success) {
             $item_id = $_POST["id"];
             $item_name = $_POST["name"];
-            $updateFile = "UPDATE dm_r SET file_status = 'DELETED' WHERE _did = $item_id";
+            $session_id = $_SESSION["session_id"];
+            $updateFile = "UPDATE dm_r SET file_status = 'DELETED', updated_by = $session_id WHERE _did = $item_id";
             $conn->query($updateFile);
             $split_name = explode(".", $item_name);
             unlink("../../uploads/" . hash("sha1", $split_name[0] . '.' . $split_name[1]) . '.' . $split_name[1]);
@@ -98,10 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("File is too large. Max is 25MB!"); });</script>';
                     } else {
                         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $loc)) {
-                            $fileUpload = "INSERT INTO dm_r (file_name, file_type, file_size, file_added_date, file_status, session_id) VALUES ";
+                            $fileUpload = "INSERT INTO dm_r (file_name, file_type, file_size, file_added_date, file_status, created_by, updated_by) VALUES ";
                             $timeAdded = strtotime("now");
                             $session_id = $_SESSION["session_id"];
-                            $fileUpload .= "('$filename', '$fileType', $filesize, $timeAdded, 'EXISTS', $session_id)";
+                            $fileUpload .= "('$filename', '$fileType', $filesize, $timeAdded, 'EXISTS', $session_id, $session_id)";
                             if ($conn->query($fileUpload) === TRUE) {
                                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file <u>' . basename($_FILES["fileToUpload"]["name"]) . '</u> has been uploaded."); });</script>';
                             }
@@ -124,11 +135,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page = null;
 $query = "SELECT * FROM dm_r";
 if (isset($_GET["q"]) && !empty($_GET["q"])) {
-    $query .= " WHERE file_name ='" . $_GET["q"] . "'";
+    $query .= " WHERE file_name LIKE '%" . $_GET["q"] . "%' OR file_description LIKE '%" . $_GET["q"] . "%' OR file_type LIKE '" . $_GET["q"] . "' AND NOT file_status ='DELETED'";
 }
 $getDmR = mysqli_query($conn, $query);
 if (mysqli_num_rows($getDmR) > 0) {
-    $page .= '<div class="row row-cols-1 row-cols-md-5 g-4">';
+    $page .= '<div class="row row-cols-1 row-cols-md-5 g-4" data-masonry="{&quot;percentPosition&quot;: true }">';
     while ($row = mysqli_fetch_assoc($getDmR)) {
         if ($row["file_status"] != "DELETED") {
             $page .= '
@@ -148,7 +159,7 @@ if (mysqli_num_rows($getDmR) > 0) {
             }
             $page .= '
                             <div class="d-flex">
-                            <div class="ml-auto"><small class="text-muted">' . time_elapsed_string('@'. $row["file_added_date"]) . '</small></div>
+                            <div class="ml-auto"><small class="text-muted">' . time_elapsed_string('@' . $row["file_added_date"]) . '</small></div>
                             <div class="ms-auto">
                             <i class="fa-solid fa-download" onclick="download(\'' . hash("sha1", $row["file_name"]) . '.' . $row["file_type"] . '\', \'' . $row["file_name"] . '\')"></i> &nbsp; <i class="fa-regular fa-pen-to-square edit"  data-id="' . $row["_did"] . '"></i> &nbsp; <i class="fa-solid fa-trash delete" data-id="' . $row["_did"] . '"></i>
                             </div>
@@ -164,7 +175,7 @@ if (mysqli_num_rows($getDmR) > 0) {
     if (isset($_GET["q"]) && !empty($_GET["q"])) {
         $page = '<h1>No data found for query <u>' . $_GET["q"] . '</u>.';
     } else {
-        $page = '<h1>No data available found.</h1>';
+        $page = '<h1>No data available.</h1>';
     }
 }
 
@@ -176,6 +187,11 @@ if (mysqli_num_rows($getDmR) > 0) {
 
     <main>
         <div class="container pt-4 pt-xl-5 mb-5">
+            <h1>Document Management and Records</h1>
+            <p class="h5 mb-5">Storage, retrieval of documents and records. Efficient collaboration, version
+                control,<br>
+                and secure access to important information, reducing reliance on traditional paper-based filing systems.
+            </p>
             <div class="row g-0">
                 <div class="col-md-6 p-3">
                     <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
@@ -215,8 +231,8 @@ if (mysqli_num_rows($getDmR) > 0) {
 
     <?php
     $loadCustomJS = '<script src="../../js/dm_r.js"></script>';
+    include("../../include/footer.php");
     ?>
-    <?php include("../../include/footer.php"); ?>
 </body>
 
 </html>

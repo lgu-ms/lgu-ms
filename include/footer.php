@@ -121,6 +121,9 @@
 <script src="<?php echo $directory; ?>vendor/components/jquery/jquery.min.js"></script>
 <script src="<?php echo $directory; ?>vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 <?php 
+if (isset($masonry)) {
+  echo ' <script src="' . $directory . 'vendor/components/masonry/masonry.pkgd.min.js"></script>';
+}
 if (isset($recaptcha)) {
   echo '<script src="https://www.google.com/recaptcha/api.js?render='.$captcha_site_key.'"></script>';
   echo '<script src="'.$directory.'js/grecaptcha.js"></script>';

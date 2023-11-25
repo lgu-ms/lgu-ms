@@ -61,12 +61,6 @@ CREATE TABLE `passwordchanged` (
   `user_email` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-CREATE TABLE `profilepic` (
-  `_pid` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `profilepic` text NOT NULL COMMENT 'base64 format of user profile picture',
-  `user_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
 CREATE TABLE `contactus` (
   `_cid` int(10) UNSIGNED ZEROFILL NOT NULL,
   `user_name` text NOT NULL,
@@ -99,10 +93,6 @@ ALTER TABLE `passwordchanged`
   ADD KEY `password_account_id` (`user_id`),
   ADD KEY `password_session_id` (`session_id`);
 
-ALTER TABLE `profilepic`
-  ADD PRIMARY KEY (`_pid`),
-  ADD KEY `account_profile_id` (`user_id`);
-
 ALTER TABLE `contactus`
   ADD PRIMARY KEY (`_cid`);
 
@@ -122,9 +112,6 @@ ALTER TABLE `otp`
 ALTER TABLE `passwordchanged`
   MODIFY `_pid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
 
-ALTER TABLE `profilepic`
-  MODIFY `_pid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
-
 ALTER TABLE `contactus`
   MODIFY `_cid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
 
@@ -142,10 +129,6 @@ ALTER TABLE `otp`
 ALTER TABLE `passwordchanged`
   ADD CONSTRAINT `password_account_id` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`),
   ADD CONSTRAINT `password_session_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`);
-
-ALTER TABLE `profilepic`
-  ADD CONSTRAINT `account_profile_id` FOREIGN KEY (`user_id`) REFERENCES `account` (`_id`);
-COMMIT;
 
 ALTER TABLE `contactus`
   ADD CONSTRAINT `contact_session_id` FOREIGN KEY (`session_id`) REFERENCES `account_session` (`_sid`),
