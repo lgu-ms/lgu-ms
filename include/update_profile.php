@@ -5,7 +5,7 @@ if (isset($_FILES["changePhoto"]) && isLogin()) {
     $check = getimagesize($theFile["tmp_name"]);
     if ($check) {
         if ($theFile["size"] > 6000000) {
-            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The selected image file is too large!"); });</script>';
+            echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The selected image file is too large. Max is 6MB!"); });</script>';
         } else {
             $target_dir = $directory . "avatar/";
             $target_file = $target_dir . basename($theFile["name"]);
