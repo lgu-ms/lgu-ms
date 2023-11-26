@@ -4,7 +4,7 @@ include("../include/session.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"];
     $fullname = $_POST["fullname"];
-    $password = hash("sha512", $_POST["password"]);
+    $password =password_hash($_POST["password"], PASSWORD_DEFAULT);
     $usertype = $_POST["type"];
 
     $sql = "INSERT INTO account (user_name, user_fullname, user_email, user_password, user_type, created_at, updated_at) VALUES ";

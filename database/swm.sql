@@ -8,8 +8,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 
-CREATE TABLE `swm` (
-  `_sid` int(10) UNSIGNED ZEROFILL NOT NULL,
+CREATE TABLE IF NOT EXISTS `swm` (
+  `_sid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
   `collection_area` text NOT NULL,
   `no_trucks` int(11) NOT NULL,
   `solid_waste_weight` int(11) NOT NULL,
@@ -20,23 +20,16 @@ CREATE TABLE `swm` (
   `created_on` int(11) NOT NULL,
   `updated_on` int(11) NOT NULL,
   `created_by` int(11) UNSIGNED NOT NULL,
-  `updated_by` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Solid Waste Management';
+  `updated_by` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`_sid`),
+  KEY `swm_created_by` (`created_by`),
+  KEY `swm_updated_by` (`updated_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000000000 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Solid Waste Management';
 
 
 ALTER TABLE `swm`
-  ADD PRIMARY KEY (`_sid`),
-  ADD KEY `swm_created_by` (`created_by`),
-  ADD KEY `swm_updated_by` (`updated_by`);
-
-
-ALTER TABLE `swm`
-  MODIFY `_sid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000000;
-
-
-ALTER TABLE `swm`
-  ADD CONSTRAINT `swm_created_by` FOREIGN KEY (`created_by`) REFERENCES `account_session` (`_sid`),
-  ADD CONSTRAINT `swm_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `account_session` (`_sid`);
+  ADD CONSTRAINT `created_by_id` FOREIGN KEY (`created_by`) REFERENCES `lgu-ms`.`account_session` (`_sid`),
+  ADD CONSTRAINT `updated_by_id` FOREIGN KEY (`updated_by`) REFERENCES `lgu-ms`.`account_session` (`_sid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,10 +1,18 @@
 <?php
-include("config.php");
+include("../../include/config.php");
 
-$conn = new mysqli($mysql_address, $mysql_user, $mysql_password, $mysql_db);
+try {
+    $conn = new mysqli($mysql_address, $mysql_ptm_user, $mysql_ptm_pass, $mysql_ptm_db);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $conn->connect_error;
+
+} catch (Exception $a) {
+    if ($debug) {
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Houston! Database Error</title></head><body><style>* {transition: all 0.6s;}html {height: 100%;}body {font-family: "Lato", sans-serif;color: #888;margin: 0;}#main {display: table;width: 100%;height: 100vh;text-align: center;}.fof {display: table-cell;vertical-align: middle;}.fof h1 {font-size: 50px;display: inline-block;padding-right: 12px;animation: type 0.5s alternate infinite;}@keyframes type {from {box-shadow: inset -3px 0px 0px #888;}to {box-shadow: inset -3px 0px 0px transparent;}}</style><div id="main"><div class="fof"><h1>OOPS!</h1><h3>looks like there is a database issue.</h3><p>' . str_replace("\n", "<br>", $a) . '</p></div></div></body><html>';
+    } else {
+        http_response_code(500);
+    }
+    die();
 }
 
 function getSessionId()
@@ -12,7 +20,7 @@ function getSessionId()
     global $conn;
 
     // Gets session id for recording transactions
-    $today =  $_SESSION["session_started"];
+    $today = $_SESSION["session_started"];
     $query = "SELECT _sid FROM account_session WHERE session_started = ? AND user_id = ?";
     $user_id = $_SESSION["login_temp_user_id"];
     $stmtSessionId = $conn->prepare($query);
@@ -206,7 +214,7 @@ function submitProperty()
         $city = $_POST['city'];
         $province = $_POST['province'];
         $fullAddress = $houseNo . ', ' . $street . ', ' . $barangay . ', ' . $city . ', ' . $province;
-        $formatVal = (int)$_POST['propertyValue'];
+        $formatVal = (int) $_POST['propertyValue'];
         $value = number_format($formatVal);
         $propertyType = $_POST['listGroupRadio'];
 
@@ -1077,7 +1085,7 @@ function modifyProperty()
         $city = $_POST['city'];
         $province = $_POST['province'];
         $fullAddress = $houseNo . ', ' . $street . ', ' . $barangay . ', ' . $city . ', ' . $province;
-        $formatVal = (int)$_POST['propertyValue'];
+        $formatVal = (int) $_POST['propertyValue'];
         $value = number_format($formatVal);
         $propertyType = $_POST['listGroupRadio'];
         $propertyId = null;

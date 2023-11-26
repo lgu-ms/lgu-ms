@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION["session_id"] = $row1["_sid"];
                             $_SESSION["user_id"] = $user_id;
                             $_SESSION["user_type"] = $user_type;
+                            $_SESSION["session_started"] = $today;
+                            
                             echo '<script>window.location.href = "../"</script>';
                             die();
                         }

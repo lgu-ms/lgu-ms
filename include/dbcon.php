@@ -2,7 +2,11 @@
 include("config.php");
 
 try {
-    $conn = new mysqli($mysql_address, $mysql_user, $mysql_password, $mysql_db);
+    if ($debug) {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    }
+    
+    $conn = new mysqli($mysql_address, $mysql_main_user, $mysql_main_pass, $mysql_main_db);
 
     $conn->connect_error;
 

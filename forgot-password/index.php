@@ -166,18 +166,11 @@ $page = '
 </html>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         if (isset($_POST["forgot"])) {
             $email = "";
             if (!isset($_POST["email"])) {
@@ -195,8 +188,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $timeGenerated = strtotime("now");
                         $sqlOtp .= "('$temp_id', $timeGenerated, 'FORGOT-PASSWORD', '$email')";
                         if ($conn->query($sqlOtp) === TRUE) {
-                            require_once "../include/mail.php";
-                            $mail = initMail('../', $email, $row["user_fullname"], "Password Reset", '
+                            if (!$debug) {
+                                require_once "../include/mail.php";
+                                $mail = initMail('../', $email, $row["user_fullname"], "Password Reset", '
         <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
             <div style="margin:50px auto;width:70%;padding:20px 0">
                 <div style="border-bottom:1px solid #eee">
@@ -216,10 +210,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         ');
-                            if (sendMail($mail)) {
-                                echo '<script>showToast("Please check your email for the reset url.")</script>';
+                                if (sendMail($mail)) {
+                                    echo '<script>showToast("Please check your email for the reset url.")</script>';
+                                } else {
+                                    echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                }
                             } else {
-                                echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                echo '<script>window.location.href = "https://digitalbarangay.com/forgot-password?r=' . $temp_id . '";</script>';
                             }
                         }
                     }
@@ -261,8 +258,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             if ($conn->query($setChangePassword) === TRUE) {
                                 $_SESSION["fp_temp_user_email"] = null;
                                 $_SESSION["fp_temp_user_fullname"] = null;
-                                require_once "../include/mail.php";
-                                $notifyPasswordChange = initMail("../", $fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
+                                if (!$debug) {
+                                    require_once "../include/mail.php";
+                                    $notifyPasswordChange = initMail("../", $fp_temp_user_email, $fp_temp_user_fullname, "Your account password has been reset.", '
                                 <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                     <div style="margin:50px auto;width:70%;padding:20px 0">
                                         <div style="border-bottom:1px solid #eee">
@@ -281,7 +279,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
                                 ');
-                                sendMail($notifyPasswordChange);
+                                    sendMail($notifyPasswordChange);
+                                }
                                 echo '<script>showPopup("Change Password", "Successfully changed your password", "../login?ref=forgot_password&status=success", "Log in")</script>';
                             }
                         }

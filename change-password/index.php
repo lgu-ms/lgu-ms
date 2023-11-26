@@ -97,21 +97,15 @@ include("../include/header.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $ppassword = $password = $cpassword = "";
         if (!isset($_POST["ppassword"])) {
             echo '<script>showToast("You need to type your previous password!")</script>';
         } else {
-            $ppassword = hash("sha512", $_POST["ppassword"]);
+            $ppassword = $_POST["ppassword"];
             $user_id = $_SESSION["user_id"];
             $session_id = $_SESSION["session_id"];
 
@@ -130,9 +124,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if (!isset($_POST["cpassword"])) {
                             echo '<script>showToast("You need to retype your password again!")</script>';
                         } else {
-                            $cpassword = hash("sha512", $_POST["cpassword"]);
+                            $cpassword = $_POST["cpassword"];
                             if (strcasecmp($password, $cpassword) == 0) {
-                                if (strcasecmp($db_password, $ppassword) == 0) {
+                                if (password_verify($ppassword, $db_password)) {
                                     $setPassword = "UPDATE account SET user_password = '$password' WHERE _id = $user_id";
                                     if ($conn->query($setPassword)) {
                                         $setChangePassword = "INSERT INTO passwordchanged (date_accessed, session_id, user_id, event_type) VALUES ";

@@ -18,7 +18,7 @@ jobs:
           npm i
           cd obfuscate && node obfuscate
           cd ..
-          rm -rf obfuscate node_modules package.json package-lock.json .prettierrc.json include/config.php js/grecaptcha.js modules/citizen-services-and-engagement-module/config.php modules/real-property-tax-management-module/config.php
+          rm -rf obfuscate node_modules package.json package-lock.json .prettierrc.json include/config.php js/grecaptcha.js
       - name: Push to deployment Repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main

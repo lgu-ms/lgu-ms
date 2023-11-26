@@ -72,16 +72,10 @@ include("../include/header.php");
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $name = $email = $message = "";
         if (!isset($_POST["name"])) {
             echo '<script>showToast("Name is required!")</script>';
