@@ -1,5 +1,6 @@
 const cacheName = "dbv1";
-const domain = "https://digitalbarangay.com";
+const domain = atob("aHR0cHM6Ly9kaWdpdGFsYmFyYW5nYXkuY29t");
+const allowedFolder = ["/vendor/", "/fonts/"];
 
 self.addEventListener("activate", (event) => {
     event.waitUntil(
@@ -21,7 +22,7 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", async (event) => {
     if (event.request.method !== "GET") return;
-    if (event.request.destination === "image" || event.request.url.includes("/vendor/") || event.request.url.includes("/fonts/")) {
+    if ((event.request.destination === "image" || event.request.url.includes(allowedFolder)) && event.request.url.startsWith(domain)) {
         event.respondWith(
             caches.open(cacheName).then((cache) => {
                 return cache.match(event.request).then((cachedResponse) => {
@@ -33,7 +34,7 @@ self.addEventListener("fetch", async (event) => {
                         })
                     );
                 });
-            })
+            });
         );
     }
     return;

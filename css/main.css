@@ -273,7 +273,7 @@ nav {
 }
 
 .card {
-    background-color: var(--background-color);
+    background-color: transparent;
     border: var(--bs-card-border-width) solid var(--text-color);
     border-radius: 8px;
     transition: border-radius .2s ease-in-out;

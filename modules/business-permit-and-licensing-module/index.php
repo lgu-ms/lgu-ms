@@ -2,13 +2,13 @@
 include("../../include/session.php");
 include("../../include/header.php");
 
-$page_publisher = "https://facebook.com/melvinjonesrepol";
+$page_publisher = "https://github.com/reyes-9";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Business Permit and Licensing";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/cover.png";
-$page_author = "Melvin Jones Repol";
+$page_author = "Enzo Reyes";
 $page_canonical = "https://digitalbarangay.com/modules/business-permit-and-licensing-module/";
 $page_url = $page_canonical;
 $directory = "../../";

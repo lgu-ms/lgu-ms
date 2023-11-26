@@ -116,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $_SESSION["session_id"] = $login_temp_session_id;
                             $_SESSION["user_id"] = $login_temp_user_id;
                             $_SESSION["user_type"] = $login_temp_user_type;
+                            $_SESSION["session_started"] = $today;
 
                             // TODO: Check if the device_id is new or not according to the past 
                             // sessions if new notify the user about the new device accessing his account

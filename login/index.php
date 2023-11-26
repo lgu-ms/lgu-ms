@@ -133,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                             $device_id = $_SERVER['HTTP_USER_AGENT'];
                             $today = strtotime("now");
-                            $_SESSION["session_started"] = $today;
                             $sql .= "('$device_id', $today, 'active', $user_id, $today)";
                             if ($conn->query($sql) === TRUE) {
                                 $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = $today AND user_id = $user_id");
