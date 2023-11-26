@@ -109,16 +109,10 @@ include("../include/header.php");
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $email = $fullname = $password = $cpassword = "";
         if (!isset($_POST["email"])) {
             echo '<script>showToast("Email is required!")</script>';
@@ -156,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SESSION["signup_temp"] = true;
                                 $_SESSION["signup_temp_email"] = $email;
                                 $_SESSION["signup_temp_fullname"] = $fullname;
-                                $_SESSION["signup_temp_password"] = hash("sha512", $password);
+                                $_SESSION["signup_temp_password"] = password_hash($password, PASSWORD_DEFAULT);
                                 $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
                                 $temp_id = hash("sha512", $otp);
                                 $_SESSION["signup_temp_otp"] = $temp_id;
@@ -164,8 +158,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $timeGenerated = strtotime("now");
                                 $sqlOtp .= "('$otp', $timeGenerated, 'ACCOUNT_CREATION', '$temp_id')";
                                 if ($conn->query($sqlOtp) === TRUE) {
-                                    require_once "../include/mail.php";
-                                    $mail = initMail('../', $email, $fullname, "OTP Verification", '
+                                    if (!$debug) {
+                                        require_once "../include/mail.php";
+                                        $mail = initMail('../', $email, $fullname, "OTP Verification", '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                         <div style="margin:50px auto;width:70%;padding:20px 0">
                                             <div style="border-bottom:1px solid #eee">
@@ -185,11 +180,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </div>
                                     ');
-                                    if (sendMail($mail)) {
+                                        if (sendMail($mail)) {
+                                            echo '<script>window.location.href = "verification?ref=signup"</script>';
+                                            die();
+                                        } else {
+                                            echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                        }
+                                    } else {
+                                        echo '<script>alert("Your OTP is: ' . $otp . '");</script>';
                                         echo '<script>window.location.href = "verification?ref=signup"</script>';
                                         die();
-                                    } else {
-                                        echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
                                     }
                                 }
                             }

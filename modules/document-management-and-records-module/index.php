@@ -7,6 +7,24 @@ if (!isAdmin()) {
     die();
 }
 
+try {
+    if ($debug) {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    }
+    
+    $dm_r = new mysqli($mysql_address, $mysql_dm_r_user, $mysql_dm_r_pass, $mysql_dm_r_db);
+
+    $dm_r->connect_error;
+
+} catch (Exception $a) {
+    if ($debug) {
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Houston! Database Error</title></head><body><style>* {transition: all 0.6s;}html {height: 100%;}body {font-family: "Lato", sans-serif;color: #888;margin: 0;}#main {display: table;width: 100%;height: 100vh;text-align: center;}.fof {display: table-cell;vertical-align: middle;}.fof h1 {font-size: 50px;display: inline-block;padding-right: 12px;animation: type 0.5s alternate infinite;}@keyframes type {from {box-shadow: inset -3px 0px 0px #888;}to {box-shadow: inset -3px 0px 0px transparent;}}</style><div id="main"><div class="fof"><h1>OOPS!</h1><h3>looks like there is a database issue.</h3><p>' . str_replace("\n", "<br>", $a) . '</p></div></div></body><html>';
+    } else {
+        http_response_code(500);
+    }
+    die();
+}
+
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Document Management and Records";
@@ -27,16 +45,10 @@ include("../../include/header.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["edit"])) {
         require_once '../../vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
+        require_once '../../include/recaptcha.php';
         $token = $_POST["g-recaptcha-response"];
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $captcha_secret_key,
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getBody());
-        if ($result->success) {
+
+        if (verifyResponse($captcha_secret_key, $token)) {
             if (!isset($_POST["description"])) {
                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Description is required!"); });</script>';
             } else {
@@ -45,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $item_description = $_POST["description"];
                 $session_id = $_SESSION["session_id"];
                 $updateFile = "UPDATE dm_r SET file_description = '$item_description', updated_by = $session_id  WHERE _did = $item_id";
-                $conn->query($updateFile);
+                $dm_r->query($updateFile);
                 $split_name = explode(".", $item_name);
                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file ' . $item_name . ' has been updated!"); });</script>';
             }
@@ -56,21 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST["delete"])) {
         require_once '../../vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
+        require_once '../../include/recaptcha.php';
         $token = $_POST["g-recaptcha-response"];
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $captcha_secret_key,
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getBody());
-        if ($result->success) {
+
+        if (verifyResponse($captcha_secret_key, $token)) {
             $item_id = $_POST["id"];
             $item_name = $_POST["name"];
             $session_id = $_SESSION["session_id"];
             $updateFile = "UPDATE dm_r SET file_status = 'DELETED', updated_by = $session_id WHERE _did = $item_id";
-            $conn->query($updateFile);
+            $dm_r->query($updateFile);
             $split_name = explode(".", $item_name);
             unlink("../../uploads/" . hash("sha1", $split_name[0] . '.' . $split_name[1]) . '.' . $split_name[1]);
             echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file ' . $item_name . ' has been deleted!"); });</script>';
@@ -80,18 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST["upload"])) {
-
         require_once '../../vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
+        require_once '../../include/recaptcha.php';
         $token = $_POST["g-recaptcha-response"];
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $captcha_secret_key,
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getBody());
-        if ($result->success) {
+
+        if (verifyResponse($captcha_secret_key, $token)) {
             if (isset($_FILES["fileToUpload"])) {
                 if (isLogin()) {
                     $target_dir = "../../uploads/";
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $timeAdded = strtotime("now");
                             $session_id = $_SESSION["session_id"];
                             $fileUpload .= "('$filename', '$fileType', $filesize, $timeAdded, 'EXISTS', $session_id, $session_id)";
-                            if ($conn->query($fileUpload) === TRUE) {
+                            if ($dm_r->query($fileUpload) === TRUE) {
                                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The file <u>' . basename($_FILES["fileToUpload"]["name"]) . '</u> has been uploaded."); });</script>';
                             }
                         } else {
@@ -137,7 +136,7 @@ $query = "SELECT * FROM dm_r";
 if (isset($_GET["q"]) && !empty($_GET["q"])) {
     $query .= " WHERE file_name LIKE '%" . $_GET["q"] . "%' OR file_description LIKE '%" . $_GET["q"] . "%' OR file_type LIKE '" . $_GET["q"] . "' AND NOT file_status ='DELETED'";
 }
-$getDmR = mysqli_query($conn, $query);
+$getDmR = mysqli_query($dm_r, $query);
 if (mysqli_num_rows($getDmR) > 0) {
     $page .= '<div class="row row-cols-1 row-cols-md-5 g-4" data-masonry="{&quot;percentPosition&quot;: true }">';
     while ($row = mysqli_fetch_assoc($getDmR)) {

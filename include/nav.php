@@ -92,7 +92,7 @@ $dec_user_name = null;
                     if (!isset($hideLoginButton)) {
                         $ff = '
                 <li class="nav-item prim">
-                <a class="nav-link default-light" href="' . $directory . 'sigup?ref=signup_button">
+                <a class="nav-link default-light" href="' . $directory . 'signup?ref=signup_button">
                    Signup
                 </a>
             </li>
