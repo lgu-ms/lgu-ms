@@ -1,5 +1,5 @@
 <?php
-include("../../include/config.php");
+    include("../../include/config.php");
 
 try {
     $conn = new mysqli($mysql_address, $mysql_ptm_user, $mysql_ptm_pass, $mysql_ptm_db);
@@ -17,16 +17,15 @@ try {
 
 function getSessionId()
 {
-    global $conn;
+    include("../../include/config.php");
+    $conn = new mysqli($mysql_address, $mysql_main_user , $mysql_main_pass , $mysql_main_db );
 
-    // Gets session id for recording transactions
-    $today = $_SESSION["session_started"];
-    $query = "SELECT _sid FROM account_session WHERE session_started = ? AND user_id = ?";
-    $user_id = $_SESSION["login_temp_user_id"];
+    $query = "SELECT _sid FROM account_session WHERE user_id = ?";
+    $user_id = $_SESSION["user_id"];
     $stmtSessionId = $conn->prepare($query);
 
     if ($stmtSessionId) {
-        $stmtSessionId->bind_param("si", $today, $user_id);
+        $stmtSessionId->bind_param("i",  $user_id);
         $stmtSessionId->execute();
 
         $result = $stmtSessionId->get_result();
@@ -47,8 +46,7 @@ function getOwnerId()
 {
     global $conn;
 
-    // Gets session id for recording transactions
-    $user_id = $_SESSION["login_temp_user_id"];
+    $user_id = $_SESSION["user_id"];
     $sql = "SELECT owner_id FROM property_owner WHERE account_id = $user_id";
     $result = $conn->query($sql);
     if ($result) {
@@ -56,10 +54,10 @@ function getOwnerId()
         while ($row = $result->fetch_assoc()) {
             $ownerId = $row['owner_id'];
         }
-        return $ownerId; // Return the retrieved citizen ID
+        return $ownerId;
     } else {
         echo "Error executing the query: " . $conn->error;
-        return 0; // Return a default value or handle error case
+        return 0;
     }
 }
 
@@ -204,7 +202,9 @@ function submitProperty()
 
 
     global $conn;
-    $user_id = $_SESSION["user_id"];
+
+    $owner_id = getOwnerId();
+    $session_id = getSessionId();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -227,9 +227,9 @@ function submitProperty()
             if ($result->num_rows > 0) {
                 echo $failed;
             } else {
-                $sql = "INSERT INTO property (account_id, property_address, value, property_type) VALUES (?, ?, ?, ?)";
+                $sql = "INSERT INTO property (owner_id, property_address, value, property_type) VALUES (?, ?, ?, ?)";
                 $stmtInsert = $conn->prepare($sql);
-                $stmtInsert->bind_param("isss", $user_id, $fullAddress, $value, $propertyType);
+                $stmtInsert->bind_param("isss", $owner_id, $fullAddress, $value, $propertyType);
 
                 if ($stmtInsert->execute()) {
                     // gets the property id
@@ -252,24 +252,6 @@ function submitProperty()
                     }
                     $stmtGetProperty->free_result();
                     $stmtGetProperty->close();
-                    // gets the owner id
-                    $sqlGetOwnerId = "SELECT owner_id FROM property_owner WHERE account_id = ?";
-                    $stmtGetOwnerId = $conn->prepare($sqlGetOwnerId);
-                    $stmtGetOwnerId->bind_param("i", $user_id);
-
-                    if ($stmtGetOwnerId->execute()) {
-                        $resultOwnerId = $stmtGetOwnerId->get_result();
-
-                        if ($resultOwnerId->num_rows > 0) {
-                            while ($rowOwner = $resultOwnerId->fetch_assoc()) {
-                                $owner_id = $rowOwner['owner_id'];
-                            }
-                        }
-                    } else {
-                        echo "Error retrieving owner_id: " . $stmtGetOwnerId->error;
-                    }
-                    $stmtGetOwnerId->free_result();
-                    $stmtGetOwnerId->close();
 
                     setTax($formatVal, $propertyType, $propertyId, $owner_id);
 
@@ -278,8 +260,6 @@ function submitProperty()
                     echo "Error: " . $stmtInsert->error;
                 }
                 $stmtInsert->close();
-                $owner_id = getOwnerId();
-                $session_id = getSessionId();
                 recordTransaction($session_id, $owner_id, "Property Submmission");
             }
         } else {
@@ -322,6 +302,7 @@ function viewTax()
 
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
+    $owner_id = getOwnerId();
     $user_id = $_SESSION["user_id"];
     $houseNo = $_POST['houseNo'];
     $street = $_POST['street'];
@@ -355,9 +336,9 @@ function viewTax()
             $userMatch = true;
         }
 
-        $findProperty = "SELECT * FROM property WHERE account_id = ? AND property_address = ? AND property_type = ?";
+        $findProperty = "SELECT * FROM property WHERE owner_id = ? AND property_address = ? AND property_type = ?";
         $stmt = $conn->prepare($findProperty);
-        $stmt->bind_param("iss", $user_id, $address, $propertyType);
+        $stmt->bind_param("iss", $owner_id, $address, $propertyType);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -376,16 +357,15 @@ function viewTax()
 
         if ($validate === true) {
             $modals = '';
-            $getTax = "SELECT * FROM tax_record WHERE account_id = ? AND property_id = ? AND owner_id = ?";
+            $getTax = "SELECT * FROM tax_record WHERE property_id = ? AND owner_id = ?";
             $stmt = $conn->prepare($getTax);
-            $stmt->bind_param("iss", $user_id, $valPropertyId, $valOwnerId);
+            $stmt->bind_param("ss", $valPropertyId, $valOwnerId);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $taxId = $row['tax_id'];
-                    $accountId = $row['account_id'];
                     $propertyId = $row['property_id'];
                     $ownerId = $row['owner_id'];
                     $taxAmount = $row['tax_amount'];
@@ -403,7 +383,6 @@ function viewTax()
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p><strong>Tax ID:</strong></p>
-                                            <p><strong>Account ID:</strong></p>
                                             <p><strong>Property ID:</strong></p>
                                             <p><strong>Owner ID:</strong></p>
                                             <p><strong>Tax Amount:</strong></p>
@@ -412,7 +391,6 @@ function viewTax()
                                         </div>
                                         <div class="col-md-6">
                                             <p>$taxId</p>
-                                            <p>$accountId</p>
                                             <p>$propertyId</p>
                                             <p>$ownerId</p>
                                             <p>$taxAmount</p>
@@ -443,7 +421,7 @@ function viewTax()
             }
             $owner_id = getOwnerId();
             $session_id = getSessionId();
-            recordTransaction($session_id, $owner_id, "Account Registration");
+            recordTransaction($session_id, $owner_id, "Tax Viewing");
         } else {
 
             echo $failed;
@@ -489,9 +467,9 @@ function setTax($value, $type, $id, $owner_id)
         $rate = $percentageTax . '%';
         $payment_status = "Unpaid";
 
-        $sql = "INSERT INTO tax_record (account_id, property_id, owner_id, tax_amount, payment_status, tax_rate) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tax_record (property_id, owner_id, tax_amount, payment_status, tax_rate) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iiiiss", $user_id, $id, $owner_id, $taxAmount, $payment_status, $rate);
+        $stmt->bind_param("iiiss", $id, $owner_id, $taxAmount, $payment_status, $rate);
         $stmt->execute();
         $stmt->close();
     } else {
@@ -512,8 +490,8 @@ function getTables($tableName, $function)
         case "property_owner":
             if ($result->num_rows > 0) {
 
-                echo '<table class="table table-hover " style="text-align:center;">';
-                echo '<thead  class="table-light"><tr><th>Owner Id</th><th>Account Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact No.</th></tr></thead>';
+                echo '<table class="table table-light table-hover " style="text-align:center;">';
+                echo '<thead><tr><th>Owner Id</th><th>Account Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Contact No.</th></tr></thead>';
 
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
@@ -529,11 +507,11 @@ function getTables($tableName, $function)
             if ($result->num_rows > 0) {
 
                 echo '<table class="table table-hover " style="text-align:center;">';
-                echo '<thead  class="table-light"><tr><th>Property Id</th><th>Account Id</th><th>Property Address</th><th>Value</th><th>Property Type</th></tr></thead>';
+                echo '<thead  class="table-light"><tr><th>Property Id</th><th>Owner Id</th><th>Property Address</th><th>Value</th><th>Property Type</th></tr></thead>';
 
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tbody class="table-dark"><tr><td>' . $row["property_id"] . '</td><td>' . $row["account_id"] . '</td><td>' . $row["property_address"] . '</td><td>' . $row["value"] . '</td><td>' . $row["property_type"] . '</td></tr></tbody>';
+                    echo '<tbody class="table-dark"><tr><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["property_address"] . '</td><td>' . $row["value"] . '</td><td>' . $row["property_type"] . '</td></tr></tbody>';
                 }
                 echo "</table>";
             } else {
@@ -585,10 +563,10 @@ function getTables($tableName, $function)
                                 echo '<h2 class="text-center mb-4 mt-4">Tax Payment</h2>';
                                 echo '<div class="container">';
                                 echo '<table class="table table-hover " style="text-align:center;">';
-                                echo '<thead  class="table-light"><tr><th>Tax Id</th><th>Account Id</th><th>Property Id</th><th>Owner Id</th><th>Tax Amount</th></th><th>Payment Status</th><th>Tax Rate</th></tr></thead>';
+                                echo '<thead  class="table-light"><tr><th>Tax Id</th><th>Property Id</th><th>Owner Id</th><th>Tax Amount</th></th><th>Payment Status</th><th>Tax Rate</th></tr></thead>';
 
                                 // Display the first row
-                                echo '<tbody class="table-dark"><tr><td>' . $row["tax_id"] . '</td><td>' . $row["account_id"] . '</td><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["tax_amount"] . '</td><td>' . $row["payment_status"] . '</td><td>' . $row["tax_rate"] . '</td></tr></tbody>';
+                                echo '<tbody class="table-dark"><tr><td>' . $row["tax_id"] . '</td><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["tax_amount"] . '</td><td>' . $row["payment_status"] . '</td><td>' . $row["tax_rate"] . '</td></tr></tbody>';
                                 $_SESSION['tax_id'] = $row["tax_id"];
 
                                 // Output data of the rest of the rows
@@ -625,11 +603,11 @@ function getTables($tableName, $function)
                     if ($result->num_rows > 0) {
 
                         echo '<table class="table table-hover " style="text-align:center;">';
-                        echo '<thead  class="table-light"><tr><th>Tax Id</th><th>Account Id</th><th>Property Id</th><th>Owner Id</th><th>Tax Amount</th></th><th>Payment Status</th><th>Tax Rate</th></tr></thead>';
+                        echo '<thead  class="table-light"><tr><th>Tax Id</th><th>Property Id</th><th>Owner Id</th><th>Tax Amount</th></th><th>Payment Status</th><th>Tax Rate</th></tr></thead>';
 
                         // Output data of each row
                         while ($row = $result->fetch_assoc()) {
-                            echo '<tbody class="table-dark"><tr><td>' . $row["tax_id"] . '</td><td>' . $row["account_id"] . '</td><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["tax_amount"] . '</td><td>' . $row["payment_status"] . '</td><td>' . $row["tax_rate"] . '</td></tr></tbody>';
+                            echo '<tbody class="table-dark"><tr><td>' . $row["tax_id"] . '</td><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["tax_amount"] . '</td><td>' . $row["payment_status"] . '</td><td>' . $row["tax_rate"] . '</td></tr></tbody>';
                         }
                         echo "</table>";
                     } else {
@@ -643,11 +621,11 @@ function getTables($tableName, $function)
             if ($result->num_rows > 0) {
 
                 echo '<table class="table table-hover " style="text-align:center;">';
-                echo '<thead  class="table-light"><tr><th>Transaction Id</th><th>Account Id</th><th>Transaction Type</th><th>Transaction Date</th></tr></thead>';
+                echo '<thead  class="table-light"><tr><th>Transaction Id</th><th>Session Id</th><th>Transaction Type</th><th>Transaction Date</th></tr></thead>';
 
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tbody class="table-dark"><tr><td>' . $row["transaction_id"] . '</td><td>' . $row["account_id"] . '</td><td>' . $row["transaction_type"] . '</td><td>' . $row["transaction_date"] . '</td></tr></tbody>';
+                    echo '<tbody class="table-dark"><tr><td>' . $row["transaction_id"] . '</td><td>' . $row["session_id"] . '</td><td>' . $row["transaction_type"] . '</td><td>' . $row["transaction_date"] . '</td></tr></tbody>';
                 }
                 echo "</table>";
             } else {
@@ -772,14 +750,14 @@ function payTax()
             $stmtUpdate->execute();
             $owner_id = getOwnerId();
             $session_id = getSessionId();
-            recordTransaction($session_id, $owner_id, "Account Registration");
+            recordTransaction($session_id, $owner_id, "Tax Payment");
         }
         $stmtUpdate->close();
     }
     $stmt->close();
     $conn->close();
     echo '<script>setTimeout(function() {
-        window.location.href = "index.php";
+        window.location.href = "admin.php";
     }, 3000);</script>';
 }
 
@@ -890,7 +868,7 @@ function modifyOwner()
             echo $modSuccess;
             $owner_id = getOwnerId();
             $session_id = getSessionId();
-            recordTransaction($session_id, $owner_id, "Account Registration");
+            recordTransaction($session_id, $owner_id, "Owner Modification");
         } else {
             echo "Error updating record: " . $stmt->error;
         }
@@ -942,7 +920,7 @@ function deleteOwner()
             echo $deleteSuccess;
             $owner_id = getOwnerId();
             $session_id = getSessionId();
-            recordTransaction($session_id, $owner_id, "Account Registration");
+            recordTransaction($session_id, $owner_id, "Owner Deletion");
         } else {
             echo "Error executing the query: " . $stmt->error;
         }
@@ -1000,9 +978,9 @@ function printModProperty()
 
                 echo '<h3><code>Record Selected.</code> </h3>';
                 echo '<table class="table table-hover " style="text-align:center;">';
-                echo '<thead  class="table-light"><tr><th>Property Id</th><th>Account Id</th><th>Property Address</th><th>Value</th><th>Property Type</th></tr></thead>';
+                echo '<thead  class="table-light"><tr><th>Property Id</th><th>Owner Id</th><th>Property Address</th><th>Value</th><th>Property Type</th></tr></thead>';
 
-                echo '<tbody class="table-dark"><tr><td>' . $row["property_id"] . '</td><td>' . $row["account_id"] . '</td><td>' . $row["property_address"] . '</td><td>' . $row["value"] . '</td><td>' . $row["property_type"] . '</td></tr></tbody>';
+                echo '<tbody class="table-dark"><tr><td>' . $row["property_id"] . '</td><td>' . $row["owner_id"] . '</td><td>' . $row["property_address"] . '</td><td>' . $row["value"] . '</td><td>' . $row["property_type"] . '</td></tr></tbody>';
 
                 while ($rowDisplay = $resultSet->fetch_assoc()) {
                     echo '<tbody class="table-dark"><tr><td>' . $rowDisplay["property_id"] . '</td><td>' . $rowDisplay["account_id"] . '</td><td>' . $rowDisplay["property_address"] . '</td><td>' . $rowDisplay["value"] . '</td><td>' . $rowDisplay["property_type"] . '</td></tr></tbody>';
@@ -1102,7 +1080,7 @@ function modifyProperty()
             } else {
                 $sql = "UPDATE property SET property_type = ?, value = ?, property_address = ? WHERE account_id = ? AND property_address = ?";
                 $stmtUpdate = $conn->prepare($sql);
-                var_dump($prevAddress);
+
                 $stmtUpdate->bind_param("sssis", $propertyType, $value, $fullAddress, $user_id, $prevAddress);
 
 
@@ -1150,7 +1128,7 @@ function modifyProperty()
 
                     $owner_id = getOwnerId();
                     $session_id = getSessionId();
-                    recordTransaction($session_id, $owner_id, "Account Registration");
+                    recordTransaction($session_id, $owner_id, "Property Modification");
 
                     echo $submitted;
                 } else {
@@ -1209,7 +1187,7 @@ function deleteProperty()
             echo $deleteSuccess;
             $owner_id = getOwnerId();
             $session_id = getSessionId();
-            recordTransaction($session_id, $owner_id, "Account Registration");
+            recordTransaction($session_id, $owner_id, "Property Deletetion");
         } else {
             echo "Error executing the query: " . $stmt->error;
         }
@@ -1227,9 +1205,9 @@ function recordTransaction($session_id, $owner_id, $type)
 {
     global $conn;
 
-    $sql = "INSERT INTO transactions (session_id, owner_id, transaction_type, transaction_date) VALUES (?, ?, NOW())";
+    $sql = "INSERT INTO transactions (session_id, owner_id, transaction_type, transaction_date) VALUES (?, ?, ?, NOW())";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $session_id, $owner_id, $type);
+    $stmt->bind_param("iis", $session_id, $owner_id, $type);
 
     if ($stmt->execute()) {
         echo "New record inserted successfully";
@@ -1237,5 +1215,4 @@ function recordTransaction($session_id, $owner_id, $type)
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
     $stmt->close();
-    $conn->close();
 }
