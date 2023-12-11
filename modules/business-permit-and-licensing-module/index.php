@@ -1,14 +1,13 @@
 <?php
 include("../../include/session.php");
-include("../../include/header.php");
 
-$page_publisher = "https://facebook.com/melvinjonesrepol";
+$page_publisher = "https://github.com/reyes-9";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Business Permit and Licensing";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/cover.png";
-$page_author = "Melvin Jones Repol";
+$page_author = "Enzo Reyes";
 $page_canonical = "https://digitalbarangay.com/modules/business-permit-and-licensing-module/";
 $page_url = $page_canonical;
 $directory = "../../";
@@ -35,6 +34,7 @@ if (!isLogin()) {
     echo '<script>window.location.href = "../../login"</script>';
   }
 
+  include("../../include/header.php");
 ?>
 <body class="d-flex flex-column min-vh-100">
 
@@ -57,7 +57,7 @@ if (!isLogin()) {
     <div class="container mt-5" id="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <img src="../../../images/business.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
+          <img src="../../images/business.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
         </div>
         <div class="col-md-6">
           <p>It is designed to handle the issuance, renewal, and management of business permits. It streamlines and automates the process of obtaining permits required for starting or operating a business legally within a specific jurisdiction, such as a city or municipality.</p>

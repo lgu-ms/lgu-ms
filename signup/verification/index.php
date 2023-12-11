@@ -67,16 +67,10 @@ include("../../include/header.php");
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once '../../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $signup_temp_email = $_SESSION["signup_temp_email"];
         $signup_temp_fullname = $_SESSION["signup_temp_fullname"];
         $signup_temp_password = $_SESSION["signup_temp_password"];

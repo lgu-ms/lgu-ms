@@ -23,61 +23,51 @@ include("../include/header.php");
 
     <main>
         <div class="container pt-4 pt-xl-5">
-            <h1 class="border-bottom mb-5">Terms of Service</h1>
+            <h1 class="border-bottom mb-5"><?php echo $getString["terms_of_service"]; ?></h1>
             <ol>
                 <li>
-                    <h3>Acceptance of Terms</h3>
-                    <p>By accessing or using the Digital Barangay System ("the System"), you agree to comply with and be
-                        bound by these Terms of Service. If you do not agree with these terms, please refrain from using
-                        the System.</p>
+                    <h3><?php echo $getString["terms_header_1"]; ?></h3>
+                    <p><?php echo $getString["terms_header_1_description"]; ?></p>
                 </li>
                 <li>
-                    <h3>Account Registration and Security</h3>
+                    <h3><?php echo $getString["terms_header_2"]; ?></h3>
                     <p>
                     <ul>
-                        <li>Users must provide accurate and complete information during registration.</li>
-                        <li>Users are responsible for maintaining the confidentiality of their account credentials
-                            and are liable for all activities conducted through their account.</li>
+                        <li><?php echo $getString["terms_header_2_option_1"]; ?></li>
+                        <li><?php echo $getString["terms_header_2_option_2"]; ?></li>
                     </ul>
                     </p>
                 </li>
                 <li>
-                    <h3>Use of the System</h3>
+                    <h3><?php echo $getString["terms_header_3"]; ?></h3>
                     <p>
                     <ul>
-                        <li>Users agree not to engage in any activity that may disrupt the functionality of the System
-                            or compromise its security.</li>
-                        <li>Users must comply with all applicable laws and regulations while using the System.</li>
+                        <li><?php echo $getString["terms_header_3_option_1"]; ?></li>
+                        <li><?php echo $getString["terms_header_3_option_2"]; ?></li>
                     </ul>
                     </p>
                 </li>
                 <li>
-                    <h3>Data Privacy</h3>
+                    <h3><?php echo $getString["terms_header_4"]; ?></h3>
                     <p>
                     <ul>
-                        <li>The System collects and processes personal information in accordance with our <a
-                                href="../privacy/">Privacy Policy</a>.</li>
-                        <li>Users have the right to access, correct, or delete their personal information as outlined in
-                            the Privacy Policy.</li>
+                        <li><?php echo $getString["terms_header_4_option_1"]; ?></li>
+                        <li><?php echo $getString["terms_header_4_option_2"]; ?></li>
                     </ul>
                     </p>
                 </li>
                 <li>
-                    <h3>Content and Intellectual Property</h3>
+                    <h3><li><?php echo $getString["terms_header_5"]; ?></li></h3>
                     <p>
                     <ul>
-                        <li>Users retain ownership of their content but grant the System a non-exclusive license to use,
-                            display, and distribute the content within the System.</li>
-                        <li>The System's content, including but not limited to logos, text, and graphics, is protected
-                            by intellectual property laws and is the property of the System.</li>
+                        <li><?php echo $getString["terms_header_5_option_1"]; ?></li>
+                        <li><?php echo $getString["terms_header_5_option_2"]; ?></li>
                     </ul>
                     </p>
                 </li>
                 <li>
-                    <h3>Limitation of Liability</h3>
-                    <p>The System is provided "as is" without any warranty, and users use it at their own risk. The
-                        System is not liable for any direct, indirect, incidental, consequential, or punitive damages
-                        arising out of the use or inability to use the System.</p>
+                    <h3><?php echo $getString["terms_header_6"]; ?></h3>
+                    <p><li><?php echo $getString["terms_header_6_description"]; ?></li></p>
                 </li>
                 <li>
                     <h3>Modification of Terms</h3>

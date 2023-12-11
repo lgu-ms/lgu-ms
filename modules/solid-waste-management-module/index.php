@@ -2,6 +2,24 @@
 include("../../include/session.php");
 include("../../include/time_elapse_str.php");
 
+try {
+    if ($debug) {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    }
+
+    $swm = new mysqli($mysql_address, $mysql_swm_user, $mysql_swm_pass, $mysql_swm_db);
+
+    $swm->connect_error;
+
+} catch (Exception $a) {
+    if ($debug) {
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Houston! Database Error</title></head><body><style>* {transition: all 0.6s;}html {height: 100%;}body {font-family: "Lato", sans-serif;color: #888;margin: 0;}#main {display: table;width: 100%;height: 100vh;text-align: center;}.fof {display: table-cell;vertical-align: middle;}.fof h1 {font-size: 50px;display: inline-block;padding-right: 12px;animation: type 0.5s alternate infinite;}@keyframes type {from {box-shadow: inset -3px 0px 0px #888;}to {box-shadow: inset -3px 0px 0px transparent;}}</style><div id="main"><div class="fof"><h1>OOPS!</h1><h3>looks like there is a database issue.</h3><p>' . str_replace("\n", "<br>", $a) . '</p></div></div></body><html>';
+    } else {
+        http_response_code(500);
+    }
+    die();
+}
+
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
 $page_title = "Solid Waste Management";
@@ -22,21 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isAdmin()) {
 
     if (isset($_POST["delete"])) {
         require_once '../../vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
+        require_once '../../include/recaptcha.php';
         $token = $_POST["g-recaptcha-response"];
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $captcha_secret_key,
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getBody());
-        if ($result->success) {
+
+        if (verifyResponse($captcha_secret_key, $token)) {
             if (isLogin()) {
                 $item_id = $_POST["id"];
                 $item_name = $_POST["name"];
                 $deleteData = "DELETE FROM swm WHERE _sid = $item_id";
-                $conn->query($deleteData);
+                $swm->query($deleteData);
                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("The data ' . $item_name . ' has been deleted!"); });</script>';
             } else {
                 echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("You need to login before deleting a data!."); });</script>';
@@ -49,16 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isAdmin()) {
     if (isset($_POST["add"]) || isset($_POST["edit"])) {
         $actionType = isset($_POST["add"]) ? true : (isset($_POST["edit"]) ? false : false);
         require_once '../../vendor/autoload.php';
-        $client = new GuzzleHttp\Client();
+        require_once '../../include/recaptcha.php';
         $token = $_POST["g-recaptcha-response"];
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $captcha_secret_key,
-                'response' => $token
-            ]
-        ]);
-        $result = json_decode($response->getBody());
-        if ($result->success) {
+
+        if (verifyResponse($captcha_secret_key, $token)) {
             $collection_area = $no_trucks = $solid_waste_weight = $collection_date = $transport_to = $solid_waste_processing_type = $solid_waste_type = "";
             if (isLogin()) {
                 if (!isset($_POST["collection_area"])) {
@@ -94,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isAdmin()) {
                                                 $today = strtotime("now");
                                                 $session_id = $_SESSION["session_id"];
                                                 $sql .= "('$collection_area', $no_trucks, '$solid_waste_weight', '$collection_date', '$transport_to', '$solid_waste_processing_type', '$solid_waste_type', $today, $today, $session_id, $session_id)";
-                                                if ($conn->query($sql) === TRUE) {
+                                                if ($swm->query($sql) === TRUE) {
                                                     echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Data has been added."); });</script>';
                                                 }
                                             } else {
@@ -102,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isAdmin()) {
                                                 $sid = $_POST["id"];
                                                 $session_id = $_SESSION["session_id"];
                                                 $updateItemData = "UPDATE swm SET collection_area = '$collection_area', no_trucks = $no_trucks, solid_waste_weight = $solid_waste_weight, collection_date = '$collection_date', transport_to = '$transport_to', waste_processing_type = '$solid_waste_processing_type', waste_type = '$solid_waste_type', updated_on = $today, updated_by = $session_id WHERE _sid = $sid";
-                                                if ($conn->query($updateItemData) === TRUE) {
+                                                if ($swm->query($updateItemData) === TRUE) {
                                                     echo '<script>window.addEventListener("DOMContentLoaded", () => { showToast("Data has been updated."); });</script>';
                                                 }
                                             }
@@ -128,7 +134,7 @@ $query = "SELECT * FROM swm";
 if (isset($_GET["q"]) && !empty($_GET["q"])) {
     $query .= " WHERE collection_area LIKE '%" . $_GET["q"] . "%' OR collection_date LIKE '%" . $_GET["q"] . "%' OR transport_to LIKE '%" . $_GET["q"] . "%' OR waste_processing_type LIKE '%" . $_GET["q"] . "%' OR waste_type LIKE '%" . $_GET["q"] . "%'";
 }
-$getSwm = mysqli_query($conn, $query);
+$getSwm = mysqli_query($swm, $query);
 if (mysqli_num_rows($getSwm) > 0) {
     $page .= '<div class="row row-cols-1 row-cols-md-3 g-2" data-masonry="{&quot;percentPosition&quot;: true }">';
     while ($row = mysqli_fetch_assoc($getSwm)) {
@@ -184,43 +190,67 @@ if (mysqli_num_rows($getSwm) > 0) {
     <?php include("../../include/nav.php"); ?>
 
     <main>
-        <div class="container pt-4 pt-xl-5 mb-5">
-            <h1>Solid Waste Management</h1>
-            <p class="h5 mb-5">Optimize and streamline the management of solid waste. Waste collection scheduling, <br>
-                tracking, and reporting, ultimately enhancing efficiency and transparency in waste management processes.
-            </p>
-            <div class="row g-0">
-                <?php
-                if (isAdmin()) {
-                    echo '
+
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 module-sidebar-c">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                            id="menu">
+
+                            <?php
+                            include("../../include/module_list_sidebar.php");
+                            echo $moduleListSidebar;
+                            ?>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col py-3">
+
+                    <div class="container pt-4 pt-xl-5 mb-5">
+                        <h1>Solid Waste Management</h1>
+                        <p class="h5 mb-5">Optimize and streamline the management of solid waste. Waste collection
+                            scheduling, <br>
+                            tracking, and reporting, ultimately enhancing efficiency and transparency in waste
+                            management processes.
+                        </p>
+                        <div class="row g-0">
+                            <?php
+                            if (isAdmin()) {
+                                echo '
                     <div class="col-md-4 p-3">
                     <button class="btn btn-primary px-5" id="addData">Add Data</button>
                 </div>
                     ';
-                }
-                ?>
-                <div class="col-md-8 p-3">
-
-                    <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
-                        <div class="search-container">
-                            <?php
-                            if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                                echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
-                            } else {
-                                echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
                             }
                             ?>
+                            <div class="col-md-8 p-3">
 
-                            <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                                <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
+                                    <div class="search-container">
+                                        <?php
+                                        if (isset($_GET["q"]) && !empty($_GET["q"])) {
+                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
+                                        } else {
+                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
+                                        }
+                                        ?>
+
+                                        <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
+
+                        <?php
+                        echo $page;
+                        ?>
+                    </div>
                 </div>
             </div>
-
-            <?php
-            echo $page;
-            ?>
         </div>
+
     </main>
 
     <?php

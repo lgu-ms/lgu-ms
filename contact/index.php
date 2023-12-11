@@ -30,20 +30,27 @@ include("../include/header.php");
                         <form action="<?php htmlspecialchars('php_self'); ?>" method="post">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h1>Contact Us</h1>
+                                    <h1>
+                                        <?php echo $getString["contact_us"]; ?>
+                                    </h1>
                                     <br>
                                     <div class="input-group2">
-                                        <input id="name" type="text" placeholder="Name" name="name" required>
+                                        <input id="name" type="text"
+                                            placeholder="<?php echo $getString["name_placeholder"]; ?>" name="name"
+                                            required>
                                         <i class="fa fa-user"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input id="email" type="email" placeholder="Email" name="email" required>
+                                        <input id="email" type="email"
+                                            placeholder="<?php echo $getString["email_placeholder"]; ?>" name="email"
+                                            required>
                                         <i class="fa-solid fa-envelope"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <textarea id="message1" name="message" rows="6" placeholder="Message"
+                                        <textarea id="message1" name="message" rows="6"
+                                            placeholder="<?php echo $getString["message_placeholder"]; ?>"
                                             minlength="200" required></textarea>
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </div>
@@ -52,7 +59,16 @@ include("../include/header.php");
                                     <input type="hidden" name="action" value="validate_captcha">
 
                                     <div class="mt-2">
-                                        <button id="executeCaptcha" class="btn btn-primary px-5 shadow">Send</button>
+                                        <button id="executeCaptcha" class="btn btn-primary px-5 shadow">
+                                            <?php echo $getString["action_send"]; ?>
+                                        </button>
+                                    </div>
+                                    <div class="mt-4">
+                                        <small>This site is protected by reCAPTCHA and the
+                                            Google
+                                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                            <a href="https://policies.google.com/terms">Terms of Service</a>
+                                            apply.</small>
                                     </div>
                                 </div>
                             </div>
@@ -72,31 +88,25 @@ include("../include/header.php");
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $name = $email = $message = "";
         if (!isset($_POST["name"])) {
-            echo '<script>showToast("Name is required!")</script>';
+            echo '<script>showToast("' . $getString["err_empty_name"] . '")</script>';
         } else {
             $name = $_POST["name"];
             if (!isset($_POST["email"])) {
-                echo '<script>showToast("Email is required!")</script>';
+                echo '<script>showToast("' . $getString["err_empty_email"] . '")</script>';
             } else {
                 $email = $_POST["email"];
                 if (!isset($_POST["message"])) {
-                    echo '<script>showToast("Message is required!")</script>';
+                    echo '<script>showToast("' . $getString["err_empty_message"] . '")</script>';
                 } else {
                     $message = $_POST["message"];
                     if (strlen($message) < 200) {
-                        echo '<script>showToast("Lengthen you message up to 200 characters or more!")</script>';
+                        echo '<script>showToast("' . $getString["err_invalid_length_message"] . '")</script>';
                     } else {
                         $sqlContact = "INSERT INTO contactus (user_name, user_email, message, date_send";
                         if (isLogin()) {
@@ -133,14 +143,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     ');
                             sendMail($sendMailToDev);
-                            $mail = initMail('../', $email, $name, "Support Team", '
+                            $mail = initMail('../', $email, $name, $getString["support_team"], '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                         <div style="margin:50px auto;width:70%;padding:20px 0">
                                             <div style="border-bottom:1px solid #eee">
-                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                                <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">' . $getString["site_name"] . '</a>
                                             </div>
-                                            <p style="font-size:1.1em">Hi ' . $name . ',</p>
-                                            <p>Thank for contacting us we just want you to know we received your message.</p>
+                                            <p style="font-size:1.1em">' . sprintf($getString["mail_hi"], $name) . '</p>
+                                            <p>' . $getString["mail_contact_us_content"] . '</p>
                                             <p style="font-size:0.9em;">Regards,<br />Digital Barangay Support Team</p>
                                             <hr style="border:none;border-top:1px solid #eee" />
                                             <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
@@ -153,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     ');
                             if (sendMail($mail)) {
-                                echo '<script>showToast("Thank you for contacting us!")</script>';
+                                echo '<script>showToast("' . $getString["success_contact"] . '")</script>';
                             } else {
-                                echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                echo '<script>showToast("' . $getString["err_common_email"] . '")</script>';
                             }
                         }
                     }
@@ -163,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        echo '<script>showToast("Seems like you failed the `I am not a robot test`.")</script>';
+        echo '<script>showToast("' . $getString["err_recaptcha"] . '")</script>';
     }
 }
 ?>

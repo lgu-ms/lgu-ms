@@ -56,7 +56,8 @@ include("../include/header.php");
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Password" name="password" id="password" required>
+                                        <input type="password" placeholder="Password" name="password" id="password"
+                                            required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
@@ -75,6 +76,12 @@ include("../include/header.php");
                                             href="../signup?ref=login">Signup</a>
                                         <br><br>
                                         <a class="fpass" href="../forgot-password?ref=login">Forgot password?</a>
+                                    </div>
+                                    <div class="mt-4">
+                                        <small>This site is protected by reCAPTCHA and the Google
+                                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                            <a href="https://policies.google.com/terms">Terms of Service</a>
+                                            apply.</small>
                                     </div>
                                 </div>
                             </div>
@@ -98,18 +105,11 @@ include("../include/header.php");
 </html>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     require_once '../vendor/autoload.php';
-    $client = new GuzzleHttp\Client();
+    require_once '../include/recaptcha.php';
     $token = $_POST["g-recaptcha-response"];
-    $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-        'form_params' => [
-            'secret' => $captcha_secret_key,
-            'response' => $token
-        ]
-    ]);
-    $result = json_decode($response->getBody());
-    if ($result->success) {
+
+    if (verifyResponse($captcha_secret_key, $token)) {
         $email = $password = "";
         if (!isset($_POST["email"])) {
             echo '<script>showToast("Email is required!")</script>';
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST["password"])) {
                 echo '<script>showToast("Password is required!")</script>';
             } else {
-                $password = hash("sha512", $_POST["password"]);
+                $password = $_POST["password"];
                 $isRegister = mysqli_query($conn, "SELECT * FROM account WHERE user_email = '$email'");
                 if (mysqli_num_rows($isRegister) > 0) {
                     while ($row = mysqli_fetch_assoc($isRegister)) {
@@ -128,12 +128,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $fullname = $row["user_fullname"];
                         $user_type = $row["user_type"];
 
-                        if (strcasecmp($db_password, $password) == 0) {
+                        if (password_verify($password, $db_password)) {
 
                             $sql = "INSERT INTO account_session (user_agent, session_started, session_status, user_id, last_accessed) VALUES ";
                             $device_id = $_SERVER['HTTP_USER_AGENT'];
                             $today = strtotime("now");
-                            $_SESSION["session_started"] = $today;
                             $sql .= "('$device_id', $today, 'active', $user_id, $today)";
                             if ($conn->query($sql) === TRUE) {
                                 $getSessionID = mysqli_query($conn, "SELECT * FROM account_session WHERE session_started = $today AND user_id = $user_id");
@@ -151,8 +150,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $timeGenerated = strtotime("now");
                                         $sqlOtp .= "('$otp', $timeGenerated, 'LOGIN', '$temp_id')";
                                         if ($conn->query($sqlOtp) === TRUE) {
-                                            require_once "../include/mail.php";
-                                            $mail = initMail('../', $email, $fullname, "OTP Verification", '
+                                            if (!$debug) {
+                                                require_once "../include/mail.php";
+                                                $mail = initMail('../', $email, $fullname, "OTP Verification", '
                                     <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                         <div style="margin:50px auto;width:70%;padding:20px 0">
                                             <div style="border-bottom:1px solid #eee">
@@ -172,11 +172,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </div>
                                     ');
-                                            if (sendMail($mail)) {
-                                                echo '<script>window.location.href = "verification?ref=login"</script>';
-                                                die();
+                                                if (sendMail($mail)) {
+                                                    echo '<script>window.location.href = "verification?ref=login"</script>';
+                                                    die();
+                                                } else {
+                                                    echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                                }
                                             } else {
-                                                echo '<script>showToast("An error occured while sending you an email. Please try it again later!")</script>';
+                                                echo '<script>alert("Your OTP is: ' . $otp . '");</script>';
+                                                echo '<script>window.location.href = "verification?ref=signup"</script>';
+                                                die();
                                             }
                                         }
                                     }
