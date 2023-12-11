@@ -15,6 +15,9 @@ jobs:
 
   codeql:
     uses: ./.github/workflows/codeql.yml
+    permissions:
+      actions: read
+      security-events: write
 
   deploy:
     runs-on: ubuntu-latest
