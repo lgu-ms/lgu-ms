@@ -13,9 +13,12 @@ jobs:
   security-checker:
     uses: ./.github/workflows/security-checker.yml
 
+  codeql:
+    uses: ./.github/workflows/codeql.yml
+
   deploy:
     runs-on: ubuntu-latest
-    needs: [php-composer, security-checker]
+    needs: [php-composer, security-checker, codeql]
     steps:
       - uses: actions/checkout@v3
       - name: Start Obfuscating
