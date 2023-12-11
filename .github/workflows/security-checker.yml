@@ -5,6 +5,7 @@ on:
     branches: [ "master", "deployment"]
   pull_request:
     branches: [ "master", "deployment"]
+  workflow_call:
   workflow_dispatch:
 
 jobs:
@@ -19,7 +20,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          
+
       - name: Security Checker
         run: |
           composer install --prefer-dist --no-progress
