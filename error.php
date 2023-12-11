@@ -2,8 +2,9 @@
 include("include/session.php");
 
 $code = $_GET["code"];
+$uri = $_GET["uri"];
 
-if (!isset($code) || is_numeric($code) != 1 || (is_numeric($code) == 1 && ($code != 400 && $code != 401 && $code != 403 && $code != 404 && $code != 500))) {
+if (!isset($code) || is_numeric($code) != 1 || (is_numeric($code) == 1 && ($code != 400 && $code != 401 && $code != 403 && $code != 404 && $code != 500)) && !isset($uri)) {
     echo "<script>window.location.href = '/?ref=eeeeeeeeeeeeerrr';</script>";
     die();
 }
@@ -63,10 +64,16 @@ foreach ($err as $error) {
               width="300" alt="error">
           </div>
           <div class="col-md-8">
-            <h1 class="display-1"><strong>Error ' . $error->code . '</strong></h1>
-            <h1 class="display-6">' . $error->name . '</h1>
+            <h1 class="display-1" style="font-weight: 900;"><strong>' . $error->code . '</strong></h1>
+            <h1 class="display-6">This is not the webpage youre looking for.</h1>
             <p>' . $error->description . '</p>  
-            <button class="btn btn-primary shadow px-5" onclick="window.location.href=\'/\'">HOMEPAGE</button>
+            <form action="search" method="get">
+            <div class="search-container">
+                <input id="search" placeholder="Search anything..." type="text" name="q">
+                <i class="fa-solid fa-magnifying-glass" id="but"></i>
+            </div>
+        </form>
+        <small class="text-muted"><a href="contact">Contact Us</a> — <a href="https://stats.uptimerobot.com/n0EyAslx3A">Digital Barangay Status</a> </small>
           </div>
         </div>
       </div>
@@ -85,24 +92,8 @@ $page_image = "https://digitalbarangay.com/images/ogimage.png";
 $page_author = "Melvin Jones Repol";
 $page_canonical = "https://digitalbarangay.com/";
 $page_url = $page_canonical;
-
-$url = $_SERVER['REQUEST_URI'];
-$parts = explode('/',$url);
-$dir = $_SERVER['SERVER_NAME'];
-for ($i = 0; $i < count($parts) - 2; $i++) {
- $dir .= $parts[$i] . "/";
-}
-
 $directory = '';
 $directory_img = '';
-if (isset($_GET["d5345n5k3j3bh4b3hb4b3"])) {
-    $directory = str_replace("localhost/", "", $dir);
-    $directory_img = str_replace("localhost/", "", $dir);
-} else {
-    $directory = str_replace("digitalbarangay.com/", "", $dir);
-    $directory_img = str_replace("digitalbarangay.com/", "", $dir);
-}
-echo $directory_img;
 
 include("include/header.php");
 
@@ -116,12 +107,15 @@ include("include/header.php");
         <?php echo $main; ?>
     </main>
 
-    <?php include("include/footer.php"); ?>
+    <?php
+    echo '<script>window.history.pushState("object", "title", "http://' . $_SERVER['HTTP_HOST'] . $uri . '")</script>';
+    include("include/footer.php"); ?>
 </body>
 
 </html>
 
 <?php
+
 
 $insertError = "INSERT INTO error (error_code, error_name, error_date";
 

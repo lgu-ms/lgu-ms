@@ -190,7 +190,7 @@ if (mysqli_num_rows($getDmR) > 0) {
             <div class="row flex-nowrap">
                 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 module-sidebar-c">
                     <div
-                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                        class="d-flex flex-column align-items-center align-items-sm-start min-vh-100">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                             id="menu">
 
@@ -216,13 +216,13 @@ if (mysqli_num_rows($getDmR) > 0) {
                                     <div class="search-container mt-5">
                                         <?php
                                         if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
+                                            echo ' <input id="searchModule" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
                                         } else {
-                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
+                                            echo ' <input id="searchModule" placeholder="Search documents/records..." type="text" name="q">';
                                         }
                                         ?>
 
-                                        <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                                        <i class="fa-solid fa-magnifying-glass" id="butModule"></i>
                                     </div>
                                 </form>
                             </div>
