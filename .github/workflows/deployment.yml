@@ -7,15 +7,15 @@ on:
 
 jobs:
 
-  job1:
+  php-composer:
     uses: ./.github/workflows/php.yml
 
-  job2:
+  security-checker:
     uses: ./.github/workflows/security-checker.yml
 
-  jobs3:
+  deploy:
     runs-on: ubuntu-latest
-    needs: [job1, job2]
+    needs: [php-composer, security-checker]
     steps:
       - uses: actions/checkout@v3
       - name: Start Obfuscating
