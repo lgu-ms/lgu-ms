@@ -1,0 +1,21 @@
+name: "PHP Syntax"
+
+on: pull_request
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Run php-cs-fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --config=.php-cs-fixer.dist.php
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Apply php-cs-fixer changes
+          branch: ${{ github.head_ref }}
