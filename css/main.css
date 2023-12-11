@@ -110,6 +110,10 @@ footer a:after {
     margin-left: 8px !important;
 }
 
+.module-sidebar a:after {
+    width: 0% !important;
+}
+
 a.btn::after {
     width: 0% !important;
 }
@@ -1042,6 +1046,24 @@ video {
     text-align: center;
 }
 
-.grecaptcha-badge { 
+.grecaptcha-badge {
     visibility: hidden !important;
+}
+
+.module-sidebar {
+    text-transform: none !important;
+}
+
+.module-sidebar-c {
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+.module-sidebar:hover {
+    background-color: var(--box-shdow);
 }

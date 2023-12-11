@@ -57,7 +57,7 @@ if (!isLogin()) {
     <div class="container mt-5" id="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <img src="../../../images/business.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
+          <img src="../../images/business.jpg" class="rounded mx-auto d-block img-fluid" alt="Hero Image">
         </div>
         <div class="col-md-6">
           <p>It is designed to handle the issuance, renewal, and management of business permits. It streamlines and automates the process of obtaining permits required for starting or operating a business legally within a specific jurisdiction, such as a city or municipality.</p>

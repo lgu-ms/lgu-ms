@@ -1,5 +1,5 @@
 <?php
-include("../include/session.php");
+include("include/session.php");
 
 $code = $_GET["code"];
 
@@ -97,25 +97,26 @@ $directory = '';
 $directory_img = '';
 if (isset($_GET["d5345n5k3j3bh4b3hb4b3"])) {
     $directory = str_replace("localhost/", "", $dir);
-    $directory_img = str_replace("localhost/", "../", $dir);
+    $directory_img = str_replace("localhost/", "", $dir);
 } else {
     $directory = str_replace("digitalbarangay.com/", "", $dir);
-    $directory_img = str_replace("digitalbarangay.com/", "../", $dir);
+    $directory_img = str_replace("digitalbarangay.com/", "", $dir);
 }
+echo $directory_img;
 
-include("../include/header.php");
+include("include/header.php");
 
 ?>
 
 <body class="d-flex flex-column min-vh-100">
 
-    <?php include("../include/nav.php"); ?>
+    <?php include("include/nav.php"); ?>
 
     <main>
         <?php echo $main; ?>
     </main>
 
-    <?php include("../include/footer.php"); ?>
+    <?php include("include/footer.php"); ?>
 </body>
 
 </html>
