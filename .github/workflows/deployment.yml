@@ -8,10 +8,10 @@ on:
 jobs:
 
   job1:
-    uses: ./.github/workflows/php.yml@master
+    uses: ./.github/workflows/php.yml
 
   job2:
-    uses: ./.github/workflows/security-checker.yml@master
+    uses: ./.github/workflows/security-checker.yml
 
   jobs3:
     runs-on: ubuntu-latest
