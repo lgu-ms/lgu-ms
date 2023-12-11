@@ -1,4 +1,11 @@
-<?php include("localization.php"); ?>
+<?php
+if ((!file_exists($directory . 'vendor/autoload.php'))) {
+    die('You must have Composer installed and must run the composer install CLI command.' . PHP_EOL .
+        'Download Composer from the website: https://getcomposer.org/download/' . PHP_EOL .
+        'Then, run the "composer install" command.' . PHP_EOL);
+}
+
+include("localization.php"); ?>
 
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>">
@@ -87,6 +94,11 @@
     </title>
 
     <?php
+
+    if (isset($customCodeHeader)) {
+        echo $customCodeHeader;
+    }
+
     include("update_profile.php");
     ?>
 </head>

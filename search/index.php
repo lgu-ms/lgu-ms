@@ -24,35 +24,15 @@ include("../include/header.php");
 
     <main>
 
-        <div class="container pt-2 pt-xl-5 mb-5">
-            <div class="row pt-5">
-                <div class="col-12 col-lg-10 mx-auto">
-
-                    <form action="<?php echo $directory; ?>search" method="get">
-                        <div class="search-container">
-                            <?php
-                            if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                                echo '<input id="search" placeholder="What are you looking for?" type="text" name="q" value="' . $_GET["q"] . '">';
-                            } else {
-                                echo '<input id="search" placeholder="What are you looking for?" type="text" name="q">';
-                            }
-                            ?>
-
-                            <i class="fa-solid fa-magnifying-glass" id="but"></i>
-                        </div>
-                    </form>
-                    <?php
-                    if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                        echo '<h2 class="mt-4">No results found!</h2><p><a href="https://google.com/search?q=' . $_GET["q"] . '%20site:digitalbarangay.com">search to google instead?</a></p>';
-                    }
-                    ?>
-                </div>
-            </div>
+        <div class="container  mb-5">
+            <h1>Digital Barangay Search</h1>
+            <h4>Find information quickly...</h4>
+            <script async src="https://cse.google.com/cse.js?cx=265058b6096cd42bf"></script>
+            <div class="gcse-search"></div>
         </div>
 
 
     </main>
-
     <?php include("../include/footer.php"); ?>
 </body>
 

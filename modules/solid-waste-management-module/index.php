@@ -231,13 +231,13 @@ if (mysqli_num_rows($getSwm) > 0) {
                                     <div class="search-container">
                                         <?php
                                         if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
+                                            echo ' <input id="searchModule" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
                                         } else {
-                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
+                                            echo ' <input id="searchModule" placeholder="Search documents/records..." type="text" name="q">';
                                         }
                                         ?>
 
-                                        <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                                        <i class="fa-solid fa-magnifying-glass" id="butModule"></i>
                                     </div>
                                 </form>
                             </div>

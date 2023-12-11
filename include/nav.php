@@ -19,7 +19,9 @@ $dec_user_name = null;
 
         <a class="navbar-brand " href="<?php echo $directory; ?>">
             <img src="<?php echo $directory; ?>favicon.ico" alt="Icon" height="20" class="navbar-brand-icon">
-            <span class="navbar-brand-name default-light"> <?php echo $getString["site_name"]; ?> </span>
+            <span class="navbar-brand-name default-light">
+                <?php echo $getString["site_name"]; ?>
+            </span>
         </a>
 
         <div class="collapse navbar-collapse" id="navbarText">
@@ -28,16 +30,33 @@ $dec_user_name = null;
                 if (!isset($hideSearchBar)) {
                     echo '
                 <li class="nav-item">
-                    <form action="' . $directory . 'search" method="get">
                         <div class="search-container">
-                            <input id="search" placeholder="' . $getString["search_placeholder"] . '" type="text" name="q">
+                            <input id="search" placeholder="' . $getString["search_placeholder"] . '" type="text" name="gsc.q">
                             <i class="fa-solid fa-magnifying-glass" id="but"></i>
                         </div>
-                    </form>
                 </li>
                 ';
                 }
                 ?>
+
+                <script>
+                    if (typeof search !== "undefined") {
+                        function g_search() {
+                            window.location.href = '<?php echo $directory; ?>search#gsc.q=' + escapeHtml(search.value);
+                        }
+
+                        search.addEventListener("keyup", ({key}) => {
+                            if (key === "Enter") {
+                                g_search();
+                            }
+                        });
+
+                        but.onclick = function () {
+                            g_search();
+                        };
+                    }
+
+                </script>
 
                 <li class="nav-item">
                     <a class="nav-link default-light" href="<?php echo $directory; ?>">
@@ -45,7 +64,9 @@ $dec_user_name = null;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link default-light" href="<?php echo $directory; ?>modules"><?php echo $getString["modules"]; ?></a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>modules">
+                        <?php echo $getString["modules"]; ?>
+                    </a>
                 </li>
                 <?php
                 if (!isset($home)) {
@@ -57,7 +78,9 @@ $dec_user_name = null;
                 }
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact"><?php echo $getString["contact_us"]; ?></a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact">
+                        <?php echo $getString["contact_us"]; ?>
+                    </a>
                 </li>
 
                 <?php
