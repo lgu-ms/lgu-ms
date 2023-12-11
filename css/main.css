@@ -1056,7 +1056,7 @@ video {
 
 .module-sidebar-c {
     height: 90vh;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
@@ -1066,4 +1066,11 @@ video {
 
 .module-sidebar:hover {
     background-color: var(--box-shdow);
+}
+
+
+@media (min-width:570px) {
+    .module-sidebar-c {
+        overflow-y: auto !important;
+    }
 }
