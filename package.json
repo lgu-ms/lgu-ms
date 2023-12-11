@@ -24,7 +24,7 @@
     "clean-css": "^5.3.2",
     "html-minifier": "^4.0.0",
     "javascript-obfuscator": "^4.0.2",
-    "minify": "^10.5.2"
+    "minify": "^11.0.0"
   },
   "engines": {
     "node": ">=18.x"
