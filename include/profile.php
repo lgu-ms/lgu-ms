@@ -21,7 +21,7 @@
                        
                         <div class="profilepic-content">
                             <span class="profilepic-icon"><i class="fas fa-camera"></i></span>
-                            <span class="profilepic-text">Change Photo</span>
+                            <span class="profilepic-text"><?php echo $getString["change_photo"]; ?></span>
                         </div>
                     </div>
 
@@ -30,10 +30,9 @@
                     </h5>
                     <hr class="mt-5">
                     <a href="<?php echo $directory ?>change-password?ref=profile"><i
-                            class="fa-solid fa-lock"></i>&nbsp;&nbsp;Change
-                        Password</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                            class="fa-solid fa-lock"></i>&nbsp;&nbsp; <?php echo $getString["change_password"]; ?></a> &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="<?php echo $directory ?>logout?ref=profile"><i
-                            class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;&nbsp;Logout</a>
+                            class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;&nbsp; <?php echo $getString["logout"]; ?></a>
                 </div>
 
             </div>

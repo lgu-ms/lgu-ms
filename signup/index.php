@@ -49,10 +49,10 @@ include("../include/header.php");
                                         <i class="fa fa-user"></i>
                                     </div>
 
-                                    <div class="input-group2">
+                                    <!-- <div class="input-group2">
                                         <input type="text" placeholder="Fullname" name="fullname" required>
                                         <i class="fa fa-circle-info"></i>
-                                    </div>
+                                    </div> -->
 
                                     <div class="input-group2">
                                         <input type="password" placeholder="Password" name="password" id="password"
@@ -74,17 +74,22 @@ include("../include/header.php");
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                                     <input type="hidden" name="action" value="validate_captcha">
 
-                                    <small>By clicking Signup, you agree to our <u><a href="/terms">Terms</a></u>, <u><a
-                                                href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie
-                                                Policy</a></u>.</small>
                                     <div class="mt-4">
-                                        <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
-                                            name="submit">Signup</button>
+                                        <a id="signupNext" class="btn btn-primary px-5 shadow">Signup</a>
                                         <a type="button" class="btn btn-outline-primary px-4"
                                             href="../login?ref=signup">Login</a>
                                         <br><br>
                                         <a class="fpass" href="../forgot-password?ref=signup">Forgot
                                             password?</a>
+                                    </div>
+                                    <div class="mt-4">
+                                        <small>I accept Digital Barangay <u><a href="/terms">Terms</a></u>,
+                                            <u><a href="/privacy">Privacy</a></u> and <u><a href="/cookies">Cookie
+                                                    Policy</a></u>.<br><br>This site is protected by reCAPTCHA and the
+                                            Google
+                                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                            <a href="https://policies.google.com/terms">Terms of Service</a>
+                                            apply.</small>
                                     </div>
                                 </div>
                             </div>

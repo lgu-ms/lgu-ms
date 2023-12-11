@@ -8,7 +8,7 @@ if (!isLogin()) {
 
 $page_publisher = "https://facebook.com/melvinjonesrepol";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
-$page_title = "Changed Password - Digital Barangay";
+$page_title = "Change Password - Digital Barangay";
 $page_description = "";
 $page_keywords = "digital barangay, lgu, lgu management system";
 $page_image = "https://digitalbarangay.com/images/ogimage.png";
@@ -41,29 +41,34 @@ include("../include/header.php");
                         <form action="<?php htmlspecialchars('php_self'); ?>" method="post" id="form">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h1>Change Password</h1>
+                                    <h1>
+                                        <?php echo $getString["change_password"]; ?>
+                                    </h1>
                                     <br>
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Previous Password" name="ppassword"
-                                            id="ppassword" required>
+                                        <input type="password"
+                                            placeholder="<?php echo $getString["prev_pass_placeholder"]; ?>"
+                                            name="ppassword" id="ppassword" required>
                                         <i class="fa fa-backward"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="New Password" name="password" id="password"
-                                            required>
+                                        <input type="password"
+                                            placeholder="<?php echo $getString["new_pass_placeholder"]; ?>"
+                                            name="password" id="password" required>
                                         <i class="fa fa-key"></i>
                                     </div>
 
                                     <div class="input-group2">
-                                        <input type="password" placeholder="Confirm New Password" name="cpassword"
-                                            id="cpassword" required>
+                                        <input type="password"
+                                            placeholder="<?php echo $getString["confirm_pass_placeholder"]; ?>"
+                                            name="cpassword" id="cpassword" required>
                                         <i class="fa fa-arrows-rotate"></i>
                                     </div>
 
                                     <input class="form-check-input" type="checkbox" value="" id="showPassword">
                                     <label class="form-check-label" for="showPassword">
-                                        Show password
+                                        <?php echo $getString["show_pass_label"]; ?>
                                     </label>
 
                                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
@@ -71,7 +76,9 @@ include("../include/header.php");
 
                                     <div class="form-group mt-2">
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
-                                            name="submit">Update</button>
+                                            name="submit">
+                                            <?php echo $getString["update"]; ?>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (verifyResponse($captcha_secret_key, $token)) {
         $ppassword = $password = $cpassword = "";
         if (!isset($_POST["ppassword"])) {
-            echo '<script>showToast("You need to type your previous password!")</script>';
+            echo '<script>showToast("' . $getString["err_empty_prev_pass"] . '")</script>';
         } else {
             $ppassword = $_POST["ppassword"];
             $user_id = $_SESSION["user_id"];
@@ -118,11 +125,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $db_user_fullname = $row["user_fullname"];
 
                     if (!isset($_POST["password"])) {
-                        echo '<script>showToast("You need to enter your new password!")</script>';
+                        echo '<script>showToast("' . $getString["err_empty_new_pass"] . '")</script>';
                     } else {
                         $password = hash("sha512", $_POST["password"]);
                         if (!isset($_POST["cpassword"])) {
-                            echo '<script>showToast("You need to retype your password again!")</script>';
+                            echo '<script>showToast("' . $getString["err_empty_confirm_pass"] . '")</script>';
                         } else {
                             $cpassword = $_POST["cpassword"];
                             if (strcasecmp($password, $cpassword) == 0) {
@@ -134,14 +141,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $setChangePassword .= "($today, $session_id, $user_id, 'change-password')";
                                         if ($conn->query($setChangePassword) === TRUE) {
                                             require_once "../include/mail.php";
-                                            $notifyPasswordChange = initMail('../', $db_user_email, $db_user_fullname, "Your account password has been reset.", '
+                                            $notifyPasswordChange = initMail('../', $db_user_email, $db_user_fullname, $getString["mail_reset_password"], '
                                             <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
                                                 <div style="margin:50px auto;width:70%;padding:20px 0">
                                                     <div style="border-bottom:1px solid #eee">
-                                                        <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">Digital Barangay</a>
+                                                        <a href="" style="font-size:1.4em;color: #2e475d;text-decoration:none;font-weight:600">' . $getString["site_name"] . '</a>
                                                     </div>
-                                                    <p style="font-size:1.1em">Hi ' . $db_user_fullname . ',</p>
-                                                    <p>You received this email to let you know that your account password has been reset. If you did not do it please contact us immediately.</p>
+                                                    <p style="font-size:1.1em">' . sprintf($getString["mail_hi"], $db_user_fullname) . '</p>
+                                                    <p>' . $getString["mail_reset_content"] . '</p>
                                                     <p style="font-size:0.9em;">Regards,<br />Digital Barangay Security Team</p>
                                                     <hr style="border:none;border-top:1px solid #eee" />
                                                     <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
@@ -154,14 +161,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </div>
                                             ');
                                             sendMail($notifyPasswordChange);
-                                            echo '<script>showPopup("Change Password", "Successfully changed your password", "' . $directory . '", "Go Home")</script>';
+                                            echo '<script>showPopup("' . $getString["change_password"] . '", "' . $getString["success_change_pass"] . '", "' . $directory . '", "' . $getString["go_home"] . '")</script>';
                                         }
                                     }
                                 } else {
-                                    echo '<script>showToast("Please type again your password!")</script>';
+                                    echo '<script>showToast("' . $getString["err_invalid_pass"] . '")</script>';
                                 }
                             } else {
-                                echo '<script>showToast("Please type again your new password!")</script>';
+                                echo '<script>showToast("' . $getString["err_invalid_new_pass"] .'")</script>';
                             }
                         }
                     }
@@ -169,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
-        echo '<script>showToast("Seems like you failed in I am not a robot test.")</script>';
+        echo '<script>showToast("' . $getString["err_recaptcha"] . '")</script>';
     }
 }
 ?>

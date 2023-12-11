@@ -19,7 +19,7 @@ $dec_user_name = null;
 
         <a class="navbar-brand " href="<?php echo $directory; ?>">
             <img src="<?php echo $directory; ?>favicon.ico" alt="Icon" height="20" class="navbar-brand-icon">
-            <span class="navbar-brand-name default-light"> Digital Barangay </span>
+            <span class="navbar-brand-name default-light"> <?php echo $getString["site_name"]; ?> </span>
         </a>
 
         <div class="collapse navbar-collapse" id="navbarText">
@@ -30,7 +30,7 @@ $dec_user_name = null;
                 <li class="nav-item">
                     <form action="' . $directory . 'search" method="get">
                         <div class="search-container">
-                            <input id="search" placeholder="What are you looking for?" type="text" name="q">
+                            <input id="search" placeholder="' . $getString["search_placeholder"] . '" type="text" name="q">
                             <i class="fa-solid fa-magnifying-glass" id="but"></i>
                         </div>
                     </form>
@@ -41,23 +41,23 @@ $dec_user_name = null;
 
                 <li class="nav-item">
                     <a class="nav-link default-light" href="<?php echo $directory; ?>">
-                        Home
+                        <?php echo $getString["home"]; ?>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link default-light" href="<?php echo $directory; ?>modules">Modules</a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>modules"><?php echo $getString["modules"]; ?></a>
                 </li>
                 <?php
                 if (!isset($home)) {
                     echo '
                      <li class="nav-item">
-                    <a class="nav-link default-light" href="' . $directory . 'milestone">Milestone</a>
+                    <a class="nav-link default-light" href="' . $directory . 'milestone">' . $getString["milestone"] . '</a>
                 </li>
                      ';
                 }
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact">Contact Us</a>
+                    <a class="nav-link default-light" href="<?php echo $directory; ?>contact"><?php echo $getString["contact_us"]; ?></a>
                 </li>
 
                 <?php
@@ -93,12 +93,12 @@ $dec_user_name = null;
                         $ff = '
                 <li class="nav-item prim">
                 <a class="nav-link default-light" href="' . $directory . 'signup?ref=signup_button">
-                   Signup
+                   ' . $getString["sign_up"] . '
                 </a>
             </li>
             <li class="nav-item prim">
             <a class="nav-link  btn btn-primary px-4" href="' . $directory . 'login?ref=login_button">
-                Login
+            ' . $getString["log_in"] . '
             </a>
         </li>
                     ';
@@ -138,7 +138,7 @@ $dec_user_name = null;
                         $ff = '
                     <li class="nav-item seco">
                     <a class="nav-link default-light" href="' . $directory . 'login?ref=login_button">
-                    <span class="text sec px-2">Log in</span>
+                    <span class="text sec px-2"> ' . $getString["log_in"] . '</span>
                     <i class="fa-solid fa-user"></i>
                     </a>
                 </li>

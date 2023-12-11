@@ -1,6 +1,5 @@
 <?php
 include("../../include/session.php");
-include("../../include/header.php");
 
 $page_publisher = "https://github.com/reyes-9";
 $page_modified_time = "2023-11-22T13:37:36+00:00";
@@ -35,6 +34,7 @@ if (!isLogin()) {
     echo '<script>window.location.href = "../../login"</script>';
   }
 
+  include("../../include/header.php");
 ?>
 <body class="d-flex flex-column min-vh-100">
 

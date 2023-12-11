@@ -1041,3 +1041,7 @@ video {
     width: 50%;
     text-align: center;
 }
+
+.grecaptcha-badge { 
+    visibility: hidden !important;
+}

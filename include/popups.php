@@ -1,6 +1,6 @@
 <noscript>
     <div class="nojs">
-        An error occurred. Try reloading this page, or enable JavaScript if it is disabled in your browser.
+        <?php echo $getString["nojs"]; ?>
     </div>
 </noscript>
 <div aria-live="polite" aria-atomic="true" class="position-relative">

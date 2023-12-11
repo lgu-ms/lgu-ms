@@ -77,6 +77,12 @@ include("../include/header.php");
                                         <br><br>
                                         <a class="fpass" href="../forgot-password?ref=login">Forgot password?</a>
                                     </div>
+                                    <div class="mt-4">
+                                        <small>This site is protected by reCAPTCHA and the Google
+                                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                            <a href="https://policies.google.com/terms">Terms of Service</a>
+                                            apply.</small>
+                                    </div>
                                 </div>
                             </div>
                         </form>

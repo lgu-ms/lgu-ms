@@ -1,4 +1,4 @@
-const cacheName = "dbv1";
+const cacheName = "dbv2";
 const domain = atob("aHR0cHM6Ly9kaWdpdGFsYmFyYW5nYXkuY29t");
 const allowedFolder = ["/vendor/", "/fonts/"];
 
@@ -26,16 +26,13 @@ self.addEventListener("fetch", async (event) => {
         event.respondWith(
             caches.open(cacheName).then((cache) => {
                 return cache.match(event.request).then((cachedResponse) => {
-                    return (
-                        cachedResponse ||
+                    return cachedResponse ||
                         fetch(event.request.url).then((fetchedResponse) => {
                             cache.put(event.request, fetchedResponse.clone());
                             return fetchedResponse;
-                        })
-                    );
                 });
             });
-        );
+        }));
     }
     return;
 });
