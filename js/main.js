@@ -318,6 +318,204 @@ if (typeof modulesList !== "undefined") {
     }
 }
 
+if (typeof signupNext !== "undefined") {
+    signupNext.onclick = function () {
+        let mainModal = document.getElementById("mainModal");
+
+        let modalID = generateRandomId(10);
+    
+        let modal = document.createElement("div");
+        modal.setAttribute("class", "modal fade");
+        modal.setAttribute("tabindex", "-1");
+        modal.setAttribute("id", modalID);
+        modal.setAttribute("aria-hidden", "true");
+    
+        let modalDialog = document.createElement("div");
+        modalDialog.setAttribute("class", "modal-dialog modal-dialog-centered");
+        let modalContent = document.createElement("div");
+        modalContent.setAttribute("class", "modal-content");
+    
+        let modalHeader = document.createElement("div");
+        modalHeader.setAttribute("class", "modal-header");
+    
+        let h1 = document.createElement("h1");
+        h1.setAttribute("class", "modal-title fs-5");
+        h1.innerText = "Complete your signup";
+    
+        let closeButton = document.createElement("button");
+        closeButton.setAttribute("class", "btn-close");
+        closeButton.setAttribute("type", "button");
+        closeButton.setAttribute("data-bs-dismiss", "modal");
+        closeButton.setAttribute("aria-label", "close");
+    
+        modalHeader.append(h1);
+        modalHeader.append(closeButton);
+    
+        let modalBody = document.createElement("div");
+        modalBody.setAttribute("class", "modal-body");
+    
+        let p = document.createElement("p");
+        p.innerText = "hello World";
+    
+        let form = document.createElement("form");
+        form.setAttribute("action", "");
+        form.setAttribute("method", "post");
+    
+        let inputG = document.createElement("div");
+        inputG.setAttribute("class", "input-group2");
+        let input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("placeholder", "First name");
+        input.setAttribute("name", "Firstname");
+        input.setAttribute("required", "required");
+        let inputI = document.createElement("i");
+        inputI.setAttribute("class", "fa-solid fa-circle-info");
+        inputG.append(input);
+        inputG.append(inputI);
+        form.append(inputG);
+    
+        let inputG1 = document.createElement("div");
+        inputG1.setAttribute("class", "input-group2");
+        let input1 = document.createElement("input");
+        input1.setAttribute("type", "text");
+        input1.setAttribute("placeholder", "Middle name (Optional)");
+        input1.setAttribute("name", "Middlename");
+        input1.setAttribute("required", "required");
+        let inputI1 = document.createElement("i");
+        inputI1.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1.append(input1);
+        inputG1.append(inputI1);
+        form.append(inputG1);
+    
+        let inputG1a = document.createElement("div");
+        inputG1a.setAttribute("class", "input-group2");
+        let input1a = document.createElement("input");
+        input1a.setAttribute("type", "text");
+        input1a.setAttribute("placeholder", "Last name");
+        input1a.setAttribute("name", "Lastname");
+        input1a.setAttribute("required", "required");
+        let inputI1a = document.createElement("i");
+        inputI1a.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1a.append(input1a);
+        inputG1a.append(inputI1a);
+        form.append(inputG1a);
+    
+        let inputG1ab = document.createElement("div");
+        inputG1ab.setAttribute("class", "input-group2");
+        let input1ab = document.createElement("input");
+        input1ab.setAttribute("type", "date");
+        input1ab.setAttribute("placeholder", "Birthdate");
+        input1ab.setAttribute("name", "birthdate");
+        input1ab.setAttribute("required", "required");
+        let inputI1ab = document.createElement("i");
+        inputI1ab.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1ab.append(input1ab);
+        inputG1ab.append(inputI1ab);
+        form.append(inputG1ab);
+    
+        let inputG1abc = document.createElement("div");
+        inputG1abc.setAttribute("class", "input-group2");
+        let input1abc = document.createElement("input");
+        input1abc.setAttribute("type", "text");
+        input1abc.setAttribute("placeholder", "Birth place");
+        input1abc.setAttribute("name", "Birthplace");
+        input1abc.setAttribute("required", "required");
+        let inputI1abc = document.createElement("i");
+        inputI1abc.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1abc.append(input1abc);
+        inputG1abc.append(inputI1abc);
+        form.append(inputG1abc);
+    
+        let inputG1abcd = document.createElement("div");
+        inputG1abcd.setAttribute("class", "input-group2");
+        let input1abcd = document.createElement("input");
+        input1abcd.setAttribute("type", "text");
+        input1abcd.setAttribute("placeholder", "Sex");
+        input1abcd.setAttribute("name", "Sex");
+        input1abcd.setAttribute("required", "required");
+        let inputI1abcd = document.createElement("i");
+        inputI1abcd.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1abcd.append(input1abcd);
+        inputG1abcd.append(inputI1abcd);
+        form.append(inputG1abcd);
+    
+        let inputG1abcde = document.createElement("div");
+        inputG1abcde.setAttribute("class", "input-group2");
+        let input1abcde = document.createElement("input");
+        input1abcde.setAttribute("type", "number");
+        input1abcde.setAttribute("placeholder", "Mobile number");
+        input1abcde.setAttribute("name", "Mobilenumber");
+        input1abcde.setAttribute("required", "required");
+        let inputI1abcde = document.createElement("i");
+        inputI1abcde.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1abcde.append(input1abcde);
+        inputG1abcde.append(inputI1abcde);
+        form.append(inputG1abcde);
+
+        let inputG1abcdef = document.createElement("div");
+        inputG1abcdef.setAttribute("class", "input-group2");
+        let input1abcdef = document.createElement("input");
+        input1abcdef.setAttribute("type", "text");
+        input1abcdef.setAttribute("placeholder", "Address");
+        input1abcdef.setAttribute("name", "Address");
+        input1abcdef.setAttribute("required", "required");
+        let inputI1abcdef = document.createElement("i");
+        inputI1abcdef.setAttribute("class", "fa-solid fa-circle-info");
+        inputG1abcdef.append(input1abcdef);
+        inputG1abcdef.append(inputI1abcdef);
+        form.append(inputG1abcdef);
+    
+        let hiddenInputResponse = document.createElement("input");
+        hiddenInputResponse.setAttribute("type", "hidden");
+        hiddenInputResponse.setAttribute("id", "g-recaptcha-response");
+        hiddenInputResponse.setAttribute("name", "g-recaptcha-response");
+        let hiddenInputAction = document.createElement("input");
+        hiddenInputAction.setAttribute("type", "hidden");
+        hiddenInputAction.setAttribute("name", "action");
+        hiddenInputAction.setAttribute("value", "validate_captcha");
+    
+        let dFlex = document.createElement("div");
+        dFlex.setAttribute("class", "d-flex");
+        let msAuto = document.createElement("div");
+        msAuto.setAttribute("class", "ms-auto");
+    
+        let actionButton = document.createElement("button");
+        actionButton.setAttribute("type", "submit");
+        actionButton.setAttribute("name", "submit");
+        actionButton.setAttribute("class", "btn btn-primary px-4");
+        // actionButton.setAttribute("data-bs-dismiss", "modal");
+        actionButton.innerText = "Signup";
+    
+        msAuto.append(actionButton);
+        dFlex.append(msAuto);
+        form.append(hiddenInputResponse);
+        form.append(hiddenInputAction);
+        form.append(dFlex);
+    
+        grecaptcha.ready(function () {
+            grecaptcha.execute(captcha_site_key, { action: "validate_captcha" }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+            });
+        });
+    
+        modalBody.append(p);
+        modalBody.append(form);
+        modalContent.append(modalHeader);
+        modalContent.append(modalBody);
+    
+        modalDialog.append(modalContent);
+        modal.append(modalDialog);
+        mainModal.append(modal);
+    
+        let bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+    
+        $("#" + modalID).on("hide.bs.modal", function () {
+            modal.remove();
+        });
+    };
+}
+
 if (typeof changePhoto !== "undefined") {
     changePhoto.onclick = function () {
         $("#popupProfileModal").modal("hide");

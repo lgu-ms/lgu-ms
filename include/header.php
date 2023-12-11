@@ -1,5 +1,7 @@
+<?php include("localization.php"); ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $lang; ?>">
 
 <head>
     <script>(function (w, d, s, l, i) {

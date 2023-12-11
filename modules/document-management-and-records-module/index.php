@@ -11,7 +11,7 @@ try {
     if ($debug) {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     }
-    
+
     $dm_r = new mysqli($mysql_address, $mysql_dm_r_user, $mysql_dm_r_pass, $mysql_dm_r_db);
 
     $dm_r->connect_error;
@@ -185,47 +185,70 @@ if (mysqli_num_rows($getDmR) > 0) {
     <?php include("../../include/nav.php"); ?>
 
     <main>
-        <div class="container pt-4 pt-xl-5 mb-5">
-            <h1>Document Management and Records</h1>
-            <p class="h5 mb-5">Storage, retrieval of documents and records. Efficient collaboration, version
-                control,<br>
-                and secure access to important information, reducing reliance on traditional paper-based filing systems.
-            </p>
-            <div class="row g-0">
-                <div class="col-md-6 p-3">
-                    <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
-                        <div class="search-container mt-5">
+
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 module-sidebar-c">
+                    <div
+                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                            id="menu">
+
                             <?php
-                            if (isset($_GET["q"]) && !empty($_GET["q"])) {
-                                echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
-                            } else {
-                                echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
-                            }
+                            include("../../include/module_list_sidebar.php");
+                            echo $moduleListSidebar;
                             ?>
 
-                            <i class="fa-solid fa-magnifying-glass" id="but"></i>
-                        </div>
-                    </form>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-6 p-1">
-                    <div class="mb-3">
-                        <form action="<?php htmlspecialchars('php_self'); ?>" method="post"
-                            enctype="multipart/form-data">
-                            <label for="fileToUpload" class="form-label">Upload File</label>
-                            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
-                            <button type="submit" name="upload" id="executeCaptcha"
-                                class="btn btn-primary px-5 mt-2">Upload</button>
-                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                            <input type="hidden" name="action" value="validate_captcha">
-                        </form>
+                <div class="col py-3">
+                    <div class="container pt-4 pt-xl-5 mb-5">
+                        <h1>Document Management and Records</h1>
+                        <p class="h5 mb-5">Storage, retrieval of documents and records. Efficient collaboration, version
+                            control,<br>
+                            and secure access to important information, reducing reliance on traditional paper-based
+                            filing systems.
+                        </p>
+                        <div class="row g-0">
+                            <div class="col-md-6 p-3">
+                                <form action="<?php htmlspecialchars('php_self'); ?>" method="get">
+                                    <div class="search-container mt-5">
+                                        <?php
+                                        if (isset($_GET["q"]) && !empty($_GET["q"])) {
+                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q" value="' . $_GET["q"] . '">';
+                                        } else {
+                                            echo ' <input id="search" placeholder="Search documents/records..." type="text" name="q">';
+                                        }
+                                        ?>
+
+                                        <i class="fa-solid fa-magnifying-glass" id="but"></i>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 p-1">
+                                <div class="mb-3">
+                                    <form action="<?php htmlspecialchars('php_self'); ?>" method="post"
+                                        enctype="multipart/form-data">
+                                        <label for="fileToUpload" class="form-label">Upload File</label>
+                                        <input class="form-control" type="file" name="fileToUpload" id="fileToUpload"
+                                            required>
+                                        <button type="submit" name="upload" id="executeCaptcha"
+                                            class="btn btn-primary px-5 mt-2">Upload</button>
+                                        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                                        <input type="hidden" name="action" value="validate_captcha">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php echo $page; ?>
                     </div>
                 </div>
             </div>
-
-            <?php
-            echo $page;
-            ?>
         </div>
+
+
     </main>
 
     <?php

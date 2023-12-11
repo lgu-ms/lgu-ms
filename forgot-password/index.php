@@ -58,6 +58,13 @@ $page = '
                             <br><br>
                             <a class="fpass" href="../signup?ref=forgot-password">No account yet?</a>
                         </div>
+                        <div class="mt-4">
+                        <small>This site is protected by reCAPTCHA and the
+                            Google
+                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                            <a href="https://policies.google.com/terms">Terms of Service</a>
+                            apply.</small>
+                    </div>
                     </div>
                 </div>
             </form>
@@ -132,6 +139,13 @@ $page = '
                                         <button id="executeCaptcha" class="btn btn-primary px-5 shadow" type="submit"
                                             name="submit">Update</button>
                                     </div>
+                                    <div class="mt-4">
+                                    <small>This site is protected by reCAPTCHA and the
+                                        Google
+                                        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                        <a href="https://policies.google.com/terms">Terms of Service</a>
+                                        apply.</small>
+                                </div>
                                 </div>
                             </div>
                         </form>
