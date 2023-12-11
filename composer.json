@@ -11,6 +11,12 @@
             "role": "Developer"
         }
     ],
+    "funding": [
+        {
+            "url": "https://github.com/mrepol742",
+            "type": "github"
+        }
+    ],
     "require": {
         "twbs/bootstrap": "^5.3",
         "components/font-awesome": "^6.4",

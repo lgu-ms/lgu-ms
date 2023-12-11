@@ -14,6 +14,12 @@ jobs:
  
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          
       - name: Security Checker
         run: |
           composer install --prefer-dist --no-progress
