@@ -32,6 +32,7 @@ if (isLogin()) {
 }
 ?>
 
+
 <body class="d-flex flex-column ">
     <?php include("../../include/nav.php");
     include("process.php");
@@ -53,9 +54,11 @@ if (isLogin()) {
     <div class="container mt-5">
         <h2 class="text-center mb-4">Property Owner</h2>
         <div class="table-responsive">
+
             <?php
             getTables("property_owner", "0");
             ?>
+
         </div>
 
         <h2 class="text-center mb-4" style="margin-top: 100px">Property</h2>
@@ -79,7 +82,7 @@ if (isLogin()) {
             ?>
         </div>
     </div>
-    
+
 
     <!-- MODAl -->
     <div class="text-center m-2">
